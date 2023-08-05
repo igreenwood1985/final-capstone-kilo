@@ -1,6 +1,8 @@
 BEGIN TRANSACTION;
 
+DROP TABLE IF EXISTS user_recipe;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS recipes;
 
 CREATE TABLE users (
 	user_id SERIAL,
@@ -10,4 +12,23 @@ CREATE TABLE users (
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
 
+CREATE TABLE recipes (
+	recipe_id SERIAL,
+	recipe_name varchar(50) NOT NULL,
+	ingredients text NOT NULL,
+	instructions text NOT NULL,
+	
+	CONSTRAINT PK_recipe PRIMARY KEY (recipe_id)
+);
+
+CREATE TABLE user_recipe (
+	user_id int,
+	recipe_id int,
+	
+	CONSTRAINT PK_user_recipe PRIMARY KEY (user_id, recipe_id),
+	CONSTRAINT FK_user FOREIGN KEY(user_id) REFERENCES users(user_id),
+	CONSTRAINT FK_recipe FOREIGN KEY(recipe_id) REFERENCES recipes(recipe_id)
+);
+
 COMMIT TRANSACTION;
+--rollback;
