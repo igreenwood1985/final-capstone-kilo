@@ -15,8 +15,16 @@ export default {
 
 
     getRecipes(searchTerm) {
-        
         return http.get('?type=public&beta=false&q=' + searchTerm + '&app_id=' + apiID + '&app_key=' + apiKey + '&random=true');
+    },
+
+    getFilteredRecipes(searchTerm, filtersArray) {
+      let appends = "";
+      filtersArray.forEach((item) => {
+        appends += item;
+        console.log("hi");
+      })
+      return http.get('?type=public&beta=false&q=' + searchTerm + '&app_id=' + apiID + '&app_key=' + apiKey + '&random=true' + appends)
     }
 
 }

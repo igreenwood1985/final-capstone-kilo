@@ -36,4 +36,33 @@ export default {
 </script>
 
 <style>
+.card {
+    border: 2px solid black;
+    border-radius: 10px;
+    display: inline-block;
+    width: 275px;
+    height: 600px;
+    margin: 20px;
+}
+
+.card.read {
+    background-color: lightgray;
+}
+
+.card img {
+  max-width: 75%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card .recipe-name {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.card .time-to-make {
+    font-size: 1rem;
+}
 </style>
