@@ -13,10 +13,7 @@
         v-on:click.prevent="toggleAdvancedSearch()"
         >Advanced Search</a
       >
-
-      <div class="filters" v-show="advancedSearchVisible">
-        <div class="left-filters">
-          <div>
+       <div class="search-in-title">
             <input
               type="checkbox"
               name="title"
@@ -25,7 +22,10 @@
               v-model="activeFilters"
             />
             <label for="title">Search In Recipe Name</label>
-          </div>
+      </div>
+      <div class="filters" v-show="advancedSearchVisible">
+        <div class="left-filters">
+          <h4>Dietary Restrictions</h4>
           <div>
             <input
               type="checkbox"
@@ -37,12 +37,107 @@
             <label for="dairy-free">Dairy-Free</label>
           </div>
           <div>
-            <input type="checkbox" name="title" id="recipe-title" />
-            <label for="title">Recipe Must Have Search Term In Title</label>
+            <input 
+            type="checkbox" 
+            name="egg-free" 
+            id="egg-free" 
+            v-bind:value="'&health=egg-free'" 
+            v-model="activeFilters"
+            />
+            <label for="title">Egg Free</label>
+          </div>
+          <div>
+            <input 
+            type="checkbox" 
+            name="fish-free" 
+            id="fish-free" 
+            v-bind:value="'&health=fish-free'" 
+            v-model="activeFilters"
+            />
+            <label for="title">Fish Free</label>
+          </div>
+          <div>
+            <input 
+            type="checkbox" 
+            name="gluten-free" 
+            id="gluten-free" 
+            v-bind:value="'&health=gluten-free'" 
+            v-model="activeFilters"
+            />
+            <label for="gluten-free">Gluten Free</label>
+          </div>
+          <div>
+            <input 
+            type="checkbox" 
+            name="peanut-free" 
+            id="peanut-free" 
+            v-bind:value="'&health=peanut-free'" 
+            v-model="activeFilters"
+            />
+            <label for="title">Peanut Free</label>
+          </div>
+          <div>
+            <input 
+            type="checkbox" 
+            name="pescatarian" 
+            id="pescatarian" 
+            v-bind:value="'&health=pescatarian'" 
+            v-model="activeFilters"
+            />
+            <label for="title">Pescatarian</label>
+          </div>
+          <div>
+            <input 
+            type="checkbox" 
+            name="soy-free" 
+            id="soy-free" 
+            v-bind:value="'&health=soy-free'" 
+            v-model="activeFilters"
+            />
+            <label for="title">Soy Free</label>
+          </div>
+            <div>
+            <input 
+            type="checkbox" 
+            name="tree-nut-free" 
+            id="tree-nut-free" 
+            v-bind:value="'&health=tree-nut-free'" 
+            v-model="activeFilters"
+            />
+            <label for="title">Tree Nut Free</label>
+          </div>
+          <div>
+            <input 
+            type="checkbox" 
+            name="vegan" 
+            id="vegan"
+            v-bind:value="'&health=vegan'" 
+            v-model="activeFilters"
+            />
+            <label for="vegan">Vegan</label>
+          </div>
+            <div>
+            <input 
+            type="checkbox" 
+            name="vegetarian" 
+            id="vegetarian" 
+            v-bind:value="'&health=vegetarian'" 
+            v-model="activeFilters"
+            />
+            <label for="title">Vegetarian</label>
           </div>
         </div>
 
         <div class="center-filters">
+          <h4>Placeholder</h4>
+          <div>
+            <input type="checkbox" name="title" id="recipe-title" />
+            <label for="title">Recipe Must Have Search Term In Title</label>
+          </div>
+          <div>
+            <input type="checkbox" name="title" id="recipe-title" />
+            <label for="title">Recipe Must Have Search Term In Title</label>
+          </div>
           <div>
             <input type="checkbox" name="title" id="recipe-title" />
             <label for="title">Recipe Must Have Search Term In Title</label>
@@ -58,6 +153,7 @@
         </div>
 
         <div class="right-filters">
+          <h4>Placeholder</h4>
           <div>
             <input type="checkbox" name="title" id="recipe-title" />
             <label for="title">Recipe Must Have Search Term In Title</label>
@@ -148,6 +244,10 @@ export default {
   padding-bottom: 50px;
 }
 
+div h4 {
+  text-align: center;
+}
+
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -163,9 +263,8 @@ export default {
   background-color: lightsteelblue;
   padding-top: 10px;
   padding-bottom: 10px;
-}
-
-.left-filters {
   text-align: left;
 }
+
+
 </style>
