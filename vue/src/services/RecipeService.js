@@ -24,6 +24,7 @@ export default {
         appends += item;
         console.log("hi");
       })
+      console.log(appends);
       return http.get('?type=public&beta=false&q=' + searchTerm + '&app_id=' + apiID + '&app_key=' + apiKey + '&random=true' + appends)
     }
 
