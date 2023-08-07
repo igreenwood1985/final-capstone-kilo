@@ -1,7 +1,9 @@
 <template>
   <!-- <router-link v-bind:to="{ name: 'recipe', params: { uri: recipe.recipe.uri } }"> -->
-    <div class="card">
+    <div class="card" v-bind:class="{favorited:recipe.favorited}">
       <h2 class="recipe-name">{{ recipe.recipe.label }}</h2>
+      <button v-show="recipe.favorited == false" v-if="$store.state.token!='' " v-on:click="addToFavorites">Favorite</button>
+      <button v-show="recipe.favorited" v-if="$store.state.token!='' " v-on:click="addToFavorites">Unfavorite</button>
       <img v-if="recipe.recipe.uri" v-bind:src="recipe.recipe.image" />
       <h3 class="time-to-make">{{ recipe.recipe.totalTime }}</h3>
       <p class="calories">{{ recipe.recipe.calories }}</p>
@@ -12,6 +14,8 @@
 </template>
 
 <script>
+import AccountService from '../services/AccountService.js';
+
 export default {
   name: "card",
   props: {
@@ -30,7 +34,15 @@ export default {
     combineHealthAndDietaryTags() {
        return this.recipe.recipe.healthLabels.concat(this.recipe.recipe.dietLabels)
 
+
     },
+    addToFavorites(recipe){
+      AccountService.addToFavorites(recipe).then(response => {
+        if(response != null){
+        return Object.assign({}, this.recipe, {favorited: true});
+        }
+      })
+    }
   },
 };
 </script>
