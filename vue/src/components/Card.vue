@@ -36,10 +36,10 @@ export default {
 
 
     },
-    addToFavorites(recipe){
-      AccountService.addToFavorites(recipe).then(response => {
-        if(response != null){
-        return Object.assign({}, this.recipe, {favorited: true});
+    addToFavorites(){
+      AccountService.addToFavorites(this.recipe).then(response => {
+        if(response.status == 201){
+          return Object.assign({}, this.recipe, {favorited: true});
         }
       })
     }

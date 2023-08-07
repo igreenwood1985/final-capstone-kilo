@@ -6,7 +6,7 @@ const http = axios.create({
 });
 export default{
 getFavoritedRecipes(){
-    return http.get('/')
+    return http.get('dashboard')
 },
 addRecipeToFavorites(recipe){
     return http.post('', recipe)
