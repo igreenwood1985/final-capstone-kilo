@@ -3,7 +3,8 @@
     <div class="search-section">
       <h2>Search for recipes</h2>
       <input class="search-box" type="text" v-model="searchTerm" />
-      <button v-on:click="searchForRecipes">Search</button>
+      <button v-show="advancedSearchVisible === false" v-on:click="searchForRecipes">Search</button>
+      <button v-show="advancedSearchVisible" v-on:click="searchByFilters">Search</button> 
       <br />
       <br />
       <a
@@ -23,7 +24,7 @@
               v-bind:value="'strict-title'"
               v-model="activeFilters"
             />
-            <label for="title">Recipe Must Have Search Term In Title</label>
+            <label for="title">Search In Recipe Name</label>
           </div>
           <div>
             <input
@@ -72,7 +73,6 @@
         </div>
       </div>
 
-      <button v-show="activeFilters.length > 0" v-on:click="searchByFilters">Search With Filters</button>
     </div>
 
     <div class="cards">
