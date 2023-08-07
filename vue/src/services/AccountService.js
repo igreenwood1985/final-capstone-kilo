@@ -1,20 +1,16 @@
 import axios from 'axios';
 
-const http = axios.create({
-  baseURL: "/"
-  
-});
-export default{
-getFavoritedRecipes(){
-    return http.get('dashboard')
-},
-addRecipeToFavorites(recipe){
-    return http.post('', recipe)
-},
-removeRecipeToFavorites(recipe){
-    return http.delete('', recipe)
-},
-getRecipeById(id){
-    return http.get('/' + id)
-}
+export default {
+    getFavoritedRecipes() {
+        return axios.get('dashboard');
+    },
+    addRecipeToFavorites(recipe) {
+        return axios.post('', recipe);
+    },
+    removeRecipeToFavorites(recipe) {
+        return axios.delete('', recipe);
+    },
+    getRecipeById(id) {
+        return axios.get('/' + id);
+    }
 }

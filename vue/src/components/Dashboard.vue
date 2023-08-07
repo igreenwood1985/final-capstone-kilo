@@ -1,19 +1,19 @@
 <template>
   <div>
-    <card
+    <favorited-card
       v-for="recipe in favoriteRecipes"
       v-bind:recipe="recipe"
-      v-bind:key="recipe.recipe.uri"
+      v-bind:key="recipe.id"
       v-bind:enable-add="true"
-    ></card>
+    />
   </div>
 </template>
 
 <script>
 import AccountService from "../services/AccountService.js";
-import Card from "./Card.vue";
+import FavoritedCard from "./FavoritedCard.vue";
 export default {
-  components: { Card },
+  components: { FavoritedCard },
   data() {
     return { favoriteRecipes: [] };
   },
@@ -24,6 +24,9 @@ export default {
       });
     },
   },
+  created() {
+    this.getFavoriteRecipes();
+  }
 };
 </script>
 <style>
