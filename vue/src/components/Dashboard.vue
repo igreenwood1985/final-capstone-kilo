@@ -26,8 +26,9 @@ export default {
   },
   created() {
     this.getFavoriteRecipes();
-  }
+  },
 };
 </script>
+
 <style>
 </style>
