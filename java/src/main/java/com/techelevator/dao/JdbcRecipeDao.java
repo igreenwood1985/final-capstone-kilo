@@ -11,9 +11,30 @@ import java.util.List;
 @Component
 public class JdbcRecipeDao implements RecipeDao {
     private final JdbcTemplate jdbcTemplate;
+    private String label;
 
     public JdbcRecipeDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public List<RecipeDto> getDashboardRecipes(int userId) {
+        RecipeDto returnedRecipe = new RecipeDto();
+        List<RecipeDto> recipeDtoList = new ArrayList<>();
+
+        String sql = "SELECT recipes.recipe_id, uri, label, img, calories, yield, cuisineType, totalTime " +
+                "FROM recipes " +
+                "JOIN user_recipe ON user_recipe.recipe_id = recipes.recipe_id " +
+                "WHERE user_id = ?" +
+                "ORDER BY recipe_id DESC";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+
+        while (results.next()) {
+            returnedRecipe = mapRowToRecipe(results);
+            recipeDtoList.add(returnedRecipe);
+        }
+        return recipeDtoList;
     }
 
     @Override
@@ -21,34 +42,52 @@ public class JdbcRecipeDao implements RecipeDao {
         RecipeDto returnedRecipe = new RecipeDto();
         List<RecipeDto> recipeDtoList = new ArrayList<>();
 
-        String sql = "SELECT recipes.recipe_id, recipe_name, ingredients, instructions " +
+        String sql = "SELECT recipes.recipe_id, uri, label, img, calories, yield, cuisineType, totalTime  " +
                 "FROM recipes " +
                 "JOIN user_recipe ON user_recipe.recipe_id = recipes.recipe_id " +
-                "WHERE user_id = ?";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql,userId);
-       while(results.next()){
-           returnedRecipe = mapRowToRecipe(results);
-           recipeDtoList.add(returnedRecipe);
+                "WHERE user_id = ?" +
+                "ORDER BY recipe_id DESC";
 
-       }
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
 
-
-
-
+        while (results.next()) {
+            returnedRecipe = mapRowToRecipe(results);
+            recipeDtoList.add(returnedRecipe);
+        }
         return recipeDtoList;
     }
 
+    @Override
+    public RecipeDto addFavoriteRecipe(RecipeDto recipeDto, int userId) {
 
-    private RecipeDto mapRowToRecipe(SqlRowSet rowset){
+        String insertSql = "INSERT INTO recipes (uri, label, img, calories, yield, cuisineType, totalTime) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?) " +
+                "RETURNING recipe_id";
 
+        int recipeId = jdbcTemplate.queryForObject(insertSql, int.class, recipeDto.getUri(), recipeDto.getLabel(),
+                recipeDto.getImg(), recipeDto.getCalories(), recipeDto.getYield(), recipeDto.getCuisineType(),
+                recipeDto.getTotalTime());
+
+        String joinSql = "INSERT INTO user_recipe (user_id, recipe_id) " +
+                "VALUES (?, ?)";
+
+        jdbcTemplate.update(joinSql, userId, recipeId);
+
+        recipeDto.setRecipe_id(recipeId);
+
+        return recipeDto;
+    }
+
+    private RecipeDto mapRowToRecipe(SqlRowSet rowset) {
         RecipeDto recipeDto = new RecipeDto();
-         recipeDto.setRecipe_id(rowset.getInt("recipe_id"));
-         recipeDto.setRecipe_name(rowset.getString("recipe_name"));
-         recipeDto.setIngredients(rowset.getString("ingredients"));
-         recipeDto.setInstructions(rowset.getString("instructions"));
-         return recipeDto;
-
-
-
+        recipeDto.setRecipe_id(rowset.getInt("recipe_id"));
+        recipeDto.setUri(rowset.getString("uri"));
+        recipeDto.setLabel(rowset.getString("label"));
+        recipeDto.setImg(rowset.getString("img"));
+        recipeDto.setCalories(rowset.getDouble("calories"));
+        recipeDto.setYield(rowset.getInt("yield"));
+        recipeDto.setCuisineType(rowset.getString("cuisineType"));
+        recipeDto.setTotalTime(rowset.getInt("totalTime"));
+        return recipeDto;
     }
 }
