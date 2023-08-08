@@ -3,9 +3,9 @@
   <div>
       <img v-if="recipe.recipe.uri" v-bind:src="recipe.recipe.image" />
       <h2>{{recipe.recipe.label}}</h2>
-      <h3>{{cuisine}} | {{time}} | {{calories}}</h3>
+      <h3>{{recipe.recipe.cuisineType}} | {{totalTime}} minutes | {{calories}} calories</h3>
       <div>
-          
+
       </div>
   </div>
 
@@ -15,6 +15,7 @@
 import RecipeService from '../services/RecipeService.js';
 
 export default {
+    name: 'recipe_details',
     data() {
         return {
             recipe: ''

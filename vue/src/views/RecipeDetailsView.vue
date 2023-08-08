@@ -1,11 +1,18 @@
 <template>
   
-  <div></div>
+  <div>
+    <recipe-details />
+  </div>
 
 </template>
 
 <script>
+import RecipeDetails from '../components/RecipeDetails.vue';
+
 export default {
+  components: {
+    RecipeDetails
+  }
 
 }
 </script>
