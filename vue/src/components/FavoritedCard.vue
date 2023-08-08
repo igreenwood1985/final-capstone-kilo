@@ -1,8 +1,9 @@
 <template>
-  <!-- <router-link v-bind:to="{ name: 'recipe', params: { uri: recipe.recipe.uri } }"> -->
   <div class="card">
-    <h2 class="recipe-name">{{ recipe.recipe_name }}</h2>
-    <button v-on:click="removefFromFavorites">Unfavorite</button>
+    <router-link v-bind:to="{name: 'recipe-details', params: {id : recipe.uri}}">
+      <h2 class="recipe-name">{{ recipe.label }}</h2>
+    </router-link>
+    <button v-on:click="removeFromFavorites">Unfavorite</button>
     <p>Ingredient: {{ recipe.ingredients }}</p>
     <p>Instructions: {{ recipe.instructions }}</p>
   </div>
@@ -26,8 +27,8 @@ export default {
     };
   },
   methods: {
-    // removeFFavorites() {
-    //   AccountService.addToFavorites(this.recipe).then((response) => {
+    // removeFromFavorites() {
+    //   AccountService.removeFromFavorites(this.recipe).then((response) => {
     //     if (response.status == 201) {
     //       return Object.assign({}, this.recipe, { favorited: true });
     //     }

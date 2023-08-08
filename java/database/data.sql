@@ -3,11 +3,12 @@ BEGIN TRANSACTION;
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
 
-INSERT INTO recipes (uri, label, img, calories, yield, cuisineType, totalTime) 
-VALUES ('uri-goeshere', 'Grilled Cheese', 'img-goes-here', 200, 1,'American', 20);
-INSERT INTO recipes (uri, label, img, calories, yield, cuisineType, totalTime)
+INSERT INTO recipes (uri, recipe_name, img, total_calories, servings, cuisine_type, total_time) 
+VALUES ('http://www.edamam.com/ontologies/edamam.owl#recipe_e4108dbf7f340c9b08592e57e669353f', 'Santa Fe Chicken With Saffron Rice Recipe', 'https://edamam-product-images.s3.amazonaws.com/web-img/98d/98dddf547dc7d43f89195d16085c23ff.jpg?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQD%2BhVYpBSIa9ttMNIgDGveZMzRQA8LW%2Bj41PYb4oWdmDwIhAJrrzkixYQi5iAZc3viap0jiwyyYPmyzODduC15h5eQ%2BKsIFCJD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMMTg3MDE3MTUwOTg2IgwGzUAmpc3MgiM9nMcqlgWSVGFKTAFfrjiUtKqGr%2BOdZPv2mZSLeLGGrvdAjxa9eNS%2B%2BwNwcvdS%2BYfqts0gBdv6m8FO8NjUsKDT8SqxBFdzlZLdc81E44oau%2FhcONPSNmg0YsFfA%2FCN5QoUNUpu13zexIMi7K%2B17P8rXDm8Vi4Q3RwrUuTQQsougDhF0EMdvQm4RktO%2B6NeY%2Bs293%2F%2BWUQK9iTgyxCqDmb2vhoLEemqeF4DHT4hfOVw9Qc0DqHIS2nIP0P9rsVrqQaolEuZ0bmN%2BXiWLTMTDY0Gj2z7LVX5%2BAkburiNG%2B%2B6fQLCvLzbptuUXuoM0XlbrjhUsjj9w1mTbNdl7AMoVvm1w6jAk0IPuhpTiEHAOR6oJCGnTnKhtL7weHeN2zjYn3KdF3D6Yl6duGWCpCYOD67ASWQXws%2Fgn1tIUWZSvRSR8q6yP25N8yeo2NZTR7qD4GgfkQik4BykeGIZePPwj%2BFtgGpfZKYzSbz8WQhgWc38dL8PBt3iDlmFomlb1QyCrSZdTlcuBsbNjWMGDbR%2Fc7%2F0IAycYDOAoJ%2F%2BlUdiNPtAvAUMBArDbfevkb6CaP1IwGIJJsHhXpOfV%2BdXFCpALmlxhE9JVogl9QSqg2RNnAW%2BUeBhv2cEOz95ZddwsTAJey%2BBbgV1e7uOMMy5yI%2BMko1mVnU7LWyDnEkS5vYuU4YskG%2FMTLl0ubLN9wXRIGznoqh%2Blf%2B9Nkg5eyiWtClMcuarzdDBroBoLRxA7fQ2tJQm8Ty%2BlB4whH4w48WGgUZjtgKcbCjDsBlIDnSHKKnLU4u7jkOpwfCzBSuL%2BSyHyWeSx1Qy45Jiec1KhPg%2BJc3OhJc3CnDaxhNx68Z5ZVqZ6UWexoY4tJBt2iGvhcBxuTSg%2B2RWjSbmyxdwgwixvTDcqcmmBjqwAW0ImvXAncqeCsRVgh7gBWje124XVKZY5uqDpfIwHaRcUNITtR9fUkN1tUdCzdDkTz9xeHAJ1exrndIF1ThYXuoKrnB4uLeZ3z1fRVEYTc3fJADsLZ0hRc%2FoU61DC%2FXMJNaTavZixrPxaPWKUIjaSPZ7BbR6ImNEBQ5lZCaQleE2pDHnVxnmVb2rUaklap6pBH68oCrThXZpUloLE92uKwwLh16KivynzcY4bjuYgxNx&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230808T154513Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Credential=ASIASXCYXIIFIA3CVRPG%2F20230808%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=a015ab90eb392660dda86bd87c0830fe1e5f09cdf253d085438142fd4c772aa3', 2105, 4,'American', 16);
+INSERT INTO recipes (uri, recipe_name, img, total_calories, servings, cuisine_type, total_time)
 VALUES ('uri-goeshere', 'Spaghetti', 'img-goes-here', 999, 2,'Italian', 20);
 
 INSERT INTO user_recipe (user_id, recipe_id) VALUES (1, 1), (1, 2);
 
 COMMIT TRANSACTION;
+--SELECT * FROM recipes
