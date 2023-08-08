@@ -3,9 +3,10 @@
   <div>
       <img v-if="recipe.recipe.uri" v-bind:src="recipe.recipe.image" />
       <h2>{{recipe.recipe.label}}</h2>
-      <p>{{cuisine}}</p>
-      <p>{{time}}</p>
-      <p>{{calories}}</p>
+      <h3>{{cuisine}} | {{time}} | {{calories}}</h3>
+      <div>
+          
+      </div>
   </div>
 
 </template>
