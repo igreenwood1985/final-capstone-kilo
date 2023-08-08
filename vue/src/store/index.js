@@ -42,6 +42,11 @@ export default new Vuex.Store({
     },
     SET_SEARCH_RESULTS(state, searchResults){
       state.searchResults = searchResults;
+    },
+    REMOVE_RECIPE(state, recipe) {
+      state.favoriteRecipes.filter((item) => {
+        item != recipe
+      });
     }
   }
 })
