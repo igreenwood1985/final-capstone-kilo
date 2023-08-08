@@ -3,9 +3,13 @@ package com.techelevator.model;
 public class RecipeDto {
 
     private int recipe_id;
-    private String recipe_name;
-    private String ingredients;
-    private String instructions;
+    private String uri;
+    private String label;
+    private String img;
+    private double calories;
+    private int yield;
+    private String cuisineType;
+    private int totalTime;
     public RecipeDto(){
 
     }
@@ -18,27 +22,59 @@ public class RecipeDto {
         this.recipe_id = recipe_id;
     }
 
-    public String getRecipe_name() {
-        return recipe_name;
+    public String getUri() {
+        return uri;
     }
 
-    public void setRecipe_name(String recipe_name) {
-        this.recipe_name = recipe_name;
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 
-    public String getIngredients() {
-        return ingredients;
+    public String getLabel() {
+        return label;
     }
 
-    public void setIngredients(String ingredients) {
-        this.ingredients = ingredients;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
-    public String getInstructions() {
-        return instructions;
+    public String getImg() {
+        return img;
     }
 
-    public void setInstructions(String instructions) {
-        this.instructions = instructions;
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public double getCalories() {
+        return calories;
+    }
+
+    public void setCalories(double calories) {
+        this.calories = calories;
+    }
+
+    public int getYield() {
+        return yield;
+    }
+
+    public void setYield(int yield) {
+        this.yield = yield;
+    }
+
+    public String getCuisineType() {
+        return cuisineType;
+    }
+
+    public void setCuisineType(String cuisineType) {
+        this.cuisineType = cuisineType;
+    }
+
+    public int getTotalTime() {
+        return totalTime;
+    }
+
+    public void setTotalTime(int totalTime) {
+        this.totalTime = totalTime;
     }
 }
