@@ -7,8 +7,8 @@ export default {
     addRecipeToFavorites(recipe) {
         return axios.post('/dashboard', recipe);
     },
-    removeRecipeToFavorites(recipe) {
-        return axios.delete('/', recipe);
+    removeRecipeFromFavorites(recipeId) {
+        return axios.delete('/myrecipes/' +  recipeId);
     },
     getRecipeById(id) {
         return axios.get('/' + id);

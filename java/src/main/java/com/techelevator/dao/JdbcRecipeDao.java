@@ -102,13 +102,11 @@ public class JdbcRecipeDao implements RecipeDao {
 
     // Remove a recipe from logged in user's favorites
     @Override
-    public void removeRecipeFromFavorites(RecipeDto recipeDto, int userId) {
-        String selectSql = "SELECT recipe_id FROM recipes WHERE uri = ?";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(selectSql, recipeDto.getUri());
-        if (results.next()) {
+    public void removeRecipeFromFavorites(int recipeId, int userId) {
+
             String sql = "DELETE FROM user_recipe WHERE user_id = ? AND recipe_id = ?";
-            jdbcTemplate.update(sql, userId, results.getInt("recipe_id"));
-        }
+            jdbcTemplate.update(sql, userId, recipeId);
+
     }
 
     private RecipeDto mapRowToRecipe(SqlRowSet rowset) {

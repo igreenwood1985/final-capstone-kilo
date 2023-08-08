@@ -5,7 +5,7 @@
     </router-link>
     <img v-bind:src="recipe.img"/>
     <p>Cuisine Type: {{recipe.cuisineType}}</p>
-    <!-- <button v-on:click="removeFromFavorites">Unfavorite</button> -->
+    <button v-on:click="removeFromFavorites()">Unfavorite</button>
     <p>Calories: {{ recipe.calories }}</p>
     <p>Servings: {{ recipe.yield }}</p>
     <p>{{ recipe.totalTime }} minutes</p>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-//import AccountService from "../services/AccountService.js";
+import AccountService from "../services/AccountService.js";
 
 export default {
   name: "favorited-card",
@@ -31,15 +31,18 @@ export default {
     };
   },
   methods: {
-    // removeFromFavorites() {
-    //   AccountService.removeFromFavorites(this.recipe).then((response) => {
-    //     if (response.status == 201) {
-    //       return Object.assign({}, this.recipe, { favorited: true });
-    //     }
-    //   });
-    // },
+    removeFromFavorites() {
+      AccountService.removeRecipeFromFavorites(this.recipe.recipe_id).then(response => {
+     
+          return 200 === response.status
+        
+      })
+      
+
+    }
   },
 };
+
 </script>
 
 <style>

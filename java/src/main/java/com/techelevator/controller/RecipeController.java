@@ -51,9 +51,9 @@ public class RecipeController {
     }
 
     // Remove a recipe from logged in user's favorites
-    @RequestMapping(path = "/myrecipes", method = RequestMethod.DELETE)
-    public void removeRecipeFromFavorites(@RequestBody RecipeDto recipeDto, Principal principal){
-        recipeDao.removeRecipeFromFavorites(recipeDto, getLoggedInUserId(principal));
+    @RequestMapping(path = "/myrecipes/{recipeId}", method = RequestMethod.DELETE)
+    public void removeRecipeFromFavorites(@PathVariable int recipeId, Principal principal){
+        recipeDao.removeRecipeFromFavorites(recipeId, getLoggedInUserId(principal));
     }
 
     //
