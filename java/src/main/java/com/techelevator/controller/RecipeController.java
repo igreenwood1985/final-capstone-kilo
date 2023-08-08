@@ -3,6 +3,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.RecipeDao;
 import com.techelevator.dao.UserDao;
+import com.techelevator.exception.DaoException;
 import com.techelevator.model.RecipeDto;
 import com.techelevator.model.User;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -40,8 +41,13 @@ public class RecipeController {
     // Add recipe to favorites
     @RequestMapping(path = "/dashboard", method = RequestMethod.POST)
     public RecipeDto addFavoriteRecipe(@RequestBody RecipeDto recipeDto, Principal principal) {
-       RecipeDto responseRecipeDto = recipeDao.addFavoriteRecipe(recipeDto, getLoggedInUserId(principal));
-       return responseRecipeDto;
+       try {
+           RecipeDto responseRecipeDto = recipeDao.addFavoriteRecipe(recipeDto, getLoggedInUserId(principal));
+           return responseRecipeDto;
+       } catch (DaoException e) {
+           System.out.println(e.getMessage());
+           return null;
+       }
     }
 
     //

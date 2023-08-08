@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.exception.DaoException;
 import com.techelevator.model.RecipeDto;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -22,7 +23,7 @@ public class JdbcRecipeDao implements RecipeDao {
         RecipeDto returnedRecipe = new RecipeDto();
         List<RecipeDto> recipeDtoList = new ArrayList<>();
 
-        String sql = "SELECT recipes.recipe_id, uri, label, img, calories, yield, cuisineType, totalTime " +
+        String sql = "SELECT recipes.recipe_id, uri, recipe_name, img, total_calories, servings, cuisine_type, total_time " +
                 "FROM recipes " +
                 "JOIN user_recipe ON user_recipe.recipe_id = recipes.recipe_id " +
                 "WHERE user_id = ?" +
@@ -42,7 +43,7 @@ public class JdbcRecipeDao implements RecipeDao {
         RecipeDto returnedRecipe = new RecipeDto();
         List<RecipeDto> recipeDtoList = new ArrayList<>();
 
-        String sql = "SELECT recipes.recipe_id, uri, label, img, calories, yield, cuisineType, totalTime  " +
+        String sql = "SELECT recipes.recipe_id, uri, recipe_name, img, total_calories, servings, cuisine_type, total_time " +
                 "FROM recipes " +
                 "JOIN user_recipe ON user_recipe.recipe_id = recipes.recipe_id " +
                 "WHERE user_id = ?" +
@@ -58,7 +59,7 @@ public class JdbcRecipeDao implements RecipeDao {
     }
 
     @Override
-    public RecipeDto addFavoriteRecipe(RecipeDto recipeDto, int userId) {
+    public RecipeDto addFavoriteRecipe (RecipeDto recipeDto, int userId) {
 
         // Checks to see if received Recipe is already in the database
         String checkerSql = "SELECT recipe_id, uri FROM recipes " +
@@ -77,10 +78,14 @@ public class JdbcRecipeDao implements RecipeDao {
                         "VALUES (?, ?)";
                 jdbcTemplate.update(joinSql, userId, results.getInt("recipe_id"));
             }
+            else {
+                throw new DaoException("Recipe is already in user's 'Favorites' list.");
+            }
             recipeDto.setRecipe_id(results.getInt("recipe_id"));
             // If recipe is not in database, add it, and connect it to the user via join table
         } else {
-            String insertSql = "INSERT INTO recipes (uri, label, img, calories, yield, cuisineType, totalTime) " +
+            String insertSql = "INSERT INTO recipes (uri, recipe_name, img, total_calories, servings, " +
+                    "cuisine_type, total_time) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?) " +
                     "RETURNING recipe_id";
             int recipeId = jdbcTemplate.queryForObject(insertSql, int.class, recipeDto.getUri(), recipeDto.getLabel(),
@@ -95,16 +100,17 @@ public class JdbcRecipeDao implements RecipeDao {
         return recipeDto;
     }
 
+    // SELECT recipes.recipe_id, uri, recipe_name, img, total_calories, servings, cuisine_type, total_time
     private RecipeDto mapRowToRecipe(SqlRowSet rowset) {
         RecipeDto recipeDto = new RecipeDto();
         recipeDto.setRecipe_id(rowset.getInt("recipe_id"));
         recipeDto.setUri(rowset.getString("uri"));
-        recipeDto.setLabel(rowset.getString("label"));
+        recipeDto.setLabel(rowset.getString("recipe_name"));
         recipeDto.setImg(rowset.getString("img"));
-        recipeDto.setCalories(rowset.getDouble("calories"));
-        recipeDto.setYield(rowset.getInt("yield"));
-        recipeDto.setCuisineType(rowset.getString("cuisineType"));
-        recipeDto.setTotalTime(rowset.getInt("totalTime"));
+        recipeDto.setCalories(rowset.getDouble("total_calories"));
+        recipeDto.setYield(rowset.getInt("servings"));
+        recipeDto.setCuisineType(rowset.getString("cuisine_type"));
+        recipeDto.setTotalTime(rowset.getInt("total_time"));
         return recipeDto;
     }
 }
