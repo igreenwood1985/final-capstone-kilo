@@ -11,4 +11,5 @@ public interface RecipeDao {
     public List<RecipeDto> getDashboardRecipes(int userId);
     public  RecipeDto addFavoriteRecipe(RecipeDto recipeDto, int userId);
 
+
 }

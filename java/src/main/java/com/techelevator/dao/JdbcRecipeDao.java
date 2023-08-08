@@ -60,20 +60,37 @@ public class JdbcRecipeDao implements RecipeDao {
     @Override
     public RecipeDto addFavoriteRecipe(RecipeDto recipeDto, int userId) {
 
-        String insertSql = "INSERT INTO recipes (uri, label, img, calories, yield, cuisineType, totalTime) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?) " +
-                "RETURNING recipe_id";
+        // Checks to see if received Recipe is already in the database
+        String checkerSql = "SELECT recipe_id, uri FROM recipes " +
+                "WHERE uri = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(checkerSql, recipeDto.getUri());
 
-        int recipeId = jdbcTemplate.queryForObject(insertSql, int.class, recipeDto.getUri(), recipeDto.getLabel(),
-                recipeDto.getImg(), recipeDto.getCalories(), recipeDto.getYield(), recipeDto.getCuisineType(),
-                recipeDto.getTotalTime());
+        // If it is, check to see if it is already attached to logged in user
+        if (results.next()) {
+            String joinCheckerSql = "SELECT user_id, recipe_id FROM user_recipe " +
+                    "WHERE user_id = ? AND recipe_id = ?";
+            SqlRowSet joinResults = jdbcTemplate.queryForRowSet(joinCheckerSql, userId, results.getInt("recipe_id"));
 
-        String joinSql = "INSERT INTO user_recipe (user_id, recipe_id) " +
-                "VALUES (?, ?)";
-
-        jdbcTemplate.update(joinSql, userId, recipeId);
-
-        recipeDto.setRecipe_id(recipeId);
+            // If no results populate based on logged in user id and desired recipe to favorite, add to the join table
+            if (!joinResults.next()) {
+                String joinSql = "INSERT INTO user_recipe (user_id, recipe_id) " +
+                        "VALUES (?, ?)";
+                jdbcTemplate.update(joinSql, userId, results.getInt("recipe_id"));
+            }
+            recipeDto.setRecipe_id(results.getInt("recipe_id"));
+            // If recipe is not in database, add it, and connect it to the user via join table
+        } else {
+            String insertSql = "INSERT INTO recipes (uri, label, img, calories, yield, cuisineType, totalTime) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?) " +
+                    "RETURNING recipe_id";
+            int recipeId = jdbcTemplate.queryForObject(insertSql, int.class, recipeDto.getUri(), recipeDto.getLabel(),
+                    recipeDto.getImg(), recipeDto.getCalories(), recipeDto.getYield(), recipeDto.getCuisineType(),
+                    recipeDto.getTotalTime());
+            String joinSql = "INSERT INTO user_recipe (user_id, recipe_id) " +
+                    "VALUES (?, ?)";
+            jdbcTemplate.update(joinSql, userId, recipeId);
+            recipeDto.setRecipe_id(recipeId);
+        }
 
         return recipeDto;
     }
