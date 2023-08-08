@@ -14,13 +14,13 @@ CREATE TABLE users (
 
 CREATE TABLE recipes (
 	recipe_id SERIAL,
-	uri varchar(50) NOT NULL,
-	label varchar(50) NOT NULL,
+	uri varchar(120) NOT NULL,
+	recipe_name varchar(50) NOT NULL,
 	img text NOT NULL,
-	calories numeric NOT NULL,
-	yield int NOT NULL,
-	cuisineType text NOT NULL,
-	totalTime int NOT NULL,
+	total_calories numeric NOT NULL,
+	servings int NOT NULL,
+	cuisine_type text NOT NULL,
+	total_time int NOT NULL,
 
 	
 	CONSTRAINT PK_recipe PRIMARY KEY (recipe_id)

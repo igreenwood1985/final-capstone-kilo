@@ -1,7 +1,7 @@
 <template>
   <div class="card">
-    <router-link v-bind:to="{name: 'recipe-details', params: {uri : recipe.recipe_name}}">
-      <h2 class="recipe-name">{{ recipe.recipe_name }}</h2>
+    <router-link v-bind:to="{name: 'recipe-details', params: {id : recipe.uri}}">
+      <h2 class="recipe-name">{{ recipe.label }}</h2>
     </router-link>
     <button v-on:click="removeFromFavorites">Unfavorite</button>
     <p>Ingredient: {{ recipe.ingredients }}</p>
