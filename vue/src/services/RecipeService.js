@@ -33,6 +33,11 @@ export default {
     },
 
     getRecipeByUri(uri) {
+      
+      uri = uri.replaceAll('/', '%2F')
+      uri = uri.replaceAll(':', '%3A')
+      uri = uri.replaceAll('#', '%23')
+      console.log(uri)
       return http.get('by-uri?type=public&beta=false&uri=' + uri + '&app_id=be14acd0&app_key=b9156f49c2db2a7389974ba9261c3628&field=uri&field=label&field=image&field=images&field=source&field=url&field=shareAs&field=yield&field=dietLabels&field=healthLabels&field=cautions&field=ingredientLines&field=ingredients&field=calories&field=glycemicIndex&field=totalCO2Emissions&field=co2EmissionsClass&field=totalWeight&field=totalTime&field=cuisineType&field=mealType&field=dishType&field=totalNutrients&field=totalDaily&field=digest&field=tags&field=externalId');
     }
 

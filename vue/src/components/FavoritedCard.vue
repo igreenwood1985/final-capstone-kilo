@@ -3,9 +3,13 @@
     <router-link v-bind:to="{name: 'recipe-details', params: {id : recipe.uri}}">
       <h2 class="recipe-name">{{ recipe.label }}</h2>
     </router-link>
-    <button v-on:click="removeFromFavorites">Unfavorite</button>
-    <p>Ingredient: {{ recipe.ingredients }}</p>
-    <p>Instructions: {{ recipe.instructions }}</p>
+    <img v-bind:src="recipe.img"/>
+    <p>Cuisine Type: {{recipe.cuisineType}}</p>
+    <!-- <button v-on:click="removeFromFavorites">Unfavorite</button> -->
+    <p>Calories: {{ recipe.calories }}</p>
+    <p>Servings: {{ recipe.yield }}</p>
+    <p>{{ recipe.totalTime }} minutes</p>
+
   </div>
 </template>
 
