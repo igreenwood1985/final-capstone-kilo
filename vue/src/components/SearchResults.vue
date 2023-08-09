@@ -336,12 +336,15 @@
               <label for="750-1000-cals">750 - 1000</label>
             </div>
             <div>
-              <!-- <input
-                type="checkbox"
+              <button
+               
                 name="custom-calorie-range"
                 id="custom-calorie-range"
-                v-bind:value="'&calories=' + minimumCalories + '-' + maximumCalories"
-                v-model="activeFilters"
+                v-on:click="addCalorieRange()"
+                
+                > 
+                Set Range </button>
+
               
               <input
                 type="number"
@@ -356,8 +359,8 @@
                 v-model="maximumCalories"
                 
               />
-              /> -->
-              <label for="custom-calorie-range">Custom Calorie Range</label>
+            
+              
             </div>
           </div>
         </div>
@@ -425,18 +428,17 @@ export default {
         this.$store.commit("SET_SEARCH_RESULTS", this.searchResults);
       });
     },
+    addCalorieRange(){
+      const calorieFilter  = '&calories=' + this.minimumCalories + '-' + this.maximumCalories;
+      this.activeFilters = this.activeFilters.filter((item) =>{
+        return item.includes('&calories') == false
+      })
+      this.activeFilters.push(calorieFilter)
+
+    }
   },
-//   computed: {
-//     checkCalorieRange() {
-//       if (!this.maximumCalories > 0 || !this.minimumCalories > 0) {
-//           return this.activeFilters.filter(item => {
-//             return item.contains('&calories') == false
-//           })
-//       }
-//       this.activeFilters.push('&calories=' + this.minimumCalories + '-' + this.maximumCalories)
-//       return this.activeFilters
-// }
-//   }
+  
+
 };
 </script>
 
