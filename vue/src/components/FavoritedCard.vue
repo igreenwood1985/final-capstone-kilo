@@ -1,9 +1,14 @@
 <template>
-  <div class="card">
+
+  <div class="main ">
     <!-- <router-link v-bind:to="{name: 'recipe-details', params: {id : recipe.uri}}"> -->
      <!-- <h2 class="recipe-name">{{ recipe.label }}</h2> -->
     <!-- </router-link> -->
+
     <img v-bind:src="recipe.img" id="image" />
+    <router-link v-bind:to="{name: 'recipe-details', params: {id : recipe.uri}}">
+    <h2 class="recipe-name">{{ recipe.label }}</h2>
+    </router-link>
     <p>Cuisine Type: {{recipe.cuisineType}}</p>
     <button v-on:click="removeFromFavorites()">Unfavorite</button>
     <p>Calories: {{ recipe.calories }}</p>
@@ -11,6 +16,7 @@
     <p>{{ recipe.totalTime }} minutes</p>
 
   </div>
+  
 </template>
 
 <script>
@@ -43,32 +49,32 @@ export default {
 </script>
 
 <style>
-.card {
+.main {
   border: 2px solid black;
   border-radius: 10px;
   display: inline-block;
   width: 275px;
-  height: 300px;
+  height: 400px;
   margin: 20px;
   background-color: white;
-}
-
-
-#image {
-  width: 50%;
-  height: auto;
-  aspect-ratio: 303 / 303;
+  overflow: hidden;
 }
 
 
 
 
-.card .recipe-name {
+.main .recipe-name {
+
   font-size: 1.2rem;
   text-align: center;
 }
 
-.card .time-to-make {
+.main .time-to-make {
   font-size: 1rem;
+}
+
+#image {
+   width: 100%; 
+   height: 50%;
 }
 </style>
