@@ -109,6 +109,19 @@ public class JdbcRecipeDao implements RecipeDao {
 
     }
 
+    @Override
+    public void removeRecipeFromFavoritesByUri(String recipeUri, int userId) {
+        String sqlSelect = "SELECT recipe_id " +
+                "FROM recipes " +
+                "WHERE uri = ?";
+
+        String sqlDelete = "DELETE FROM user_recipe " +
+                "WHERE user_id = ? AND recipe_id = ?";
+        int recipe_id = jdbcTemplate.queryForObject(sqlSelect, Integer.class, recipeUri);
+
+        jdbcTemplate.update(sqlDelete, userId, recipe_id);
+    }
+
     private RecipeDto mapRowToRecipe(SqlRowSet rowset) {
         RecipeDto recipeDto = new RecipeDto();
         recipeDto.setRecipe_id(rowset.getInt("recipe_id"));

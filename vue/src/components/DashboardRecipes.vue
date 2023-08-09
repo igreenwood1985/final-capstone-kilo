@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:key="componentKey">
+  <div>
       <favorited-card
         v-for="recipe in this.$store.state.favoriteRecipes"
         v-bind:recipe="recipe"
@@ -19,7 +19,10 @@ export default {
     FavoritedCard,
   },
   data() {
-    return { favoriteRecipes: [], componentKey: 0 };
+    return {
+      favoriteRecipes: [],
+      componentKey: 0
+    }
   },
   methods: {
     getFavoriteRecipes() {

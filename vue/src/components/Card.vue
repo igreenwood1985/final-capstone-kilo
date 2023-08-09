@@ -1,22 +1,12 @@
 <template>
   <!-- <router-link v-bind:to="{ name: 'recipe', params: { uri: recipe.recipe.uri } }"> -->
-  <div class="card" v-bind:class="{ favorited: recipe.favorited }">
+  <div class="card" v-bind:class="{ favorited: favorited }">
     <img v-if="recipe.recipe.uri" v-bind:src="recipe.recipe.image" />
     <h2 class="recipe-name">{{ recipe.recipe.label }}</h2>
-    <button
-      v-show="recipe.favorited == false"
-      v-if="$store.state.token != ''"
-      v-on:click="addToFavorites"
-    >
+    <button v-if="$store.state.token != '' && favorited === false" v-on:click="addToFavorites">
       Favorite
     </button>
-    <button
-      v-show="recipe.favorited"
-      v-if="$store.state.token != ''"
-      v-on:click="addToFavorites"
-    >
-      Unfavorite
-    </button>
+    <button v-if="$store.state.token != '' && favorited" v-on:click="removeFromFavorites">Unfavorite</button>
     <h3 class="time-to-make">{{ recipe.recipe.totalTime }}</h3>
     <p class="calories">{{ recipe.recipe.calories }}</p>
     <p class="cuisine-type">{{ recipe.recipe.cuisineType }}</p>
@@ -39,6 +29,7 @@ export default {
   data() {
     return {
       healthTags: "",
+      favorited: false,
     };
   },
   methods: {
@@ -48,12 +39,33 @@ export default {
       );
     },
     addToFavorites() {
-      AccountService.addToFavorites(this.recipe).then((response) => {
-        if (response.status == 201) {
-          return Object.assign({}, this.recipe, { favorited: true });
-        }
+      AccountService.addRecipeToFavorites(this.formatRecipe()).then((response) => {
+        return response.status == 200 //change to 201 when server status codes updated
       });
+      this.favorited = true;
     },
+    removeFromFavorites() {
+      console.log("entered removal function");
+      AccountService.removeRecipeFromFavoritesByUri(this.recipe.recipe.uri).then(response => {
+        console.log("removal in process");
+        return response.status == 200;
+      });
+      this.favorited = false;
+    },
+    formatRecipe() {
+      const formattedRecipe = {
+        recipe_id: 0,
+        uri: this.recipe.recipe.uri,
+        label: this.recipe.recipe.label,
+        img: this.recipe.recipe.image,
+        calories: Math.round(this.recipe.recipe.calories),
+        yield: this.recipe.recipe.yield,
+        cuisineType: this.recipe.recipe.cuisineType[0],
+        totalTime: this.recipe.recipe.totalTime
+      };
+      console.log(formattedRecipe);
+      return formattedRecipe;
+    }
   },
 };
 </script>
@@ -87,5 +99,10 @@ export default {
 
 .card .time-to-make {
   font-size: 1rem;
+}
+
+.favorited {
+  background-color: yellow;
+  border: 10px solid black;
 }
 </style>
