@@ -3,13 +3,13 @@
   <div class="recipe-details">
       <img class="image" v-if="recipe.recipe.uri" v-bind:src="recipe.recipe.image" />
       <h2>{{recipe.recipe.label}}</h2>
+      <a v-bind:h-ref="recipe.recipe.url">Instructions On How to Make</a>
       <h3>{{capitalize(formatArray(recipe.recipe.cuisineType))}} | {{recipe.recipe.totalTime}} minutes | {{Math.round(recipe.recipe.calories)}} calories</h3>
       <p>{{capitalize(formatArray(recipe.recipe.dishType))}}</p>
       <p>{{recipe.recipe.yield}} servings</p>
       <p>{{formatArray(recipe.recipe.dietLabels)}}</p>
       <p>Dietary Tags: {{formatArray(recipe.recipe.healthLabels)}}</p>
       <p>Ingredients: {{formatArray(recipe.recipe.ingredientLines)}}</p>
-      <a v-bind:h-ref="recipe.recipe.url">Instructions On How to Make</a>
       <div>
       </div>
   </div>
@@ -68,7 +68,7 @@ export default {
     width: 50%;
     border: 3px solid green;
     padding: 10px;
-    text-align: justify;
+    text-align: center;
 }
 
 .image {

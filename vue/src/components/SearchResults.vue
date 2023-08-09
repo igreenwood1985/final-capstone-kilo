@@ -336,14 +336,28 @@
               <label for="750-1000-cals">750 - 1000</label>
             </div>
             <div>
-              <input
+              <!-- <input
                 type="checkbox"
-                name="1000-plus-cals"
-                id="1000-plus-cals"
-                v-bind:value="'&calories=1000+'"
+                name="custom-calorie-range"
+                id="custom-calorie-range"
+                v-bind:value="'&calories=' + minimumCalories + '-' + maximumCalories"
                 v-model="activeFilters"
+              
+              <input
+                type="number"
+                name="minimum-range"
+                id="minimum-range"
+                v-model="minimumCalories"
               />
-              <label for="1000-plus-cals">1000+</label>
+              <input
+                type="number"
+                name="maximum-range"
+                id="maximum-range"
+                v-model="maximumCalories"
+                
+              />
+              /> -->
+              <label for="custom-calorie-range">Custom Calorie Range</label>
             </div>
           </div>
         </div>
@@ -376,6 +390,8 @@ export default {
       searchResults: [],
       advancedSearchVisible: true,
       activeFilters: [],
+      minimumCalories: '',
+      maximumCalories: '',
     };
   },
   methods: {
@@ -410,6 +426,17 @@ export default {
       });
     },
   },
+//   computed: {
+//     checkCalorieRange() {
+//       if (!this.maximumCalories > 0 || !this.minimumCalories > 0) {
+//           return this.activeFilters.filter(item => {
+//             return item.contains('&calories') == false
+//           })
+//       }
+//       this.activeFilters.push('&calories=' + this.minimumCalories + '-' + this.maximumCalories)
+//       return this.activeFilters
+// }
+//   }
 };
 </script>
 
