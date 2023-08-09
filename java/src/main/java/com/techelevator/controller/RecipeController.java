@@ -27,7 +27,7 @@ public class RecipeController {
     // Gets 4 most recent favorited recipes from logged in users for Dashboard component
     @RequestMapping(path = "/dashboard/recipes",method = RequestMethod.GET)
     public RecipeDto[] getDashboardRecipes(Principal principal) {
-        List<RecipeDto> recipeDtoList =  recipeDao.getAllFavoritedRecipes(getLoggedInUserId(principal));
+        List<RecipeDto> recipeDtoList =  recipeDao.getDashboardRecipes(getLoggedInUserId(principal));
         return recipeDtoList.toArray(new RecipeDto[recipeDtoList.size()]);
     }
 

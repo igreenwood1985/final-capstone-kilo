@@ -26,9 +26,9 @@ public class JdbcRecipeDao implements RecipeDao {
         String sql = "SELECT recipes.recipe_id, uri, recipe_name, img, total_calories, servings, cuisine_type, total_time " +
                 "FROM recipes " +
                 "JOIN user_recipe ON user_recipe.recipe_id = recipes.recipe_id " +
-                "WHERE user_id = ?" +
-                "ORDER BY recipe_id DESC" +
-                "LIMIT 4";
+                "WHERE user_id = ? " +
+                "ORDER BY recipe_id DESC " +
+                "LIMIT 3";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
 
@@ -47,7 +47,7 @@ public class JdbcRecipeDao implements RecipeDao {
         String sql = "SELECT recipes.recipe_id, uri, recipe_name, img, total_calories, servings, cuisine_type, total_time " +
                 "FROM recipes " +
                 "JOIN user_recipe ON user_recipe.recipe_id = recipes.recipe_id " +
-                "WHERE user_id = ?" +
+                "WHERE user_id = ? " +
                 "ORDER BY recipe_id DESC";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
