@@ -5,8 +5,6 @@
      <!-- <h2 class="recipe-name">{{ recipe.label }}</h2> -->
     <!-- </router-link> -->
 
-  <div class="main">
-
     <img v-bind:src="recipe.img" id="image" />
     <router-link v-bind:to="{name: 'recipe-details', params: {id : recipe.uri}}">
     <h2 class="recipe-name">{{ recipe.label }}</h2>
