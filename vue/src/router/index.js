@@ -7,7 +7,7 @@ import Register from '../views/Register.vue'
 import store from '../store/index.js'
 import DashboardView from '../views/DashboardView.vue'
 import RecipeDetailsView from '../views/RecipeDetailsView.vue'
-import RecipeListView from '../views/RecipeListView.vue'
+import MyRecipesView from '../views/MyRecipesView.vue'
 
 Vue.use(Router)
 
@@ -49,9 +49,9 @@ const router = new Router({
       }
     },
     {
-      path: '/dashboard/recipes',
-      name: 'recipe-list',
-      components: RecipeListView,
+      path: '/dashboard/myrecipes',
+      name: 'my-recipes',
+      component: MyRecipesView,
       meta: {
         requiresAuth: true
       }

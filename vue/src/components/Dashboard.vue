@@ -2,7 +2,14 @@
   <div>
     <div class="grid-container">
       <h1>heading</h1>
-      <h2 class="recipes-title">My Favorite Recipes</h2>
+      <h2 class="recipes-title">
+        My Favorite Recipes
+        <router-link
+          v-bind:to="{ name: 'my-recipes' }"
+        >
+          <h2 class="my-recipes-link">Click here to view all.</h2>
+        </router-link>
+      </h2>
       <dashboard-recipes class="recipes-section" />
       <h2 class="mealplans-title">My Meal Plans</h2>
       <dashboard-meal-plans class="meal-plans-section" />
@@ -52,7 +59,7 @@ h1 {
 
 .meals-title {
   grid-area: meals-title;
-  text-align: center; 
+  text-align: center;
 }
 
 .mealplans-title {
