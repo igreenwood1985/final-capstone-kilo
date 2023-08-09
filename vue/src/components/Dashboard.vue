@@ -1,7 +1,12 @@
 <template>
   <div>
-    <h1>hello</h1>
-    <dashboard-recipes class="recipes-section"/>
+    <div class="grid-container">
+      <h1>hello</h1>
+      <dashboard-recipes class="recipes-section"/>
+
+    </div>
+    
+    
   </div>
 </template>
 
@@ -29,5 +34,17 @@ export default {
 }
 h1 {
   text-align: center;
+}
+.grid-container {
+  display: grid;
+grid-template-columns: 1fr 1fr ;
+grid-template-areas: 
+"header header"
+"recipes mealPlan"
+"meals mealPlan"
+
+
+
+;
 }
 </style>
