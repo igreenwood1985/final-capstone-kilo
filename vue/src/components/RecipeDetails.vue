@@ -3,7 +3,7 @@
   <div class="recipe-details">
       <img class="image" v-if="recipe.recipe.uri" v-bind:src="recipe.recipe.image" />
       <h2>{{recipe.recipe.label}}</h2>
-      <a v-bind:h-ref="recipe.recipe.url">Instructions On How to Make</a>
+      <a v-bind:href="recipe.recipe.url">Instructions On How to Make</a>
       <h3>{{capitalize(formatArray(recipe.recipe.cuisineType))}} | {{recipe.recipe.totalTime}} minutes | {{Math.round(recipe.recipe.calories)}} calories</h3>
       <p>{{capitalize(formatArray(recipe.recipe.dishType))}}</p>
       <p>{{recipe.recipe.yield}} servings</p>
