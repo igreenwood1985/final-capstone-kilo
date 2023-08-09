@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="main ">
     <!-- <router-link v-bind:to="{name: 'recipe-details', params: {id : recipe.uri}}"> -->
      <!-- <h2 class="recipe-name">{{ recipe.label }}</h2> -->
     <!-- </router-link> -->
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style>
-.card {
+.main {
   border: 2px solid black;
   border-radius: 10px;
   display: inline-block;
@@ -55,9 +55,8 @@ export default {
 
 
 #image {
-  width: 50%;
-  height: auto;
-  aspect-ratio: 303 / 303;
+ width: 100%;
+ height: 50%;
 }
 
 
