@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>hello</h1>
-    <dashboard-recipes />
+    <dashboard-recipes class="recipes-section"/>
   </div>
 </template>
 
@@ -24,4 +24,10 @@ export default {
 </script>
 
 <style>
+.recipes-section {
+  background-color: yellow;
+}
+h1 {
+  text-align: center;
+}
 </style>

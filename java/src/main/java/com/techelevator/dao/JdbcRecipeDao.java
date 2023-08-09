@@ -27,7 +27,8 @@ public class JdbcRecipeDao implements RecipeDao {
                 "FROM recipes " +
                 "JOIN user_recipe ON user_recipe.recipe_id = recipes.recipe_id " +
                 "WHERE user_id = ?" +
-                "ORDER BY recipe_id DESC";
+                "ORDER BY recipe_id DESC" +
+                "LIMIT 4";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
 
@@ -102,14 +103,6 @@ public class JdbcRecipeDao implements RecipeDao {
 
     // Remove a recipe from logged in user's favorites
     @Override
-    public void removeRecipeFromFavorites(int recipeId, int userId) {
-
-            String sql = "DELETE FROM user_recipe WHERE user_id = ? AND recipe_id = ?";
-            jdbcTemplate.update(sql, userId, recipeId);
-
-    }
-
-    @Override
     public void removeRecipeFromFavoritesByUri(String recipeUri, int userId) {
         String sqlSelect = "SELECT recipe_id " +
                 "FROM recipes " +
@@ -117,11 +110,13 @@ public class JdbcRecipeDao implements RecipeDao {
 
         String sqlDelete = "DELETE FROM user_recipe " +
                 "WHERE user_id = ? AND recipe_id = ?";
+
         int recipe_id = jdbcTemplate.queryForObject(sqlSelect, Integer.class, recipeUri);
 
         jdbcTemplate.update(sqlDelete, userId, recipe_id);
     }
 
+    // Mapping
     private RecipeDto mapRowToRecipe(SqlRowSet rowset) {
         RecipeDto recipeDto = new RecipeDto();
         recipeDto.setRecipe_id(rowset.getInt("recipe_id"));

@@ -39,7 +39,7 @@ public class RecipeController {
     }
 
     // Add recipe to favorites
-    @RequestMapping(path = "/dashboard", method = RequestMethod.POST)
+    @RequestMapping(path = "/addrecipe", method = RequestMethod.POST)
     public RecipeDto addFavoriteRecipe(@RequestBody RecipeDto recipeDto, Principal principal) {
        try {
            RecipeDto responseRecipeDto = recipeDao.addFavoriteRecipe(recipeDto, getLoggedInUserId(principal));
@@ -50,18 +50,13 @@ public class RecipeController {
        }
     }
 
-    // Remove a recipe from logged in user's favorites
-//    @RequestMapping(path = "/myrecipes/{recipeId}", method = RequestMethod.DELETE)
-//    public void removeRecipeFromFavorites(@PathVariable int recipeId, Principal principal){
-//        recipeDao.removeRecipeFromFavorites(recipeId, getLoggedInUserId(principal));
-//    }
-
+    // Remove recipe from favorites using partial uri to access the recipe within the database
     @RequestMapping(path = "/myrecipes/{recipeUri}", method = RequestMethod.DELETE)
     public void removeRecipeFromFavoritesByUri(@PathVariable String recipeUri, Principal principal){
         recipeDao.removeRecipeFromFavoritesByUri(recipeUri, getLoggedInUserId(principal));
     }
 
-    //
+    // Returns logged in user's usedId
     private int getLoggedInUserId(Principal principal) {
         String username = principal.getName();
         User loggedInUser = userDao.getUserByUsername(username);
