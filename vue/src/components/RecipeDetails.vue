@@ -1,16 +1,16 @@
 <template>
   
-  <div>
-      <img v-if="recipe.recipe.uri" v-bind:src="recipe.recipe.image" />
+  <div class="recipe-details">
+      <img class="image" v-if="recipe.recipe.uri" v-bind:src="recipe.recipe.image" />
       <h2>{{recipe.recipe.label}}</h2>
-      <h3>{{formatArray(recipe.recipe.cuisineType)}} | {{recipe.recipe.totalTime}} minutes | {{Math.round(recipe.recipe.calories)}} calories</h3>
+      <h3>{{capitalize(formatArray(recipe.recipe.cuisineType))}} | {{recipe.recipe.totalTime}} minutes | {{Math.round(recipe.recipe.calories)}} calories</h3>
+      <p>{{capitalize(formatArray(recipe.recipe.dishType))}}</p>
+      <p>{{recipe.recipe.yield}} servings</p>
       <p>{{formatArray(recipe.recipe.dietLabels)}}</p>
-      <p>{{formatArray(recipe.recipe.healthLabels)}}</p>
-      <p>{{formatArray(recipe.recipe.ingredientLines)}}</p>
-      <p>{{formatArray(recipe.recipe.dishType)}}</p>
-      <p>Servings: {{recipe.recipe.yield}}</p>
+      <p>Dietary Tags: {{formatArray(recipe.recipe.healthLabels)}}</p>
+      <p>Ingredients: {{formatArray(recipe.recipe.ingredientLines)}}</p>
+      <a v-bind:h-ref="recipe.recipe.url">Instructions On How to Make</a>
       <div>
-
       </div>
   </div>
 
@@ -32,30 +32,49 @@ export default {
                 this.recipe = response.data.hits[0];
             });
         },
-        CapitalizeCuisineType(){
-            const firstLetter = this.recipe.recipe.cuisineType[0].charAt[0].toUpperCase()
-            this.recipe.recipe.cuisineType = firstLetter + 
-            this.recipe.recipe.cuisineType.substring(1)
-            console.log(this.recipe.recipe.cuisineType)
+        capitalize(string){
+            console.log('enter capitalize');
+            const firstLetter = string.charAt(0).toUpperCase();
+            console.log(firstLetter);
+            string = firstLetter + string.substring(1);
+            console.log(firstLetter + string.substring(1));
+            console.log(string);
+            return string;
         },
         formatArray(array){
             let newString = ''
-            array.forEach(element => { 
-                newString += element + ', '
-                
-            });
+
+            for (let counter = 0; counter < array.length; counter++) {
+                newString += array[counter];
+                if (counter < array.length - 1) {
+                    newString += ', '
+                }
+            }
+
             return newString
         }
 
     },
     created() {
         this.retrieveRecipeByURI();
-        this.CapitalizeCuisineType();
     }
 
 }
 </script>
 
 <style>
+.recipe-details {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+    text-align: justify;
+}
 
+.image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
 </style>

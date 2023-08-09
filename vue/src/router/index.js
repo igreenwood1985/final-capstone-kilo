@@ -4,9 +4,10 @@ import HomeView from '../views/HomeView.vue'
 import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
-import store from '../store/index'
+import store from '../store/index.js'
 import DashboardView from '../views/DashboardView.vue'
 import RecipeDetailsView from '../views/RecipeDetailsView.vue'
+import RecipeListView from '../views/RecipeListView.vue'
 
 Vue.use(Router)
 
@@ -43,6 +44,14 @@ const router = new Router({
       path: '/dashboard/recipe/:id',
       name: 'recipe-details',
       component: RecipeDetailsView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/dashboard/recipes',
+      name: 'recipe-list',
+      components: RecipeListView,
       meta: {
         requiresAuth: true
       }

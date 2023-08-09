@@ -1,6 +1,6 @@
 <template>
   <!-- <router-link v-bind:to="{ name: 'recipe', params: { uri: recipe.recipe.uri } }"> -->
-  <div class="card" v-bind:class="{ favorited: favorited }">
+  <div class="main" v-bind:class="{ favorited: favorited }">
     <img v-if="recipe.recipe.uri" v-bind:src="recipe.recipe.image" />
     <h2 class="recipe-name">{{ recipe.recipe.label }}</h2>
     <button v-if="$store.state.token != '' && favorited === false" v-on:click="addToFavorites">
@@ -71,7 +71,7 @@ export default {
 </script>
 
 <style>
-.card {
+.main {
   border: 2px solid black;
   border-radius: 10px;
   display: inline-block;
@@ -80,19 +80,16 @@ export default {
   margin: 20px;
 }
 
-.card.read {
+.main.read {
   background-color: lightgray;
 }
 
-.card img {
-  max-width: 75%;
-  height: auto;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.main img {
+  width: 100%;
+  height: 50%;
 }
 
-.card .recipe-name {
+.main .recipe-name {
   font-size: 1.2rem;
   text-align: center;
 }
