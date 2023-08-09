@@ -37,14 +37,15 @@ h1 {
 }
 .grid-container {
   display: grid;
-grid-template-columns: 1fr 1fr ;
+grid-template-columns: 2fr 1fr ;
 grid-template-areas: 
 "header header"
 "recipes mealPlan"
 "meals mealPlan"
 
-
-
 ;
+}
+.recipes-section {
+  grid-area: recipes;
 }
 </style>
