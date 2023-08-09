@@ -1,8 +1,11 @@
 import axios from 'axios';
 
 export default {
-    getFavoritedRecipes() {
+    getDashboardRecipes() {
         return axios.get('/dashboard/recipes');
+    },
+    getFavoritedRecipes(){
+        return axios.get('/myrecipes')
     },
     addRecipeToFavorites(recipe) {
         const uriIndex = recipe.uri.indexOf('#');
