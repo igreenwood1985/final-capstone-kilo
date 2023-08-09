@@ -8,18 +8,15 @@ export default {
         const uriIndex = recipe.uri.indexOf('#');
         recipe.uri = recipe.uri.substring(uriIndex + 1);
         console.log(recipe.uri);
-        return axios.post('/dashboard', recipe);
+        return axios.post('/addrecipe', recipe);
     },
-    removeRecipeFromFavorites(recipeId) {
-        return axios.delete('/myrecipes/' +  recipeId);
-    },
-    getRecipeById(id) {
-        return axios.get('/' + id);
-    },
-    removeRecipeFromFavoritesByUri(recipeUri) {
+    removeRecipeFromFavorites(recipeUri) {
         const uriIndex = recipeUri.indexOf('#');
         recipeUri = recipeUri.substring(uriIndex + 1);
         console.log(recipeUri);
         return axios.delete('/myrecipes/' +  recipeUri);
     },
+    getRecipeById(id) {
+        return axios.get('/' + id);
+    }
 }

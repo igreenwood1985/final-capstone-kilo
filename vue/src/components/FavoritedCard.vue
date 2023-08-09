@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     removeFromFavorites() {
-      AccountService.removeRecipeFromFavorites(this.recipe.recipe_id).then(response => {
+      AccountService.removeRecipeFromFavorites(this.recipe.uri).then(response => {
           return 200 === response.status;
       });
       this.$store.commit("REMOVE_RECIPE", this.recipe);
