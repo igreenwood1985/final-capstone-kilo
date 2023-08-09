@@ -3,6 +3,9 @@
     <div class="grid-container">
       <h1>hello</h1>
       <dashboard-recipes class="recipes-section"/>
+      <dashboard-meal-plans class="meal-plans-section"/>
+      <dashboard-meals class="meals-sections"/>
+      
 
     </div>
     
@@ -11,11 +14,14 @@
 </template>
 
 <script>
+import DashboardMealPlans from './DashboardMealPlans.vue';
+import DashboardMeals from './DashboardMeals.vue';
 // import AccountService from "../services/AccountService.js";
 import DashboardRecipes from "./DashboardRecipes.vue";
 
+
 export default {
-  components: { DashboardRecipes },
+  components: { DashboardRecipes, DashboardMealPlans, DashboardMeals },
   data() {
     return {
       
@@ -47,5 +53,14 @@ grid-template-areas:
 }
 .recipes-section {
   grid-area: recipes;
+}
+h1 {
+  grid-area: header;
+}
+.meal-plans-section {
+  grid-area: mealPlan;
+}
+.meals-section {
+  grid-area: meals;
 }
 </style>
