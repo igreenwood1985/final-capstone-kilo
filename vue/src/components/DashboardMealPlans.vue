@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h1>mealplans</h1>
+      <h1>   </h1>
   </div>
 </template>
 
