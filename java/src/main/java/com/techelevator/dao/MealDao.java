@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface MealDao {
 
-    public List<MealDTO> getAllMeals(int user_id);
+    public List<MealDTO> retrieveAllMeals(int user_id);
+    public List<MealDTO> retrieveDashboardMeals(int user_id);
 
 }

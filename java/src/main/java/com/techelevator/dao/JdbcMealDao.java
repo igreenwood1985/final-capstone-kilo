@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.exception.DaoException;
 import com.techelevator.model.MealDTO;
 import com.techelevator.model.RecipeDto;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
@@ -20,9 +21,9 @@ public class JdbcMealDao implements MealDao{
     }
 
     @Override
-    public List<MealDTO> getAllMeals(int user_id) {
+    public List<MealDTO> retrieveAllMeals(int user_id) {
         List<MealDTO> allMeals = new ArrayList<>();
-        String sql = "SELECT meal_id, meal_name, description " +
+        String sqlMeals = "SELECT meal_id, meal_name, description " +
                 "FROM meals " +
                 "WHERE user_id = ?;";
 
@@ -31,28 +32,64 @@ public class JdbcMealDao implements MealDao{
                 "JOIN meals ON meal_recipe.meal_id = meals.meal_id " +
                 "WHERE meals.meal_id = ?;";
         try{
-            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, user_id);
-            while(result.next()){
-                MealDTO meal = mapMealDTO(result);
-                SqlRowSet result2 = jdbcTemplate.queryForRowSet(sqlRecipes, meal.getMeal_id());
-                while (result2.next()){
-                    RecipeDto recipe = mapRecipeDTO(result2);
+            SqlRowSet resultMeals = jdbcTemplate.queryForRowSet(sqlMeals, user_id);
+            while(resultMeals.next()){
+                MealDTO meal = mapMealDTO(resultMeals);
+                SqlRowSet resultRecipes = jdbcTemplate.queryForRowSet(sqlRecipes, meal.getMeal_id());
+                while (resultRecipes.next()){
+                    RecipeDto recipe = mapRecipeDTO(resultRecipes);
                     meal.addToRecipes(recipe);
                 }
+
                 allMeals.add(meal);
-
-
 
             }
 
         }
         catch (CannotGetJdbcConnectionException exception){
-
+            throw new DaoException("Unable to connect to server or database", exception);
         }
 
         return allMeals;
 
     }
+
+    @Override
+    public List<MealDTO> retrieveDashboardMeals(int user_id) {
+        List<MealDTO> allMeals = new ArrayList<>();
+        String sqlMeals = "SELECT meal_id, meal_name, description " +
+                "FROM meals " +
+                "WHERE user_id = ? " +
+                "ORDER BY meal_id DESC " +
+                "LIMIT 3;";
+
+        String sqlRecipes = "SELECT recipes.recipe_id, recipe_name, uri, img, total_calories, servings, cuisine_type, total_time FROM recipes " +
+                "JOIN meal_recipe ON recipes.recipe_id = meal_recipe.recipe_id " +
+                "JOIN meals ON meal_recipe.meal_id = meals.meal_id " +
+                "WHERE meals.meal_id = ?;";
+        try{
+            SqlRowSet resultMeals = jdbcTemplate.queryForRowSet(sqlMeals, user_id);
+            while(resultMeals.next()){
+                MealDTO meal = mapMealDTO(resultMeals);
+                SqlRowSet resultRecipes = jdbcTemplate.queryForRowSet(sqlRecipes, meal.getMeal_id());
+                while (resultRecipes.next()){
+                    RecipeDto recipe = mapRecipeDTO(resultRecipes);
+                    meal.addToRecipes(recipe);
+                }
+
+                allMeals.add(meal);
+
+            }
+
+        }
+        catch (CannotGetJdbcConnectionException exception){
+            throw new DaoException("Unable to connect to server or database", exception);
+        }
+
+        return allMeals;
+
+    }
+
     private MealDTO mapMealDTO(SqlRowSet result){
         MealDTO meal = new MealDTO();
         meal.setMeal_id(result.getInt("meal_id"));
