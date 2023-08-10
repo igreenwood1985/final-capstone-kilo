@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public class JdbcRecipeDao implements RecipeDao {
     private final JdbcTemplate jdbcTemplate;
-    private String label;
+    //private String label;
 
     public JdbcRecipeDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
