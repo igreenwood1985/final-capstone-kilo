@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <router-link v-bind:to="{ name: 'meal-editor', params: {id: meal.meal_id} }">
-      <h2 class="meal-name">{{ meal.name }}</h2>
+      <h2 class="meal-name" v-on:click="updateCurrentMealInStore()">{{ meal.name }}</h2>
     </router-link>
     <h2 class="meal-description">{{ meal.description }}</h2>
   </div>
@@ -25,6 +25,10 @@ export default {
     };
   },
   methods: {
+    updateCurrentMealInStore() {
+      this.$store.commit("SET_CURRENT_MEAL", this.meal.meal_id);
+
+    }
 
 
 

@@ -12,9 +12,7 @@
     <p>Cuisine Type: {{recipe.cuisineType}}</p>
     <button v-on:click="removeFromFavorites()">Unfavorite</button>
     <div>
-  <b-dropdown id="dropdown-1" text="Add To Meal" class="m-md-2">
-    <b-dropdown-item v-for="meal in meals" v-bind:key="meal.meal_id" v-on:click="addToMeal(meal.meal_id)">{{meal.name}}</b-dropdown-item>
-  </b-dropdown>
+  <button v-on:click="removeRecipeFromMeal($store.state.currentMeal)">Remove from Meal</button>
 </div>
     <p>Calories: {{ recipe.calories }}</p>
     <p>Servings: {{ recipe.yield }}</p>
@@ -28,7 +26,7 @@
 import AccountService from "../services/AccountService.js";
 
 export default {
-  name: "favorited-card",
+  name: "meal-recipe-card",
   props: {
     recipe: Object,
     enableAdd: {
@@ -42,21 +40,30 @@ export default {
       meals: []
     };
   },
+  computed: {
+    currentMealId() {
+      return this.$store.getters
+    }
+  },
   methods: {
     removeFromFavorites() {
       AccountService.removeRecipeFromFavorites(this.recipe.uri).then(response => {
           return 200 === response.status;
       });
-      
     },
-    addToMeal(mealId) {
-      AccountService.addRecipeToMeal(this.recipe, mealId).then(response => {
-        return 201 === response.status;
-      });
-    },
+    // addToMeal(mealId) {
+    //   AccountService.addRecipeToMeal(this.recipe.id, mealId).then(response => {
+    //     return 201 === response.status;
+    //   });
+    // },
     getAllMeals() {
       AccountService.getFavoritedMeals().then(response => {
         this.meals = response.data;
+      })
+    },
+    removeRecipeFromMeal(mealId) {
+      AccountService.removeRecipeFromMeal(this.recipe.recipe_id, mealId).then(response => {
+        return 204 === response.status
       })
     }
   },

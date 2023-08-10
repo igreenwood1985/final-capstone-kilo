@@ -21,8 +21,8 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     searchResults: [],
+    currentMeal: 0,
   },
-
   mutations: {
     SET_AUTH_TOKEN(state, token) {
       state.token = token;
@@ -47,6 +47,9 @@ export default new Vuex.Store({
       state.favoriteRecipes.filter((item) => {
         item != recipe
       });
-    }
+    },
+    SET_CURRENT_MEAL(state, mealId) {
+      state.currentMeal = mealId;
+    },
   }
 })

@@ -6,10 +6,12 @@ import java.util.List;
 
 public interface MealDao {
 
-    public List<MealDTO> retrieveAllMeals(int user_id);
-    public List<MealDTO> retrieveDashboardMeals(int user_id);
+    public List<MealDTO> retrieveAllMeals(int userId);
+    public List<MealDTO> retrieveDashboardMeals(int userId);
 
-    public MealDTO createMeal(int user_id, MealDTO meal);
-    public MealDTO retrieveMealByID(int user_id, int meal_id);
+    public MealDTO createMeal(int userId, MealDTO meal);
+    public MealDTO retrieveMealByID(int userId, int mealId);
+    public void addRecipeToMeal(int recipeId, int mealId);
+    public void removeRecipeFromMeal(int recipeId, int mealId);
 
 }

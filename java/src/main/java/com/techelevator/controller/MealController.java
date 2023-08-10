@@ -53,12 +53,24 @@ public class MealController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(path = "/mymeals/{meal_id}", method = RequestMethod.GET)
-    public MealDTO getMealByID(@PathVariable int meal_id, Principal principal) {
+    @RequestMapping(path = "/mymeals/{mealId}", method = RequestMethod.GET)
+    public MealDTO getMealByID(@PathVariable int mealId, Principal principal) {
         int userID = getUserId(principal);
-        MealDTO meal = mealDao.retrieveMealByID(userID, meal_id);
+        MealDTO meal = mealDao.retrieveMealByID(userID, mealId);
 
         return meal;
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path = "/addrecipetomeal/{mealId}", method = RequestMethod.POST)
+    public void addRecipeToMeal(@PathVariable int mealId, @RequestBody RecipeDto recipeDto) {
+        mealDao.addRecipeToMeal(recipeDto.getRecipe_id(), mealId);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(path = "/mealeditor/delete/{mealId}", method = RequestMethod.DELETE)
+    public void removeRecipeFromMeal(@PathVariable int mealId, @RequestBody RecipeDto recipeDto) {
+        mealDao.removeRecipeFromMeal(recipeDto.getRecipe_id(), mealId);
     }
 
     private int getUserId(Principal principal){

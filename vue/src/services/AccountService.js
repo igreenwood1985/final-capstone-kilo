@@ -34,6 +34,12 @@ export default {
         return axios.post('/addmeal', meal)
     },
     getMealById(id) {
-        return axios.get('/' + id);
+        return axios.get('/mymeals/' + id);
+    },
+    addRecipeToMeal(recipe, mealId) {
+        return axios.post('/addrecipetomeal/' + mealId, recipe)
+    },
+    removeRecipeFromMeal(recipe, mealId) {
+        return axios.delete('/mealeditor/delete/' + mealId, recipe)
     }
 }

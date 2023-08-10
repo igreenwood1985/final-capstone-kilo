@@ -13,11 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class JdbcMealDao implements MealDao{
+public class JdbcMealDao implements MealDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    public JdbcMealDao(JdbcTemplate jdbcTemplate){
+    public JdbcMealDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -32,12 +32,12 @@ public class JdbcMealDao implements MealDao{
                 "JOIN meal_recipe ON recipes.recipe_id = meal_recipe.recipe_id " +
                 "JOIN meals ON meal_recipe.meal_id = meals.meal_id " +
                 "WHERE meals.meal_id = ?;";
-        try{
+        try {
             SqlRowSet resultMeals = jdbcTemplate.queryForRowSet(sqlMeals, user_id);
-            while(resultMeals.next()){
+            while (resultMeals.next()) {
                 MealDTO meal = mapMealDTO(resultMeals);
                 SqlRowSet resultRecipes = jdbcTemplate.queryForRowSet(sqlRecipes, meal.getMeal_id());
-                while (resultRecipes.next()){
+                while (resultRecipes.next()) {
                     RecipeDto recipe = mapRecipeDTO(resultRecipes);
                     meal.addToRecipes(recipe);
                 }
@@ -46,8 +46,7 @@ public class JdbcMealDao implements MealDao{
 
             }
 
-        }
-        catch (CannotGetJdbcConnectionException exception){
+        } catch (CannotGetJdbcConnectionException exception) {
             throw new DaoException("Unable to connect to server or database", exception);
         }
 
@@ -68,12 +67,12 @@ public class JdbcMealDao implements MealDao{
                 "JOIN meal_recipe ON recipes.recipe_id = meal_recipe.recipe_id " +
                 "JOIN meals ON meal_recipe.meal_id = meals.meal_id " +
                 "WHERE meals.meal_id = ?;";
-        try{
+        try {
             SqlRowSet resultMeals = jdbcTemplate.queryForRowSet(sqlMeals, user_id);
-            while(resultMeals.next()){
+            while (resultMeals.next()) {
                 MealDTO meal = mapMealDTO(resultMeals);
                 SqlRowSet resultRecipes = jdbcTemplate.queryForRowSet(sqlRecipes, meal.getMeal_id());
-                while (resultRecipes.next()){
+                while (resultRecipes.next()) {
                     RecipeDto recipe = mapRecipeDTO(resultRecipes);
                     meal.addToRecipes(recipe);
                 }
@@ -82,8 +81,7 @@ public class JdbcMealDao implements MealDao{
 
             }
 
-        }
-        catch (CannotGetJdbcConnectionException exception){
+        } catch (CannotGetJdbcConnectionException exception) {
             throw new DaoException("Unable to connect to server or database", exception);
         }
 
@@ -93,20 +91,20 @@ public class JdbcMealDao implements MealDao{
 
     @Override
     public MealDTO createMeal(int user_id, MealDTO meal) {
-        String sql ="INSERT INTO meals (meal_name, description, user_id) " +
+        String sql = "INSERT INTO meals (meal_name, description, user_id) " +
                 "VALUES (?,?,?) RETURNING meal_id;";
 
         String sqlJoin = "INSERT INTO meal_recipe (meal_id, recipe_id) " +
                 "VALUES (?, ?);";
-        try{
+        try {
             int mealID = jdbcTemplate.queryForObject(sql, Integer.class, meal.getName(), meal.getDescription(), user_id);
             meal.setMeal_id(mealID);
 //            for(int counter = 0;  ){
 //
 //            }
-        } catch(CannotGetJdbcConnectionException exception){
+        } catch (CannotGetJdbcConnectionException exception) {
 
-        } catch(DataIntegrityViolationException exception){
+        } catch (DataIntegrityViolationException exception) {
 
         }
 
@@ -115,7 +113,7 @@ public class JdbcMealDao implements MealDao{
 
     @Override
     public MealDTO retrieveMealByID(int user_id, int meal_id) {
-        MealDTO meal = null;
+        MealDTO meal = new MealDTO();
         String sql = "SELECT meal_id, meal_name, description " +
                 "FROM meals " +
                 "WHERE user_id = ? AND meal_id = ?;";
@@ -123,7 +121,17 @@ public class JdbcMealDao implements MealDao{
         try {
             SqlRowSet result = jdbcTemplate.queryForRowSet(sql, user_id, meal_id);
             if (result.next()) {
+                String sqlRecipes = "SELECT recipes.recipe_id, recipe_name, uri, img, total_calories, servings, cuisine_type, total_time FROM recipes " +
+                        "JOIN meal_recipe ON recipes.recipe_id = meal_recipe.recipe_id " +
+                        "JOIN meals ON meal_recipe.meal_id = meals.meal_id " +
+                        "WHERE meals.meal_id = ?;";
+                SqlRowSet recipeResult = jdbcTemplate.queryForRowSet(sqlRecipes, meal_id);
                 meal = mapMealDTO(result);
+                while (recipeResult.next()) {
+                    RecipeDto recipeDto = mapRecipeDTO(recipeResult);
+                    meal.addToRecipes(recipeDto);
+                }
+
             }
 
         } catch (CannotGetJdbcConnectionException exception) {
@@ -133,7 +141,22 @@ public class JdbcMealDao implements MealDao{
         return meal;
     }
 
-    private MealDTO mapMealDTO(SqlRowSet result){
+    @Override
+    public void addRecipeToMeal(int recipeId, int mealId) {
+        String sql = "INSERT INTO meal_recipe (meal_id, recipe_id) " +
+                "VALUES (?, ?)";
+        jdbcTemplate.update(sql, mealId, recipeId);
+    }
+
+    @Override
+    public void removeRecipeFromMeal(int recipeId, int mealId) {
+        String sql = "DELETE FROM meal_recipe " +
+        "WHERE meal_id = ? AND recipe_id = ?";
+        jdbcTemplate.update(sql, mealId, recipeId);
+    }
+
+
+    private MealDTO mapMealDTO(SqlRowSet result) {
         MealDTO meal = new MealDTO();
         meal.setMeal_id(result.getInt("meal_id"));
         meal.setName(result.getString("meal_name"));
@@ -141,7 +164,7 @@ public class JdbcMealDao implements MealDao{
         return meal;
     }
 
-    private RecipeDto mapRecipeDTO(SqlRowSet result){
+    private RecipeDto mapRecipeDTO(SqlRowSet result) {
         RecipeDto recipe = new RecipeDto();
         recipe.setRecipe_id(result.getInt("recipe_id"));
         recipe.setLabel(result.getString("recipe_name"));
