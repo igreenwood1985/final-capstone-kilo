@@ -4,18 +4,24 @@
       <h1>heading</h1>
       <h2 class="recipes-title">
         My Favorite Recipes
-        <router-link
-          v-bind:to="{ name: 'my-recipes' }"
-        >
+        <router-link v-bind:to="{ name: 'my-recipes' }">
           <h2 class="my-recipes-link">Click here to view all.</h2>
         </router-link>
       </h2>
       <dashboard-recipes class="recipes-section" />
       <h2 class="mealplans-title">My Meal Plans</h2>
       <dashboard-meal-plans class="meal-plans-section" />
-      <h2 class="meals-title">My Meals 
-
-        <b-button >Hi</b-button>
+      <h2 class="meals-title">
+        My Meals
+        
+        <b-button v-on:click="toggleForm()">Hi</b-button>
+        <b-form class="create-meal-form" v-show="createFormToggled">
+          <h1>Meal Name</h1>
+          <b-input type="text" v-model="meal.mealName"/>
+          <h1>Meal Description</h1>
+          <b-input type="text" v-model="meal.description" />
+          <button class="btn btn-primary" type="reset" v-on:click="createMeal()">Submit</button>
+        </b-form>
 
       </h2>
       <dashboard-meals class="meals-section" />
@@ -24,39 +30,43 @@
 </template>
 
 <script>
-import AccountService from '../services/AccountService';
+import AccountService from "../services/AccountService";
 import DashboardMealPlans from "./DashboardMealPlans.vue";
 import DashboardMeals from "./DashboardMeals.vue";
 // import AccountService from "../services/AccountService.js";
 import DashboardRecipes from "./DashboardRecipes.vue";
 
-
 export default {
   components: { DashboardRecipes, DashboardMealPlans, DashboardMeals },
   data() {
-    return {};
+    return {
+      createFormToggled: false,
+      meal: {
+        mealName: "",
+        description: ""
+      }
+    };
   },
   methods: {
-            createMeal() {
+    createMeal() {
       AccountService.createMeal(this.formatMeal()).then((response) => {
-        return response.status == 200 //change to 201 when server status codes updated
+        return response.status == 200; //change to 201 when server status codes updated
       });
-      this.favorited = true;
+      this.toggleForm();
     },
     formatMeal() {
       const formattedMeal = {
         meal_id: 0,
-        meal_name: this.meal.meal_name,
-        description:this.meal.description,
-        user_id: 0
+        meal_name: this.meal.mealName,
+        description: this.meal.description,
+        user_id: 0,
       };
       console.log(formattedMeal);
       return formattedMeal;
+    },
+    toggleForm() {
+      this.createFormToggled = this.createFormToggled == false ? true : false;
     }
-
-
-
-
   },
 };
 </script>
@@ -110,4 +120,10 @@ h1 {
   grid-area: meals;
   background-color: blue;
 }
+
+.btn {
+  background-color: lightgreen;
+  border: 2px solid black;
+}
+
 </style>

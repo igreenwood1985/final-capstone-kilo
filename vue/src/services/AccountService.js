@@ -31,6 +31,6 @@ export default {
         return axios.get('/mymeals')
     },
     createMeal(meal) {
-        return axios.post('/createmeal',meal)
+        return axios.post('/createmeal', meal)
     }
 }

@@ -1,6 +1,7 @@
 <template>
   <div>
-
+    <h2 class="meal-name">{{ meal.mealName }}</h2>
+    <h2 class="meal-description">{{ meal.description }}</h2>
   </div>
 </template>
 
@@ -10,7 +11,7 @@
 export default {
     name: "meal-card",
       props: {
-    recipe: Object,
+    meal: Object,
     enableAdd: {
       type: Boolean,
       default: false,
@@ -18,8 +19,7 @@ export default {
   },
   data() {
     return {
-      healthTags: "",
-      favorited: false,
+  
     };
   },
   methods: {
