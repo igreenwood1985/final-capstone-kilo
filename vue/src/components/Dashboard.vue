@@ -53,6 +53,8 @@ export default {
         return response.status == 200; //change to 201 when server status codes updated
       });
       this.toggleForm();
+      this.meal.mealName = "";
+      this.meal.description = "";
     },
     formatMeal() {
       const formattedMeal = {
