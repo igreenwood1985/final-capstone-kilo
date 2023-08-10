@@ -6,6 +6,7 @@ import com.techelevator.dao.UserDao;
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.RecipeDto;
 import com.techelevator.model.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +26,7 @@ public class RecipeController {
     }
 
     // Gets 4 most recent favorited recipes from logged in users for Dashboard component
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/dashboard/recipes",method = RequestMethod.GET)
     public RecipeDto[] getDashboardRecipes(Principal principal) {
         List<RecipeDto> recipeDtoList =  recipeDao.getDashboardRecipes(getLoggedInUserId(principal));
@@ -32,6 +34,7 @@ public class RecipeController {
     }
 
     // Gets ALL favorited recipes from logged in users
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/myrecipes",method = RequestMethod.GET)
     public RecipeDto[] getAllFavoritedRecipes(Principal principal) {
         List<RecipeDto> recipeDtoList =  recipeDao.getAllFavoritedRecipes(getLoggedInUserId(principal));
@@ -39,6 +42,7 @@ public class RecipeController {
     }
 
     // Add recipe to favorites
+    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/addrecipe", method = RequestMethod.POST)
     public RecipeDto addFavoriteRecipe(@RequestBody RecipeDto recipeDto, Principal principal) {
        try {
@@ -51,6 +55,7 @@ public class RecipeController {
     }
 
     // Remove recipe from favorites using partial uri to access the recipe within the database
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path = "/myrecipes/{recipeUri}", method = RequestMethod.DELETE)
     public void removeRecipeFromFavoritesByUri(@PathVariable String recipeUri, Principal principal){
         recipeDao.removeRecipeFromFavoritesByUri(recipeUri, getLoggedInUserId(principal));
