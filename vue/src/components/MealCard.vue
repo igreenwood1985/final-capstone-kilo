@@ -1,6 +1,8 @@
 <template>
   <div class="main">
-    <h2 class="meal-name">{{ meal.name }}</h2>
+    <router-link v-bind:to="{ name: 'meal-editor', params: {id: meal.meal_id} }">
+      <h2 class="meal-name">{{ meal.name }}</h2>
+    </router-link>
     <h2 class="meal-description">{{ meal.description }}</h2>
   </div>
 </template>

@@ -9,6 +9,8 @@ import DashboardView from '../views/DashboardView.vue'
 import RecipeDetailsView from '../views/RecipeDetailsView.vue'
 import MyRecipesView from '../views/MyRecipesView.vue'
 import MyMealsView from '../views/MyMealsView.vue'
+import MealEditorView from '../views/MealEditorView.vue'
+import SearchView from '../views/SearchView.vue'
 
 Vue.use(Router)
 
@@ -29,6 +31,14 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: HomeView,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: SearchView,
       meta: {
         requiresAuth: false
       }
@@ -61,6 +71,14 @@ const router = new Router({
       path: '/dashboard/mymeals',
       name: 'my-meals',
       component: MyMealsView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/dashboard/mealeditor/:id',
+      name: 'meal-editor',
+      component: MealEditorView,
       meta: {
         requiresAuth: true
       }
