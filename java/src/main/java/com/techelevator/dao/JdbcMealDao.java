@@ -3,6 +3,7 @@ package com.techelevator.dao;
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.MealDTO;
 import com.techelevator.model.RecipeDto;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -88,6 +89,28 @@ public class JdbcMealDao implements MealDao{
 
         return allMeals;
 
+    }
+
+    @Override
+    public MealDTO createMeal(int user_id, MealDTO meal) {
+        String sql ="INSERT INTO meals (meal_name, description, user_id) " +
+                "VALUES (?,?,?) RETURNING meal_id;";
+
+        String sqlJoin = "INSERT INTO meal_recipe (meal_id, recipe_id) " +
+                "VALUES (?, ?);";
+        try{
+            int mealID = jdbcTemplate.queryForObject(sql, Integer.class, meal.getName(), meal.getDescription(), user_id);
+            meal.setMeal_id(mealID);
+//            for(int counter = 0;  ){
+//
+//            }
+        } catch(CannotGetJdbcConnectionException exception){
+
+        } catch(DataIntegrityViolationException exception){
+
+        }
+
+        return meal;
     }
 
     private MealDTO mapMealDTO(SqlRowSet result){
