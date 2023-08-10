@@ -113,6 +113,26 @@ public class JdbcMealDao implements MealDao{
         return meal;
     }
 
+    @Override
+    public MealDTO retrieveMealByID(int user_id, int meal_id) {
+        MealDTO meal = null;
+        String sql = "SELECT meal_id, meal_name, description " +
+                "FROM meals " +
+                "WHERE user_id = ? AND meal_id = ?;";
+
+        try {
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, user_id, meal_id);
+            if (result.next()) {
+                meal = mapMealDTO(result);
+            }
+
+        } catch (CannotGetJdbcConnectionException exception) {
+
+        }
+
+        return meal;
+    }
+
     private MealDTO mapMealDTO(SqlRowSet result){
         MealDTO meal = new MealDTO();
         meal.setMeal_id(result.getInt("meal_id"));
