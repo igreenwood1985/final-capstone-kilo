@@ -14,7 +14,7 @@ import AccountService from "../services/AccountService";
 import FavoritedCard from "./FavoritedCard.vue";
 
 export default {
-  name: "dashboard-meals",
+  name: "my-meals-component",
   components: {
     FavoritedCard,
   },
@@ -25,8 +25,8 @@ export default {
     };
   },
   methods: {
-    getFavoriteMeals() {
-      AccountService.getDashboardMeals().then((response) => {
+    getAllFavoriteMeals() {
+      AccountService.getFavoritedMeals().then((response) => {
         this.favoriteMeals = response.data;
       });
     },
@@ -35,7 +35,7 @@ export default {
     },
   },
   created() {
-    this.getFavoriteMeals();
+    this.getAllFavoriteMeals();
   },
 };
 </script>

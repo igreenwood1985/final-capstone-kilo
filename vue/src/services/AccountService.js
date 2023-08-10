@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export default {
+    //Recipes 
     getDashboardRecipes() {
         return axios.get('/dashboard/recipes');
     },
@@ -21,5 +22,15 @@ export default {
     },
     getRecipeById(id) {
         return axios.get('/' + id);
+    },
+    //Meals
+    getDashboardMeals(){
+        return axios.get('/dashboard/meals')
+    },
+    getFavoritedMeals(){
+        return axios.get('/mymeals')
+    },
+    createMeal(meal) {
+        return axios.post('/createmeal',meal)
     }
 }
