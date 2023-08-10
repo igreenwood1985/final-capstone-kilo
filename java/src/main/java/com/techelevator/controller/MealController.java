@@ -52,6 +52,15 @@ public class MealController {
         return meal;
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path = "/mymeals/{meal_id}", method = RequestMethod.GET)
+    public MealDTO getMealByID(@PathVariable int meal_id, Principal principal) {
+        int userID = getUserId(principal);
+        MealDTO meal = mealDao.retrieveMealByID(userID, meal_id);
+
+        return meal;
+    }
+
     private int getUserId(Principal principal){
         return userDao.getUserByUsername(principal.getName()).getId();
     }
