@@ -3,6 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.MealDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.MealDTO;
+import com.techelevator.model.RecipeDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -41,5 +42,17 @@ public class MealController {
         List<MealDTO> allMealsList = mealDao.retrieveDashboardMeals(userID);
         dashboardMeals = allMealsList.toArray(new MealDTO[allMealsList.size()]);
         return dashboardMeals;
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path = "/addmeal", method = RequestMethod.POST)
+    public MealDTO addMeal(@RequestBody MealDTO meal, Principal principal){
+        int userID = getUserId(principal);
+        meal = mealDao.createMeal(userID, meal);
+        return meal;
+    }
+
+    private int getUserId(Principal principal){
+        return userDao.getUserByUsername(principal.getName()).getId();
     }
 }

@@ -9,4 +9,6 @@ public interface MealDao {
     public List<MealDTO> retrieveAllMeals(int user_id);
     public List<MealDTO> retrieveDashboardMeals(int user_id);
 
+    public MealDTO createMeal(int user_id, MealDTO meal);
+
 }
