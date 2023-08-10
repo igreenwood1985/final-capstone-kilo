@@ -13,6 +13,9 @@
       <dashboard-meal-plans class="meal-plans-section" />
       <h2 class="meals-title">
         My Meals
+        <router-link v-bind:to="{ name: 'my-meals' }">
+          <h2 class="my-meals-link">Click here to view all.</h2>
+        </router-link>
         
         <b-button v-on:click="toggleForm()">Hi</b-button>
         <b-form class="create-meal-form" v-show="createFormToggled">
@@ -59,7 +62,7 @@ export default {
     formatMeal() {
       const formattedMeal = {
         meal_id: 0,
-        meal_name: this.meal.mealName,
+        name: this.meal.mealName,
         description: this.meal.description,
         user_id: 0,
       };

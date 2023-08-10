@@ -1,6 +1,6 @@
 <template>
   <div>
-    <favorited-card
+    <meal-card
       v-for="meal in this.favoriteMeals"
       v-bind:meal="meal"
       v-bind:key="meal.id"
@@ -11,12 +11,12 @@
 
 <script>
 import AccountService from "../services/AccountService";
-import FavoritedCard from "./FavoritedCard.vue";
+import MealCard from "./MealCard.vue";
 
 export default {
   name: "my-meals-component",
   components: {
-    FavoritedCard,
+    MealCard,
   },
   data() {
     return {

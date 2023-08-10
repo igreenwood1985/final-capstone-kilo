@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h2 class="meal-name">{{ meal.mealName }}</h2>
+  <div class="main">
+    <h2 class="meal-name">{{ meal.name }}</h2>
     <h2 class="meal-description">{{ meal.description }}</h2>
   </div>
 </template>
@@ -36,5 +36,32 @@ export default {
 </script>
 
 <style>
+.main {
+  border: 2px solid black;
+  border-radius: 10px;
+  display: inline-block;
+  width: 275px;
+  height: 400px;
+  margin: 20px;
+  background-color: white;
+  overflow: hidden;
+}
 
+
+
+
+.main .recipe-name {
+
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.main .time-to-make {
+  font-size: 1rem;
+}
+
+#image {
+   width: 100%; 
+   height: 50%;
+}
 </style>

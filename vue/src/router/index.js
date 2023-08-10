@@ -8,6 +8,7 @@ import store from '../store/index.js'
 import DashboardView from '../views/DashboardView.vue'
 import RecipeDetailsView from '../views/RecipeDetailsView.vue'
 import MyRecipesView from '../views/MyRecipesView.vue'
+import MyMealsView from '../views/MyMealsView.vue'
 
 Vue.use(Router)
 
@@ -52,6 +53,14 @@ const router = new Router({
       path: '/dashboard/myrecipes',
       name: 'my-recipes',
       component: MyRecipesView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/dashboard/mymeals',
+      name: 'my-meals',
+      component: MyMealsView,
       meta: {
         requiresAuth: true
       }
