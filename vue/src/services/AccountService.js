@@ -30,7 +30,7 @@ export default {
     getFavoritedMeals(){
         return axios.get('/mymeals')
     },
-    addMealToPlan(meal) {
-        return axios.post('/addmeal',meal)
+    createMeal(meal) {
+        return axios.post('/createmeal',meal)
     }
 }

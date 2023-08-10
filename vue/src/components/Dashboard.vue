@@ -13,24 +13,51 @@
       <dashboard-recipes class="recipes-section" />
       <h2 class="mealplans-title">My Meal Plans</h2>
       <dashboard-meal-plans class="meal-plans-section" />
-      <h2 class="meals-title">My Meals</h2>
+      <h2 class="meals-title">My Meals 
+
+        <b-button >Hi</b-button>
+
+      </h2>
       <dashboard-meals class="meals-section" />
     </div>
   </div>
 </template>
 
 <script>
+import AccountService from '../services/AccountService';
 import DashboardMealPlans from "./DashboardMealPlans.vue";
 import DashboardMeals from "./DashboardMeals.vue";
 // import AccountService from "../services/AccountService.js";
 import DashboardRecipes from "./DashboardRecipes.vue";
+
 
 export default {
   components: { DashboardRecipes, DashboardMealPlans, DashboardMeals },
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+            createMeal() {
+      AccountService.createMeal(this.formatMeal()).then((response) => {
+        return response.status == 200 //change to 201 when server status codes updated
+      });
+      this.favorited = true;
+    },
+    formatMeal() {
+      const formattedMeal = {
+        meal_id: 0,
+        meal_name: this.meal.meal_name,
+        description:this.meal.description,
+        user_id: 0
+      };
+      console.log(formattedMeal);
+      return formattedMeal;
+    }
+
+
+
+
+  },
 };
 </script>
 
