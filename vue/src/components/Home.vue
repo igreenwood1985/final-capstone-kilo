@@ -46,7 +46,7 @@ body {
     color: #F9FAF8;
     background-color: #1F2937;
     width: 100%;
-    height: 90vh;
+    height: 86.23vh;
 }
 
 .header {
@@ -81,7 +81,7 @@ li > a {
 .header-body {
     margin: auto 15% auto 15%;
     padding-top: 120px;
-    padding-bottom: 120px;
+    padding-bottom: 100px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

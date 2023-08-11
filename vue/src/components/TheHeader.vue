@@ -51,7 +51,7 @@ export default {
 
 <style>
 .bar {
-  background-color: #427bd2;
+  background-color: #007FC9;
   border-bottom: 1px solid gray;
   border: 1px solid gray;
 }
