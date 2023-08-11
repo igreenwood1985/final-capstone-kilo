@@ -14,6 +14,7 @@
             class="search-box"
             placeholder="Find your next meal here..."
             v-model="searchTerm"
+            v-on:keydown.enter="chooseSearch()"
           ></b-form-input>
 
           <b-input-group-append>
@@ -472,6 +473,13 @@ export default {
         }
         this.$store.commit("SET_SEARCH_RESULTS", this.searchResults);
       });
+    },
+    chooseSearch() {
+      if (this.advancedSearchVisible === false) {
+        return this.searchForRecipes();
+      } else {
+        return this.searchByFilters();
+      }
     },
     addCalorieRange() {
       const calorieFilter =
