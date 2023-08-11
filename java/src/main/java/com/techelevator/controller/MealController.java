@@ -79,6 +79,13 @@ public class MealController {
         mealDao.deleteMeal(mealId);
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path = "/mymeals/", method = RequestMethod.PUT)
+    public void updateMeal(@RequestBody MealDTO meal, Principal principal) {
+        mealDao.updateMeal(meal);
+
+    }
+
     private int getUserId(Principal principal){
         return userDao.getUserByUsername(principal.getName()).getId();
     }
