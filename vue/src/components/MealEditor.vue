@@ -3,7 +3,7 @@
       <h1>{{ meal.name }}
           <b-button variant="danger" v-on:click="deleteMeal($store.state.currentMeal)">Delete</b-button>
       </h1>
-      <meal-recipe-card
+      <favorited-card
       v-for="recipe in meal.recipes"
       v-bind:recipe="recipe"
       v-bind:key="recipe.id"
@@ -15,7 +15,7 @@
 
 <script>
 import AccountService from '../services/AccountService';
-import MealRecipeCard from './MealRecipeCard.vue';
+import FavoritedCard from './FavoritedCard.vue';
 
 export default {
     name: "meal-editor-component",
@@ -25,7 +25,7 @@ export default {
         }
     },
     components: {
-        MealRecipeCard
+        FavoritedCard
     },
     methods: {
         retrieveMealByID() {
@@ -35,7 +35,9 @@ export default {
         },
         deleteMeal(mealId) {
             AccountService.deleteMeal(mealId).then(response => {
-                return 200 === response.status;
+                if (response.status !== 200) {
+                    this.$router.push("/dashboard");
+                }
             })
         }
     },

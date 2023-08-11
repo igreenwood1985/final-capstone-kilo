@@ -104,7 +104,7 @@ export default {
     },
     removeFromFavorites() {
       console.log("entered removal function");
-      AccountService.removeRecipeFromFavoritesByUri(
+      AccountService.removeRecipeFromFavorites(
         this.recipe.recipe.uri
       ).then((response) => {
         console.log("removal in process");

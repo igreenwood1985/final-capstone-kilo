@@ -22,7 +22,7 @@ export default new Vuex.Store({
     user: currentUser || {},
     searchResults: [],
     currentMeal: 0,
-    favoritedRecipes: {}
+    favoritedRecipes: []
   },
   getters: {
     favorite_recipes(state) {
@@ -53,11 +53,13 @@ export default new Vuex.Store({
       console.log("entering the store");
       state.favoritedRecipes = recipes;
     },
+    ADD_RECIPE (state, recipe) {
+      state.favoritedRecipes.push(recipe);
+    },
     REMOVE_RECIPE(state, recipe) {
       console.log("leaving the store");
-      state.favoriteRecipes.filter((item) => {
-        item != recipe
-      });
+      const index = state.favoritedRecipes.indexOf(recipe);
+      state.favoritedRecipes.splice(index, 1);
     },
     SET_CURRENT_MEAL(state, mealId) {
       state.currentMeal = mealId;
