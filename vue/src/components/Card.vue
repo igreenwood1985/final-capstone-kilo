@@ -18,38 +18,63 @@
       v-if="recipe.recipe.uri"
       v-bind:src="recipe.recipe.image"
     />
-    <h2 class = "recipe-name">{{ recipe.recipe.label }}</h2>
-    <h3 class = "statistics" v-if="recipe.recipe.totalTime != 0">
-      {{
-        capitalize(formatArray(recipe.recipe.cuisineType))
-      }}
-      | {{ recipe.recipe.totalTime }} minutes |
+    <h2 class="recipe-name">{{ recipe.recipe.label }}</h2>
+    <h3 class="statistics">
+      {{ capitalize(formatArray(recipe.recipe.cuisineType)) }}
+      | <span v-if="recipe.recipe.totalTime != 0">{{ recipe.recipe.totalTime }} minutes |</span>
       {{ Math.round(recipe.recipe.calories) }} calories
     </h3>
-    <div class = "buttons">
-    <button class = "fav-or-not" v-if="$store.state.token != '' && favorited === false" v-on:click="addToFavorites">
-      Add to Favorites
-    </button>
-    <button class = "fav-or-not" v-if="$store.state.token != '' && favorited" v-on:click="removeFromFavorites">Remove from Favorites</button>
-    <button> Add to Meal</button>
+    <div class="buttons">
+      <b-button size="sm"
+        class="fav-or-not"
+        v-if="$store.state.token != '' && favorited === false"
+        v-on:click="addToFavorites"
+      >
+        Add to Favorites
+      </b-button>
+      <b-button size="sm"
+        class="fav-or-not"
+        v-if="$store.state.token != '' && favorited"
+        v-on:click="removeFromFavorites"
+      >
+        Remove from Favorites
+      </b-button>
+      <b-button size="sm">Add to Meal</b-button>
     </div>
-    
-    <p>{{ capitalize(formatArray(recipe.recipe.dishType)) }} <br>
+
+    <p>
+      {{ capitalize(formatArray(recipe.recipe.dishType)) }} <br />
       {{ recipe.recipe.yield }} servings
     </p>
-    
-    
-    <p>{{ formatArray(recipe.recipe.dietLabels) }}</p>
-    <p>Dietary Tags: {{ formatArray(recipe.recipe.healthLabels) }}</p>
+
+    <div class="label-tags">
+      <label-tag
+        v-for="label in recipe.recipe.dietLabels"
+        v-bind:label="label"
+        v-bind:key="label.id"
+      />
+      <label-tag
+        v-for="label in recipe.recipe.healthLabels"
+        v-bind:label="label"
+        v-bind:key="label.id"
+      />
+    </div>
+
+    <!-- <p>{{ formatArray(recipe.recipe.dietLabels) }}</p>
+    <p>Dietary Tags: {{ formatArray(recipe.recipe.healthLabels) }}</p> -->
     <div></div>
   </div>
 </template>
 
 <script>
 import AccountService from "../services/AccountService.js";
+import LabelTag from "./LabelTag.vue";
 
 export default {
   name: "card",
+  components: {
+    LabelTag,
+  },
   props: {
     recipe: Object,
     enableAdd: {
@@ -131,8 +156,8 @@ export default {
   border: 2px solid black;
   border-radius: 10px;
   display: inline-block;
-  width: 325px;
-  height: 500px;
+  width: 300px;
+  height: 505px;
   margin: 20px;
 }
 
@@ -145,7 +170,7 @@ export default {
   height: 40%;
   border-top: 1px solid black;
   border-left: 1px solid black;
-  border-right: 1px solid black;;
+  border-right: 1px solid black;
   border-bottom: 3px solid black;
 }
 
@@ -177,4 +202,11 @@ export default {
   margin-right: 6px;
 }
 
+.label-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: end;
+  
+}
 </style>
