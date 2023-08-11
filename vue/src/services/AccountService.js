@@ -41,5 +41,8 @@ export default {
     },
     removeRecipeFromMeal(recipeId, mealId) {
         return axios.delete('/mealeditor/delete/' + mealId + '/' + recipeId)
+    },
+    deleteMeal(mealId) {
+        return axios.delete('/deletemeal/' + mealId)
     }
 }

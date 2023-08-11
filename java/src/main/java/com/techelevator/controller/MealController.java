@@ -73,6 +73,12 @@ public class MealController {
         mealDao.removeRecipeFromMeal(recipeId, mealId);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(path = "/deletemeal/{mealId}", method = RequestMethod.DELETE)
+    public void deleteMeal(@PathVariable int mealId) {
+        mealDao.deleteMeal(mealId);
+    }
+
     private int getUserId(Principal principal){
         return userDao.getUserByUsername(principal.getName()).getId();
     }
