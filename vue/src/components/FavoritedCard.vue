@@ -4,8 +4,8 @@
     <!-- <router-link v-bind:to="{name: 'recipe-details', params: {id : recipe.uri}}"> -->
      <!-- <h2 class="recipe-name">{{ recipe.label }}</h2> -->
     <!-- </router-link> -->
-
     <img v-bind:src="recipe.img" id="image" />
+    <span v-on:click="removeFromFavorites()" class="minus bg-dark">-</span>
     <router-link v-bind:to="{name: 'recipe-details', params: {id : recipe.uri}}">
     <h2 class="recipe-name">{{ recipe.label }}</h2>
     </router-link>
@@ -22,7 +22,7 @@
       <h6 class="recipe-info-label">Servings:</h6>
       <h6 class="recipe-info">{{recipe.yield}}</h6>
     </div>
-    <b-button class="bi bi-file-minus" v-on:click="removeFromFavorites()">
+    <b-button class="bi bi-file-minus" >
       Unfavorite</b-button>
     <div>
       <b-dropdown id="dropdown-1" text="Add To Meal" class="m-md-2">
@@ -125,6 +125,20 @@ export default {
 .main .time-to-make {
   font-size: 1rem;
 }
+
+.minus {
+  position: absolute;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+  color: white;
+  width: 30px;
+  height: 30px;
+  font: 30px/1 Arial,sans-serif;
+  text-align: center;
+  border-radius: 50%;
+  background-clip: padding-box;
+} 
 
 #image {
    width: 100%;
