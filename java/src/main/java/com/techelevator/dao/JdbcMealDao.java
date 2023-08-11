@@ -168,6 +168,28 @@ public class JdbcMealDao implements MealDao {
         jdbcTemplate.update(mealDeleteSql, mealId);
     }
 
+    @Override
+    public void updateMeal(MealDTO meal) {
+        String sqlUpdateName = "UPDATE meals " +
+                "SET meal_name = ? " +
+                "WHERE meal_id = ?;";
+
+        String sqlUpdateDescription = "UPDATE meals " +
+                "SET description = ? " +
+                "WHERE meal_id = ?";
+
+
+        try {
+            jdbcTemplate.update(sqlUpdateName, meal.getName(), meal.getMeal_id());
+            jdbcTemplate.update(sqlUpdateDescription, meal.getDescription(), meal.getMeal_id());
+
+        } catch (CannotGetJdbcConnectionException exception) {
+
+        } catch (DataIntegrityViolationException exception) {
+
+        }
+    }
+
 
     private MealDTO mapMealDTO(SqlRowSet result) {
         MealDTO meal = new MealDTO();
