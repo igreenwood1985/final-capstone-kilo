@@ -1,6 +1,8 @@
 <template>
   <div>
-      <h1>{{ meal.name }}</h1>
+      <h1>{{ meal.name }}
+          <b-button variant="danger" v-on:click="deleteMeal($store.state.currentMeal)">Delete</b-button>
+      </h1>
       <meal-recipe-card
       v-for="recipe in meal.recipes"
       v-bind:recipe="recipe"
@@ -30,6 +32,11 @@ export default {
             AccountService.getMealById(this.$route.params.id).then(response => {
                 this.meal = response.data;
             });
+        },
+        deleteMeal(mealId) {
+            AccountService.deleteMeal(mealId).then(response => {
+                return 200 === response.status;
+            })
         }
     },
     created() {

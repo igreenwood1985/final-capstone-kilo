@@ -13,5 +13,6 @@ public interface MealDao {
     public MealDTO retrieveMealByID(int userId, int mealId);
     public void addRecipeToMeal(int recipeId, int mealId);
     public void removeRecipeFromMeal(int recipeId, int mealId);
+    public void deleteMeal(int mealId);
 
 }

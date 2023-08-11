@@ -155,6 +155,19 @@ public class JdbcMealDao implements MealDao {
         jdbcTemplate.update(sql, mealId, recipeId);
     }
 
+    @Override
+    public void deleteMeal(int mealId) {
+        String recipeJoinDeleteSql = "DELETE FROM meal_recipe " +
+                "WHERE meal_id = ?";
+        jdbcTemplate.update(recipeJoinDeleteSql, mealId);
+        String planJoinDeleteSql = "DELETE FROM meal_plan_meal " +
+                "WHERE meal_id = ? ";
+        jdbcTemplate.update(planJoinDeleteSql, mealId);
+        String mealDeleteSql = "DELETE FROM meals " +
+                "WHERE meal_id = ?";
+        jdbcTemplate.update(mealDeleteSql, mealId);
+    }
+
 
     private MealDTO mapMealDTO(SqlRowSet result) {
         MealDTO meal = new MealDTO();
