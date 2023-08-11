@@ -4,15 +4,16 @@
         <div class="header-body">
 
             <div class="header-body-content">
-                <p class="main-body-text">This website is awesome,</p>
-                <p class="second-body-text">This website has some subtext that goes here under the main title. 
-                                            It's a smaller font and the color is lower contrast</p>
+                <p class="main-body-text">Welcome to KiloPlanner!</p>
+                <p class="second-body-text">We are your convenient and fun way to find new recipes and create 
+                    awesome meal plans for healthy living! Sign up to take full advantage of our exclusive members-only features!
+                </p>
                 <a href="#"><button class="sign-up-button">Sign Up</button></a>
             </div>
 
-            <div class="header-image">
+            <!-- <div class="header-image">
                 <h1>placeholder for an image</h1>
-            </div>
+            </div> -->
 
         </div>
 
@@ -44,7 +45,8 @@ body {
 
 .section-1 {
     color: #F9FAF8;
-    background-color: #1F2937;
+    background-image: url("../../search-wallpaper.jpg");
+    
     width: 100%;
     height: 86.23vh;
 }
@@ -90,7 +92,9 @@ li > a {
 .header-body-content {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    background-color: #1F2937;
+    border-radius: 50px;
     
 }
 
@@ -109,6 +113,7 @@ p {
 .second-body-text {
     padding-top: 10px;
     padding-bottom: 20px;
+    padding-left: 20px;
     font-size: 21px;
     color: #E5E7EB
 }
@@ -121,14 +126,15 @@ p {
     font-weight: bold;
     border-radius: 10px;
     outline: 2px solid white;
+    margin-bottom: 20px;
 }
 
-.header-image {
+/* .header-image {
     background-color: #E5E7EB;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
     flex: 1 1 100%;
-}
+} */
 </style>

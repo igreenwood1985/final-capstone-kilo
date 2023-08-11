@@ -48,13 +48,18 @@
     </p>
 
     <div class="label-tags">
-      <label-tag
+      <!-- <label-tag
         v-for="label in recipe.recipe.dietLabels"
         v-bind:label="label"
         v-bind:key="label.id"
       />
       <label-tag
         v-for="label in recipe.recipe.healthLabels"
+        v-bind:label="label"
+        v-bind:key="label.id"
+      /> -->
+      <label-tag
+        v-for="label in combinedLabels"
         v-bind:label="label"
         v-bind:key="label.id"
       />
@@ -87,6 +92,28 @@ export default {
       healthTags: "",
       favorited: false,
     };
+  },
+  computed: {
+    combinedLabels() {
+      // return this.recipe.recipe.dietLabels.slice(0,2).concat(this.recipe.recipe.healthLabels.slice(0, 6));
+      const maxDietLabels = 4;
+      const maxHealthLabels = 4;
+      const maxTotalLabels = 8;
+
+      let dietLabels = this.recipe.recipe.dietLabels.slice(0, maxDietLabels);
+      let healthLabels = this.recipe.recipe.healthLabels.slice(0, maxHealthLabels);
+
+      if(dietLabels.length < maxDietLabels) {
+        healthLabels = this.recipe.recipe.healthLabels.slice(0, maxHealthLabels +(maxDietLabels - dietLabels.length));
+      }
+
+
+      if(healthLabels.length < maxHealthLabels) {
+        dietLabels = this.recipe.recipe.dietLabels.slice(0, maxDietLabels + (maxHealthLabels - healthLabels.length));
+      }
+
+      return dietLabels.concat(healthLabels).slice(0, maxTotalLabels);
+    },
   },
   methods: {
     combineHealthAndDietaryTags() {

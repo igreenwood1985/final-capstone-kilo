@@ -2,13 +2,13 @@
   <div>
     <div class="search-section">
       <div class="call-and-block">
-        <h2>
+        <!-- <h2>
           <img
             src="../../search-logo.png"
             alt="An image of a chef's hat."
             class="search-logo"
           />
-        </h2>
+        </h2> -->
         <b-input-group size="lg">
           <b-form-input
             class="search-box"
@@ -45,7 +45,9 @@
         </button> -->
         <br />
         <br />
-        <a
+        <a 
+          style="color: white;"
+          class = "advanced-search"
           id="advanced-search"
           href=""
           v-on:click.prevent="toggleAdvancedSearch()"
@@ -500,12 +502,12 @@ export default {
   padding-top: 110px;
   padding-bottom: 50px;
   background-image: url("../../search-wallpaper.jpg");
-  min-height: 86vh;
+  min-height: 44vh;
   border: 1px solid black;
 }
 .call-and-block {
   border: 2px solid black;
-  background-color: white;
+  background-color: #1F2937;
   max-width: 50%;
   margin: auto;
   padding: 25px;
@@ -566,9 +568,9 @@ h2 {
   padding: 0px;
 }
 
-.search-logo {
+/* .search-logo {
   max-width: 30%;
   margin: 0px;
   padding: 0px;
-}
+} */
 </style>
