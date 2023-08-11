@@ -1,7 +1,7 @@
 <template>
   <div>
     <favorited-card
-      v-for="recipe in this.favoriteRecipes"
+      v-for="recipe in $store.getters.favorite_recipes"
       v-bind:recipe="recipe"
       v-bind:key="recipe.id"
       v-bind:enable-add="true"
@@ -20,14 +20,15 @@ export default {
   },
   data() {
     return {
-      favoriteRecipes: [],
+      favoriteRecipes: '',
       componentKey: 0,
     };
   },
   methods: {
     getFavoriteRecipes() {
       AccountService.getDashboardRecipes().then((response) => {
-        this.favoriteRecipes = response.data;
+        console.log("retrieving recipes...")
+        this.$store.commit("SET_FAVORITED_RECIPES", response.data);
       });
     },
     forceRefresh() {

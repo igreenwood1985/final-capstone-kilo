@@ -22,6 +22,12 @@ export default new Vuex.Store({
     user: currentUser || {},
     searchResults: [],
     currentMeal: 0,
+    favoritedRecipes: {}
+  },
+  getters: {
+    favorite_recipes(state) {
+      return state.favoritedRecipes
+    }
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -43,7 +49,12 @@ export default new Vuex.Store({
     SET_SEARCH_RESULTS(state, searchResults){
       state.searchResults = searchResults;
     },
+    SET_FAVORITED_RECIPES(state, recipes) {
+      console.log("entering the store");
+      state.favoritedRecipes = recipes;
+    },
     REMOVE_RECIPE(state, recipe) {
+      console.log("leaving the store");
       state.favoriteRecipes.filter((item) => {
         item != recipe
       });

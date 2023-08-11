@@ -47,7 +47,8 @@ export default {
       AccountService.removeRecipeFromFavorites(this.recipe.uri).then(response => {
           return 200 === response.status;
       });
-      
+      console.log("deleting recipes...")
+      this.$store.commit("REMOVE_RECIPE", this.recipe);
     },
     addToMeal(mealId) {
       AccountService.addRecipeToMeal(this.recipe, mealId).then(response => {
