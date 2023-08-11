@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="grid-container">
-      <h1>heading</h1>
+      <h1></h1>
       <h2 class="recipes-title">
         My Favorite Recipes
         <router-link v-bind:to="{ name: 'my-recipes' }">
@@ -78,6 +78,8 @@ export default {
 
 <style>
 .grid-container {
+  background-color: lightgreen;
+  border: 2px solid black;
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-areas:
@@ -95,7 +97,7 @@ h1 {
 
 .recipes-title {
   grid-area: recipes-title;
-  border: 2px solid black;
+ 
   text-align: center;
 }
 
@@ -110,25 +112,38 @@ h1 {
 }
 
 .recipes-section {
+  border: 2px solid black;
   grid-area: recipes;
-  display: flex;
+  display: flex-end;
   align-items: center;
   justify-content: space-around;
-  background-color: yellow;
+  background-color: seagreen    ;
+ 
 }
 
 .meal-plans-section {
+  border: 2px solid black;
   grid-area: mealPlan;
-  background-color: red;
+  background-color: royalblue;
+
 }
 .meals-section {
+  border: 2px solid black;
+  display: flex-end;
   grid-area: meals;
-  background-color: blue;
+  background-color: sandybrown;
+  
 }
 
 .btn {
   background-color: lightgreen;
   border: 2px solid black;
+}
+
+.my-recipes-link {
+
+  text-decoration: none;
+ 
 }
 
 </style>
