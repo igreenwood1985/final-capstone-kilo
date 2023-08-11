@@ -68,9 +68,9 @@ public class MealController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @RequestMapping(path = "/mealeditor/delete/{mealId}", method = RequestMethod.DELETE)
-    public void removeRecipeFromMeal(@PathVariable int mealId, @RequestBody RecipeDto recipeDto) {
-        mealDao.removeRecipeFromMeal(recipeDto.getRecipe_id(), mealId);
+    @RequestMapping(path = "/mealeditor/delete/{mealId}/{recipeId}", method = RequestMethod.DELETE)
+    public void removeRecipeFromMeal(@PathVariable int mealId, @PathVariable int recipeId) {
+        mealDao.removeRecipeFromMeal(recipeId, mealId);
     }
 
     private int getUserId(Principal principal){
