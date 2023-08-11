@@ -1,16 +1,47 @@
 <template>
   <!-- <router-link v-bind:to="{ name: 'recipe', params: { uri: recipe.recipe.uri } }"> -->
-  <div class="main" v-bind:class="{ favorited: favorited }">
+  <!-- <div class="main" v-bind:class="{ favorited: favorited }">
     <img v-if="recipe.recipe.uri" v-bind:src="recipe.recipe.image" />
     <h2 class="recipe-name">{{ recipe.recipe.label }}</h2>
     <button v-if="$store.state.token != '' && favorited === false" v-on:click="addToFavorites">
       Favorite
     </button>
     <button v-if="$store.state.token != '' && favorited" v-on:click="removeFromFavorites">Unfavorite</button>
-    <h3 class="time-to-make">{{ recipe.recipe.totalTime }}</h3>
-    <p class="calories">{{ recipe.recipe.calories }}</p>
-    <p class="cuisine-type">{{ recipe.recipe.cuisineType }}</p>
-    <p class="tags">{{ combineHealthAndDietaryTags() }}</p>
+    <h3 class="time-to-make">{{ recipe.recipe.totalTime }} Mins</h3>
+    <p class="calories">Calories: {{ recipe.recipe.calories }}</p>
+    <p class="cuisine-type">Cuisine: {{ recipe.recipe.cuisineType }}</p>
+    <p class="tags">Features: {{ combineHealthAndDietaryTags() }}</p>
+  </div> -->
+  <div class="main" v-bind:class="{ favorited: favorited }">
+    <img
+      class="image"
+      v-if="recipe.recipe.uri"
+      v-bind:src="recipe.recipe.image"
+    />
+    <h2 class = "recipe-name">{{ recipe.recipe.label }}</h2>
+    <h3 class = "statistics" v-if="recipe.recipe.totalTime != 0">
+      {{
+        capitalize(formatArray(recipe.recipe.cuisineType))
+      }}
+      | {{ recipe.recipe.totalTime }} minutes |
+      {{ Math.round(recipe.recipe.calories) }} calories
+    </h3>
+    <div class = "buttons">
+    <button class = "fav-or-not" v-if="$store.state.token != '' && favorited === false" v-on:click="addToFavorites">
+      Add to Favorites
+    </button>
+    <button class = "fav-or-not" v-if="$store.state.token != '' && favorited" v-on:click="removeFromFavorites">Remove from Favorites</button>
+    <button> Add to Meal</button>
+    </div>
+    
+    <p>{{ capitalize(formatArray(recipe.recipe.dishType)) }} <br>
+      {{ recipe.recipe.yield }} servings
+    </p>
+    
+    
+    <p>{{ formatArray(recipe.recipe.dietLabels) }}</p>
+    <p>Dietary Tags: {{ formatArray(recipe.recipe.healthLabels) }}</p>
+    <div></div>
   </div>
 </template>
 
@@ -39,14 +70,18 @@ export default {
       );
     },
     addToFavorites() {
-      AccountService.addRecipeToFavorites(this.formatRecipe()).then((response) => {
-        return response.status == 200 //change to 201 when server status codes updated
-      });
+      AccountService.addRecipeToFavorites(this.formatRecipe()).then(
+        (response) => {
+          return response.status == 200; //change to 201 when server status codes updated
+        }
+      );
       this.favorited = true;
     },
     removeFromFavorites() {
       console.log("entered removal function");
-      AccountService.removeRecipeFromFavoritesByUri(this.recipe.recipe.uri).then(response => {
+      AccountService.removeRecipeFromFavoritesByUri(
+        this.recipe.recipe.uri
+      ).then((response) => {
         console.log("removal in process");
         return response.status == 200;
       });
@@ -61,11 +96,32 @@ export default {
         calories: Math.round(this.recipe.recipe.calories),
         yield: this.recipe.recipe.yield,
         cuisineType: this.recipe.recipe.cuisineType[0],
-        totalTime: this.recipe.recipe.totalTime
+        totalTime: this.recipe.recipe.totalTime,
       };
       console.log(formattedRecipe);
       return formattedRecipe;
-    }
+    },
+    capitalize(string) {
+      console.log("enter capitalize");
+      const firstLetter = string.charAt(0).toUpperCase();
+      console.log(firstLetter);
+      string = firstLetter + string.substring(1);
+      console.log(firstLetter + string.substring(1));
+      console.log(string);
+      return string;
+    },
+    formatArray(array) {
+      let newString = "";
+
+      for (let counter = 0; counter < array.length; counter++) {
+        newString += array[counter];
+        if (counter < array.length - 1) {
+          newString += ", ";
+        }
+      }
+
+      return newString;
+    },
   },
 };
 </script>
@@ -75,8 +131,8 @@ export default {
   border: 2px solid black;
   border-radius: 10px;
   display: inline-block;
-  width: 275px;
-  height: 600px;
+  width: 325px;
+  height: 500px;
   margin: 20px;
 }
 
@@ -86,11 +142,16 @@ export default {
 
 .main img {
   width: 100%;
-  height: 50%;
+  height: 40%;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;;
+  border-bottom: 3px solid black;
 }
 
 .main .recipe-name {
   font-size: 1.2rem;
+  text-decoration: underline;
   text-align: center;
 }
 
@@ -102,4 +163,18 @@ export default {
   background-color: yellow;
   border: 10px solid black;
 }
+
+.statistics {
+  font-size: 1rem;
+  text-align: center;
+}
+
+.buttons {
+  text-align: center;
+}
+
+.fav-or-not {
+  margin-right: 6px;
+}
+
 </style>
