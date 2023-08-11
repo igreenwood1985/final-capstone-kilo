@@ -45,7 +45,7 @@ body {
 .section-1 {
     color: #F9FAF8;
     background-color: #1F2937;
-    width: 100vw;
+    width: 100%;
     height: 90vh;
 }
 
