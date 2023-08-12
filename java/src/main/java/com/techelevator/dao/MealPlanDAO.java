@@ -6,5 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface MealPlanDAO {
-    public List<MealPlanDTO> retrieveAllMeals(int userId);
+    public List<MealPlanDTO> retrieveAllMealPlans(int userId);
+    public MealPlanDTO retrieveMealPlanByID(int mealID, int userID);
+    public void addMealPlan(MealPlanDTO mealPlan, int userID);
+    public void updateMealPlan(MealPlanDTO mealPlan);
+    public void deleteMealPlan(int mealPlanID);
+    public void addMealToMealPlan(int mealPlanID, int mealID);
+    public void removeMealFromMealPlan(int mealPlanID, int mealID);
 }

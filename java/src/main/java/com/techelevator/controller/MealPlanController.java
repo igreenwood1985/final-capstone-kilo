@@ -27,13 +27,53 @@ public class MealPlanController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(path= "/mymealplans", method = RequestMethod.GET)
+    @RequestMapping(path = "/mymealplans", method = RequestMethod.GET)
     public MealPlanDTO[] getAllMealPlans(Principal principal){
         int userId = getUserId(principal);
-        List<MealPlanDTO> mealPlanList = mealPlanDAO.retrieveAllMeals(userId);
+        List<MealPlanDTO> mealPlanList = mealPlanDAO.retrieveAllMealPlans(userId);
         MealPlanDTO[] mealPlans = mealPlanList.toArray(new MealPlanDTO[mealPlanList.size()]);
 
         return mealPlans;
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path = "/mymealplans/{mealId}")
+    public MealPlanDTO getMealPlanByID(@PathVariable int mealId, Principal principal) {
+        int userID = getUserId(principal);
+        MealPlanDTO mealPlan = mealPlanDAO.retrieveMealPlanByID(mealId, userID);
+
+        return mealPlan;
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path = "/mymealplans", method = RequestMethod.POST)
+    public void addMealPlan(@RequestBody MealPlanDTO mealPlan, Principal principal) {
+        int userID = getUserId(principal);
+        mealPlanDAO.addMealPlan(mealPlan, userID);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path = "mymealplans", method = RequestMethod.PUT)
+    public void updateMealPlan(@RequestBody MealPlanDTO mealPlan) {
+        mealPlanDAO.updateMealPlan(mealPlan);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(path = "mymealplans/{mealPlanId}", method = RequestMethod.DELETE)
+    public void deleteMealPlan(@PathVariable int mealPlanId) {
+        mealPlanDAO.deleteMealPlan(mealPlanId);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path = "mymealplans/{mealPlanId}", method = RequestMethod.POST)
+    public void addMealToMealPlan(@PathVariable int mealPlanId, @RequestBody MealDTO meal) {
+        mealPlanDAO.addMealToMealPlan(mealPlanId, meal.getMeal_id());
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(path = "mymealplans/{mealPlanId}", method = RequestMethod.DELETE)
+    public void removeMealFromMealPlan(@PathVariable int mealPlanId, int mealID) {
+        mealPlanDAO.removeMealFromMealPlan(mealPlanId, mealID);
     }
 
     private int getUserId(Principal principal){

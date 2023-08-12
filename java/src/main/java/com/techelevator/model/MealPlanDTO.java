@@ -1,19 +1,19 @@
 package com.techelevator.model;
 
 public class MealPlanDTO {
-    private String mealPlanName;
+    private String name;
     private String description;
     private int userId;
     private int mealPlanId;
 
     private MealDTO[] meals;
 
-    public String getMealPlanName() {
-        return mealPlanName;
+    public String getName() {
+        return name;
     }
 
-    public void setMealPlanName(String mealPlanName) {
-        this.mealPlanName = mealPlanName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {

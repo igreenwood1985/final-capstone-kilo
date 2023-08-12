@@ -3,6 +3,7 @@ package com.techelevator.dao;
 import com.techelevator.model.MealDTO;
 import com.techelevator.model.MealPlanDTO;
 import com.techelevator.model.RecipeDto;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -22,7 +23,7 @@ public class JdbcMealPlanDAO implements MealPlanDAO{
         this.jdbcTemplate = jdbcTemplate;
     }
     @Override
-    public List<MealPlanDTO> retrieveAllMeals(int userId) {
+    public List<MealPlanDTO> retrieveAllMealPlans(int userId) {
         List<MealPlanDTO> mealPlanList = new ArrayList<>();
         String mealPlanSQL = "SELECT meal_plan_id, meal_plan_name, description, user_id " +
                 "FROM meal_plans " +
@@ -33,11 +34,17 @@ public class JdbcMealPlanDAO implements MealPlanDAO{
             while (result.next()){
                 MealPlanDTO mealPlan = mapMealPlan(result);
 
-                String mealSql = "";
+                String mealSql = "SELECT meals.meal_id, meal_name, description, user_id " +
+                        "FROM meals " +
+                        "JOIN meal_plan_meal ON meals.meal_id = meal_plan_meal.meal_id " +
+                        "WHERE meal_plan_id = ?";
                 SqlRowSet mealResult = jdbcTemplate.queryForRowSet(mealSql, mealPlan.getMealPlanId());
                 while(mealResult.next()){
                    MealDTO meal = mapMeal(mealResult);
-                   String recipeSql = "";
+                   String recipeSql = "SELECT recipes.recipe_id, uri, recipe_name, img, total_calories, servings, cuisine_type, total_time " +
+                           "FROM recipes " +
+                           "JOIN meal_recipe ON recipes.recipe_id = meal_recipe.recipe_id " +
+                           "WHERE meal_id = ?";
                    SqlRowSet recipeResult = jdbcTemplate.queryForRowSet(recipeSql, meal.getMeal_id());
                    while(recipeResult.next()){
                        RecipeDto recipe = mapRecipeDTO(recipeResult);
@@ -52,6 +59,128 @@ public class JdbcMealPlanDAO implements MealPlanDAO{
 
         }
         return mealPlanList;
+    }
+
+    @Override
+    public MealPlanDTO retrieveMealPlanByID(int mealID, int userID) {
+        MealPlanDTO mealPlan = null;
+        String sql = "SELECT meal_plan_id, meal_plan_name, description, user_id " +
+                "FROM meal_plans " +
+                "WHERE meal_plan_id = ? AND user_id = ?";
+
+        try {
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, mealID, userID);
+
+            if (result.next()) {
+                mealPlan = mapMealPlan(result);
+
+                String mealSql = "SELECT meals.meal_id, meal_name, description, user_id " +
+                        "FROM meals " +
+                        "JOIN meal_plan_meal ON meals.meal_id = meal_plan_meal.meal_id " +
+                        "WHERE meal_plan_id = ?";
+                SqlRowSet mealResult = jdbcTemplate.queryForRowSet(mealSql, mealPlan.getMealPlanId());
+                while(mealResult.next()){
+                    MealDTO meal = mapMeal(mealResult);
+                    String recipeSql = "SELECT recipes.recipe_id, uri, recipe_name, img, total_calories, servings, cuisine_type, total_time " +
+                            "FROM recipes " +
+                            "JOIN meal_recipe ON recipes.recipe_id = meal_recipe.recipe_id " +
+                            "WHERE meal_id = ?";
+                    SqlRowSet recipeResult = jdbcTemplate.queryForRowSet(recipeSql, meal.getMeal_id());
+                    while(recipeResult.next()){
+                        RecipeDto recipe = mapRecipeDTO(recipeResult);
+                        meal.addToRecipes(recipe);
+                    }
+                    mealPlan.addToMeals(meal);
+                }
+            }
+        } catch (CannotGetJdbcConnectionException exception) {
+
+        }
+
+        return mealPlan;
+    }
+
+    @Override
+    public void addMealPlan(MealPlanDTO mealPlan, int userID) {
+        String sql = "INSERT INTO meal_plans (meal_plan_name, description, user_id) " +
+                "VALUES (?, ?, ?);";
+
+        try {
+            jdbcTemplate.update(sql, mealPlan.getName(), mealPlan.getDescription(), userID);
+
+        } catch (CannotGetJdbcConnectionException exception) {
+
+        } catch (DataIntegrityViolationException exception) {
+
+        }
+    }
+
+    @Override
+    public void updateMealPlan(MealPlanDTO mealPlan) {
+        String sqlName = "UPDATE meal_plans " +
+                "SET meal_plan_name = ? " +
+                "WHERE meal_plan_id = ?;";
+        String sqlDescription = "UPDATE meal_plans " +
+                "SET description = ? " +
+                "WHERE meal_plan_id = ?;";
+
+        try {
+            jdbcTemplate.update(sqlName, mealPlan.getName(), mealPlan.getMealPlanId());
+            jdbcTemplate.update(sqlDescription, mealPlan.getDescription(), mealPlan.getMealPlanId());
+
+        } catch (CannotGetJdbcConnectionException exception) {
+
+        } catch (DataIntegrityViolationException exception) {
+
+        }
+    }
+
+    @Override
+    public void deleteMealPlan(int mealPlanID) {
+        String joinSql = "DELETE FROM meal_plan_meal " +
+                "WHERE meal_plan_id = ?;";
+
+        String mealPlanSql = "DELETE FROM meal_plans " +
+                "WHERE meal_plan_id = ?;";
+
+        try {
+            jdbcTemplate.update(joinSql);
+            jdbcTemplate.update(mealPlanSql);
+        } catch (CannotGetJdbcConnectionException exception) {
+
+        } catch (DataIntegrityViolationException exception) {
+
+        }
+    }
+
+    @Override
+    public void addMealToMealPlan(int mealPlanID, int mealID) {
+        String sql = "INSERT INTO meal_plan_meal (meal_plan_id, meal_id) " +
+                "VALUES (?, ?);";
+
+        try {
+            jdbcTemplate.update(sql, mealPlanID, mealID);
+
+        } catch (CannotGetJdbcConnectionException exception) {
+
+        } catch (DataIntegrityViolationException exception) {
+
+        }
+    }
+
+    @Override
+    public void removeMealFromMealPlan(int mealPlanID, int mealID) {
+        String sql = "DELETE FROM meal_plan_meal " +
+                "WHERE meal_plan_id = ? AND meal_id = ?;";
+
+        try {
+            jdbcTemplate.update(sql, mealPlanID, mealID);
+
+        } catch (CannotGetJdbcConnectionException exception) {
+
+        } catch (DataIntegrityViolationException exception) {
+
+        }
     }
 
     private RecipeDto mapRecipeDTO(SqlRowSet result) {
@@ -79,7 +208,7 @@ public class JdbcMealPlanDAO implements MealPlanDAO{
     private MealPlanDTO mapMealPlan(SqlRowSet result){
         MealPlanDTO mealPlan = new MealPlanDTO();
         mealPlan.setMealPlanId(result.getInt("meal_plan_id"));
-        mealPlan.setMealPlanName(result.getString("meal_plan_name"));
+        mealPlan.setName(result.getString("meal_plan_name"));
         mealPlan.setDescription(result.getString("description"));
         mealPlan.setUserId(result.getInt("user_id"));
 
