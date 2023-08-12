@@ -33,28 +33,28 @@ export default {
   methods: {
     getFavoriteRecipes() {
       AccountService.getDashboardRecipes().then(response => {
-        this.$store.commit("SET_FAVORITED_RECIPES", response.data);
+        let recipes = response.data;
+        console.log('from database: ' + recipes);
+        for (let counter = 0; counter < recipes.length; counter++) {
+          console.log('entering for loop...' + recipes[counter]);
+          recipes[counter].img = this.retrieveNewImageURL(recipes[counter]);
+          console.log('exiting for loop...' + recipes[counter]);
+        }
+        this.$store.commit("SET_FAVORITED_RECIPES", recipes);
       });
-    },
-    getMealImages() {
-      console.log("getting meal images");
-      let recipes = this.updateArray;
-      console.log('recipes: ' + recipes);
-      for (let counter = 0; counter < recipes.length; counter++) {   
-        RecipeService.getRecipeByUri(recipes[counter].uri).then(response => {
-          recipes[counter].image = response.data.hits[0].recipe.image;
-          console.log("found image: " + recipes[counter].image);
-        });
-      }
-      this.$store.commit("SET_FAVORITED_RECIPES", recipes);
     },
     //forceRefresh() {
     //  this.componentKey += 1;
     //},
+    retrieveNewImageURL(recipe) {
+      RecipeService.getRecipeByUri(recipe.uri).then(response => {
+        console.log('from api: ' + response.data);
+        return recipe.img = response.data.hits[0].recipe.image;
+      });      
+    }
   },
   created() {
     this.getFavoriteRecipes();
-    this.getMealImages();
   },
 };
 </script>
