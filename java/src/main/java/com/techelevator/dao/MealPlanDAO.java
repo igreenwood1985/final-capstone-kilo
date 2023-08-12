@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface MealPlanDAO {
     public List<MealPlanDTO> retrieveAllMealPlans(int userId);
-    public MealPlanDTO retrieveMealPlanByID(int mealID, int userID);
+    public MealPlanDTO retrieveMealPlanByID(int mealPlanID, int userID);
     public void addMealPlan(MealPlanDTO mealPlan, int userID);
     public void updateMealPlan(MealPlanDTO mealPlan);
     public void deleteMealPlan(int mealPlanID);

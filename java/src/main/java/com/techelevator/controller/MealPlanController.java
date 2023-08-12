@@ -37,10 +37,10 @@ public class MealPlanController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(path = "/mymealplans/{mealId}")
-    public MealPlanDTO getMealPlanByID(@PathVariable int mealId, Principal principal) {
+    @RequestMapping(path = "/mymealplans/{mealPlanId}")
+    public MealPlanDTO getMealPlanByID(@PathVariable int mealPlanId, Principal principal) {
         int userID = getUserId(principal);
-        MealPlanDTO mealPlan = mealPlanDAO.retrieveMealPlanByID(mealId, userID);
+        MealPlanDTO mealPlan = mealPlanDAO.retrieveMealPlanByID(mealPlanId, userID);
 
         return mealPlan;
     }
@@ -71,7 +71,7 @@ public class MealPlanController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @RequestMapping(path = "mymealplans/{mealPlanId}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "mymealplans/{mealPlanId}/{mealID}", method = RequestMethod.DELETE)
     public void removeMealFromMealPlan(@PathVariable int mealPlanId, int mealID) {
         mealPlanDAO.removeMealFromMealPlan(mealPlanId, mealID);
     }

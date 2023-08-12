@@ -62,14 +62,14 @@ public class JdbcMealPlanDAO implements MealPlanDAO{
     }
 
     @Override
-    public MealPlanDTO retrieveMealPlanByID(int mealID, int userID) {
+    public MealPlanDTO retrieveMealPlanByID(int mealPlanID, int userID) {
         MealPlanDTO mealPlan = null;
         String sql = "SELECT meal_plan_id, meal_plan_name, description, user_id " +
                 "FROM meal_plans " +
                 "WHERE meal_plan_id = ? AND user_id = ?";
 
         try {
-            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, mealID, userID);
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, mealPlanID, userID);
 
             if (result.next()) {
                 mealPlan = mapMealPlan(result);
