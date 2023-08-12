@@ -9,7 +9,7 @@
       <div role="alert" v-if="invalidCredentials" class="invalid-entry">
         Invalid username and password!
       </div>
-      <div role="alert" v-if="this.$route.query.registration" class="invalid-entry">
+      <div role="alert" v-if="this.$route.query.registration" class="successful-entry">
         Thank you for registering, please sign in.
       </div>
       <div class="form-input-group">
@@ -110,6 +110,10 @@ form {
 
 .invalid-entry {
   color: red;
+}
+
+.successful-entry {
+  color: green;
 }
 
 .sign-in-btn, .sign-up-link {

@@ -2,7 +2,11 @@
   <div class="entire-page">
     <div class="grid-container">
       <div class="heading"></div>
-      <h1 class="greeting">Welcome to your Dashboard</h1>
+      <h1 class="greeting">
+        <h5>Logged in as <b>{{$store.state.user.username}}</b></h5>
+        My Dashboard</h1>
+
+
       <div class="recipes-heading">
         <h2 class="recipes-title">
           My Favorite Recipes
@@ -90,9 +94,8 @@ export default {
 
 <style>
 .recipes-here {
-  border: 2px solid black;
-  width: 45rem;
-  margin-left: 4rem;
+  width: 46rem;
+  margin-left: 3rem;
   margin-top: 0;
 }
 
@@ -143,9 +146,10 @@ export default {
   grid-area: recipes-heading;
   background-color: lightslategray;
   text-align: center;
-  width: 45rem;
-  margin-left: 4rem;
+  width: 46rem;
+  margin-left: 3rem;
   margin-top: 2rem;
+  border: 1px solid black;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
 }
@@ -169,7 +173,9 @@ export default {
   display: flex-end;
   align-items: center;
   justify-content: space-around;
-  border: 2px solid black;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
 }
 
 .meal-plans-section {

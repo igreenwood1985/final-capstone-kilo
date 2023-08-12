@@ -5,6 +5,7 @@
       v-bind:recipe="recipe"
       v-bind:key="recipe.id"
       v-bind:enable-add="true"
+      class="favorited-card"
     />
   </div>
 </template>
@@ -60,4 +61,7 @@ export default {
 </script>
 
 <style>
+.favorited-card {
+  margin-top: 100rem;
+}
 </style>

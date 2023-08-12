@@ -1,12 +1,17 @@
 <template>
-
-  <div class="main ">
+  <div class="main">
     <!-- <router-link v-bind:to="{name: 'recipe-details', params: {id : recipe.uri}}"> -->
-     <!-- <h2 class="recipe-name">{{ recipe.label }}</h2> -->
+    <!-- <h2 class="recipe-name">{{ recipe.label }}</h2> -->
     <!-- </router-link> -->
-    <img v-bind:src="recipe.img" id="image" />
+    <div class="card-container">
+      <router-link v-bind:to="{name: 'recipe-details', params: {id : recipe.uri}}">
+      <img v-bind:src="recipe.img" id="image" />
+      <div class="centered">{{recipe.label}}</div>
+      </router-link>
+      <div class="top-right"><span class="minus" v-on:click="removeFromFavorites()" title="Remove from Favorites">x</span></div>
+    </div>
     <!-- <span v-on:click="removeFromFavorites()" class="minus bg-dark">-</span>
-    <router-link v-bind:to="{name: 'recipe-details', params: {id : recipe.uri}}">
+
     <h2 class="recipe-name">{{ recipe.label }}</h2>
     </router-link>
     <hr />
@@ -29,9 +34,7 @@
         <b-dropdown-item v-for="meal in meals" v-bind:key="meal.meal_id" v-on:click="addToMeal(meal.meal_id)">{{meal.name}}</b-dropdown-item>
       </b-dropdown>
     </div> -->
-    
   </div>
-  
 </template>
 
 <script>
@@ -49,51 +52,53 @@ export default {
   data() {
     return {
       healthTags: "",
-      meals: []
+      meals: [],
+      hover: false
     };
   },
   methods: {
     removeFromFavorites() {
-      AccountService.removeRecipeFromFavorites(this.recipe.uri).then(response => {
+      AccountService.removeRecipeFromFavorites(this.recipe.uri).then(
+        (response) => {
           if (response.status !== 200) {
             this.$store.commit("REMOVE_RECIPE", this.recipe);
           }
-      });
+        }
+      );
     },
     addToMeal(mealId) {
-      AccountService.addRecipeToMeal(this.recipe, mealId).then(response => {
+      AccountService.addRecipeToMeal(this.recipe, mealId).then((response) => {
         return 201 === response.status;
       });
     },
     getAllMeals() {
-      AccountService.getFavoritedMeals().then(response => {
+      AccountService.getFavoritedMeals().then((response) => {
         this.meals = response.data;
       });
     },
-    capitalize(string){
-            console.log('enter capitalize');
-            const firstLetter = string.charAt(0).toUpperCase();
-            console.log(firstLetter);
-            string = firstLetter + string.substring(1);
-            console.log(firstLetter + string.substring(1));
-            console.log(string);
-            return string;
-    }
+    capitalize(string) {
+      console.log("enter capitalize");
+      const firstLetter = string.charAt(0).toUpperCase();
+      console.log(firstLetter);
+      string = firstLetter + string.substring(1);
+      console.log(firstLetter + string.substring(1));
+      console.log(string);
+      return string;
+    },
   },
   created() {
     this.getAllMeals();
-  }
+  },
 };
-
 </script>
 
 <style scoped>
 .main {
-  border: 2px solid black;
+  border: 1px solid black;
   border-radius: 10px;
   display: inline-block;
-  width: 275px;
-  height: 15rem;
+  width: 200px;
+  height: 12rem;
   margin: 20px;
   background-color: white;
   overflow: hidden;
@@ -123,20 +128,53 @@ export default {
 
 .minus {
   position: absolute;
-  cursor: pointer;
-  display: inline-block;
-  vertical-align: top;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: white;
-  width: 30px;
-  height: 30px;
-  font: 30px/1 Arial,sans-serif;
+  width: 15px;
+  height: 15px;
+  font-size: 10px;
   text-align: center;
   border-radius: 50%;
-  background-clip: padding-box;
-} 
-
-#image {
-   width: 100%;
-   height: 50%;
+  background-color: rgba(255, 0, 0, 0.658);
+  border: 1px solid black;
 }
+
+
+.card-container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  backdrop-filter: blur(4.5px);
+  width: 99%;
+  height: 50%;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+
+.top-right {
+  position: absolute;
+  top: 5px;
+  right: 20px;
+}
+
 </style>
