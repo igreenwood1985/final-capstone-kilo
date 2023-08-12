@@ -22,7 +22,7 @@
       <h6 class="recipe-info-label">Servings:</h6>
       <h6 class="recipe-info">{{recipe.yield}}</h6>
     </div>
-    <b-button class="bi bi-file-minus" >
+    <b-button class="bi bi-file-minus" v-on:click="removeFromFavorites()" >
       Unfavorite</b-button>
     <div>
       <b-dropdown id="dropdown-1" text="Add To Meal" class="m-md-2">
@@ -55,10 +55,10 @@ export default {
   methods: {
     removeFromFavorites() {
       AccountService.removeRecipeFromFavorites(this.recipe.uri).then(response => {
-          return 200 === response.status;
+          if (response.status !== 200) {
+            this.$store.commit("REMOVE_RECIPE", this.recipe);
+          }
       });
-      console.log("deleting recipes...")
-      this.$store.commit("REMOVE_RECIPE", this.recipe);
     },
     addToMeal(mealId) {
       AccountService.addRecipeToMeal(this.recipe, mealId).then(response => {

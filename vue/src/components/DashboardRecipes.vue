@@ -1,7 +1,7 @@
 <template>
   <div>
     <favorited-card
-      v-for="recipe in $store.getters.favorite_recipes"
+      v-for="recipe in updateArray"
       v-bind:recipe="recipe"
       v-bind:key="recipe.id"
       v-bind:enable-add="true"
@@ -25,6 +25,11 @@ export default {
       //componentKey: 0,
     };
   },
+  computed: {
+    updateArray() {
+     return this.$store.state.favoritedRecipes;
+    }
+  },
   methods: {
     getFavoriteRecipes() {
       AccountService.getDashboardRecipes().then(response => {
@@ -33,7 +38,7 @@ export default {
     },
     getMealImages() {
       console.log("getting meal images");
-      let recipes = this.$store.getters.favorited_recipes;
+      let recipes = this.updateArray;
       console.log('recipes: ' + recipes);
       for (let counter = 0; counter < recipes.length; counter++) {   
         RecipeService.getRecipeByUri(recipes[counter].uri).then(response => {
