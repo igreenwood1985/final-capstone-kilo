@@ -593,6 +593,8 @@ h2 {
 
 .filter-btn, .reset-btn {
   margin-top: 1%;
+  margin-right: .5rem;
+  outline: 1px solid black;
 }
 
 

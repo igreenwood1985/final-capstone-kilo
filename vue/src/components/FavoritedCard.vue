@@ -5,7 +5,7 @@
      <!-- <h2 class="recipe-name">{{ recipe.label }}</h2> -->
     <!-- </router-link> -->
     <img v-bind:src="recipe.img" id="image" />
-    <span v-on:click="removeFromFavorites()" class="minus bg-dark">-</span>
+    <!-- <span v-on:click="removeFromFavorites()" class="minus bg-dark">-</span>
     <router-link v-bind:to="{name: 'recipe-details', params: {id : recipe.uri}}">
     <h2 class="recipe-name">{{ recipe.label }}</h2>
     </router-link>
@@ -28,7 +28,7 @@
       <b-dropdown id="dropdown-1" text="Add To Meal" class="m-md-2">
         <b-dropdown-item v-for="meal in meals" v-bind:key="meal.meal_id" v-on:click="addToMeal(meal.meal_id)">{{meal.name}}</b-dropdown-item>
       </b-dropdown>
-    </div>
+    </div> -->
     
   </div>
   
@@ -93,15 +93,10 @@ export default {
   border-radius: 10px;
   display: inline-block;
   width: 275px;
-  height: 400px;
+  height: 15rem;
   margin: 20px;
   background-color: white;
   overflow: hidden;
-}
-
-
-.main {
-  height: 35rem;
 }
 
 .recipe-info-grouping {

@@ -60,7 +60,4 @@ export default {
 </script>
 
 <style>
-.heading {
-  display: block;
-}
 </style>
