@@ -12,7 +12,7 @@
         <b-input-group size="lg">
           <b-form-input
             class="search-box"
-            placeholder="Find your next meal here..."
+            placeholder="Search by recipe name or ingredient"
             v-model="searchTerm"
             v-on:keydown.enter="chooseSearch()"
           ></b-form-input>
@@ -20,17 +20,18 @@
           <b-input-group-append>
             <b-button
               size="lg"
-              v-show="advancedSearchVisible === false"
-              v-on:click="searchForRecipes"
+              variant="primary"
+              v-on:click="chooseSearch()"
               >⌕‍
             </b-button>
 
-            <b-button
+            <!-- <b-button
               size="lg"
-              v-show="advancedSearchVisible"
+              variant="primary"
+              v-show="filtersSet"
               v-on:click="searchByFilters"
               >⌕‍
-            </b-button>
+            </b-button> -->
           </b-input-group-append>
         </b-input-group>
         <!-- <input class="search-box" type="text" placeholder="Find your next meal..." v-model="searchTerm" /> -->
@@ -382,6 +383,8 @@
                 </div>
               </div>
               <div>
+
+              
                 <!-- <button
                
                 name="custom-calorie-range"
@@ -411,8 +414,15 @@
             </div>
           </div>
         </div>
+        <div class="filter-btns" v-show="advancedSearchVisible">
+          <b-button size="sm" class="filter-btn"  v-on:click.prevent="toggleAdvancedSearch(); filtersSetTrue();">Set Filters</b-button>
+            <b-button size="sm" class="reset-btn" variant="danger" v-on:click.prevent="emptyTheArray(); filtersSetFalse();">Clear</b-button>
+        </div>
+       
       </div>
     </div>
+
+    
 
     <div class="cards">
       <card
@@ -423,6 +433,11 @@
         class="display-card"
       />
     </div>
+    <div class="tagline">
+      <h1 class="tag-title">Hungry?</h1>
+      <h1>You came to the right place.</h1>
+    </div>
+    
   </div>
 </template>
 
@@ -441,6 +456,7 @@ export default {
       searchResults: [],
       advancedSearchVisible: false,
       activeFilters: [],
+      filtersSet: false,
       minimumCalories: "",
       maximumCalories: "",
     };
@@ -460,6 +476,15 @@ export default {
       this.advancedSearchVisible =
         this.advancedSearchVisible === false ? true : false;
     },
+    filtersSetTrue() {
+      this.filtersSet = true;
+    },
+    filtersSetFalse() {
+      this.filtersSet = false;
+    },
+    emptyTheArray() {
+      this.activeFilters = [];
+    },
     searchByFilters() {
       RecipeService.getFilteredRecipes(
         this.searchTerm,
@@ -477,10 +502,10 @@ export default {
       });
     },
     chooseSearch() {
-      if (this.advancedSearchVisible === false) {
-        return this.searchForRecipes();
-      } else {
+      if (this.filtersSet === true || this.advancedSearchVisible === true || this.activeFilters.length !== 0) {
         return this.searchByFilters();
+      } else {
+        return this.searchForRecipes();
       }
     },
     addCalorieRange() {
@@ -506,12 +531,9 @@ export default {
   border: 1px solid black;
 }
 .call-and-block {
-  border: 2px solid black;
-  background-color: #1F2937;
   max-width: 50%;
   margin: auto;
-  padding: 25px;
-  border-radius: 20px;
+  padding: 14px;
 }
 
 div h4 {
@@ -523,7 +545,7 @@ div h4 {
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
-  background-color: aliceblue;
+  background-color: white;
 }
 
 .display-card {
@@ -537,9 +559,10 @@ div h4 {
   flex-direction: row;
   background-color: white;
   margin-top: 10px;
-  padding: 10px;
+  padding: 15px;
   text-align: left;
   width: 100%;
+  border-radius: 20px;
 }
 
 .left-filters,
@@ -567,6 +590,19 @@ label {
 h2 {
   padding: 0px;
 }
+
+.filter-btn, .reset-btn {
+  margin-top: 1%;
+}
+
+
+.tagline {
+  padding: 5.8rem;
+  text-align: center;
+  background-color: white;
+  font-family: bitter;
+}
+
 
 /* .search-logo {
   max-width: 30%;

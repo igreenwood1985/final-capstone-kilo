@@ -26,7 +26,7 @@ export default {
 .label-tag {
   border: 1px solid grey;
   border-radius: 20px;
-  background-color: aliceblue;
+  background-color: #E8F0FE;
   display: inline-block;
   margin: .1rem;
   font-size: 12px;

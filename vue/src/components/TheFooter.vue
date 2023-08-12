@@ -15,13 +15,14 @@ export default {
 <style>
 .footer {
     background-color: lightgray;
-    color: gray;
+    color: black;
     font-size: 15px;
     text-align: center;
     padding: 5px;
     border: 1px solid gray;
-
+    font-family: montserrat;
 }
+
 
 .footer-text > p {
     margin: 0;

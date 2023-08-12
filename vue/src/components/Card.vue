@@ -18,11 +18,13 @@
       v-if="recipe.recipe.uri"
       v-bind:src="recipe.recipe.image"
     />
+
+    <div class="stats-box">
     <h2 class="recipe-name">{{ recipe.recipe.label }}</h2>
     <h3 class="statistics">
       {{ capitalize(formatArray(recipe.recipe.cuisineType)) }}
       | <span v-if="recipe.recipe.totalTime != 0">{{ recipe.recipe.totalTime }} minutes |</span>
-      {{ Math.round(recipe.recipe.calories) }} calories
+      {{ Math.round(recipe.recipe.calories) }} calories*
     </h3>
     <div class="buttons">
       <b-button size="sm"
@@ -42,10 +44,7 @@
       <b-button size="sm">Add to Meal</b-button>
     </div>
 
-    <p>
-      {{ capitalize(formatArray(recipe.recipe.dishType)) }} <br />
-      {{ recipe.recipe.yield }} servings
-    </p>
+    
 
     <div class="label-tags">
       <!-- <label-tag
@@ -64,10 +63,14 @@
         v-bind:key="label.id"
       />
     </div>
+    <div class="dish-and-yield">
+      <!-- {{ capitalize(formatArray(recipe.recipe.dishType)) }} -->
+      *Makes {{ recipe.recipe.yield }} servings
+  </div>
+    </div>
 
     <!-- <p>{{ formatArray(recipe.recipe.dietLabels) }}</p>
     <p>Dietary Tags: {{ formatArray(recipe.recipe.healthLabels) }}</p> -->
-    <div></div>
   </div>
 </template>
 
@@ -183,14 +186,13 @@ export default {
   border: 2px solid black;
   border-radius: 10px;
   display: inline-block;
-  width: 300px;
-  height: 505px;
+  width: 250px;
+  height: 425px;
   margin: 20px;
+  background-color: white;
+  font-family: bitter;
 }
 
-.main.read {
-  background-color: lightgray;
-}
 
 .main img {
   width: 100%;
@@ -203,13 +205,12 @@ export default {
 
 .main .recipe-name {
   font-size: 1.2rem;
-  text-decoration: underline;
   text-align: center;
+  font-family: dosis;
+  font-weight: 700;
+  margin-bottom: 0px;
 }
 
-.card .time-to-make {
-  font-size: 1rem;
-}
 
 .favorited {
   background-color: yellow;
@@ -217,8 +218,9 @@ export default {
 }
 
 .statistics {
-  font-size: 1rem;
+  font-size: .8rem;
   text-align: center;
+  margin-top: .4rem;  
 }
 
 .buttons {
@@ -233,7 +235,22 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: end;
-  
+  margin-top: 1rem;
+  padding-bottom: .3rem;
 }
+
+.stats-box {
+  height: 16rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+}
+
+.dish-and-yield {
+  font-size: .7rem;
+  text-align: center;
+}
+
 </style>

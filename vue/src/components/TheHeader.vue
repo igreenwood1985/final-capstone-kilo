@@ -51,7 +51,7 @@ export default {
 
 <style>
 .bar {
-  background-color: #007FC9;
+  background-color: white;
   border-bottom: 1px solid gray;
   border: 1px solid gray;
 }
@@ -74,25 +74,27 @@ export default {
     align-items: center;
     justify-content: space-around;
     padding-right: 8px;
+    margin-right: 3%;
 }
 .title-text {
-  color: white;
+  color: black;
   font-size: 20px;
   font-family: saira;
 }
 .link-text {
-  color: white;
+  color: black;
   text-decoration: none;
   font-size: 12px;
   font-family: montserrat;
 }
 .user-link-text {
-    color: white;
+    color: black;
     text-decoration: none;
     font-size: 14px;
     font-family: montserrat;
 }
 .header-logo {
   max-width: 3%;
+  margin-left: 3%;
 }
 </style>
