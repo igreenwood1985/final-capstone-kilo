@@ -1,7 +1,7 @@
 <template>
   <div>
     <favorited-card
-      v-for="recipe in this.favoriteRecipes"
+      v-for="recipe in updateArray"
       v-bind:recipe="recipe"
       v-bind:key="recipe.id"
       v-bind:enable-add="true"
@@ -11,6 +11,7 @@
 
 <script>
 import AccountService from "../services/AccountService";
+import RecipeService from '../services/RecipeService.js';
 import FavoritedCard from "./FavoritedCard.vue";
 
 export default {
@@ -24,18 +25,36 @@ export default {
       componentKey: 0,
     };
   },
+  computed: {
+    updateArray() {
+     return this.$store.state.favoritedRecipes;
+    }
+  },
   methods: {
-    getAllFavoriteRecipes() {
-      AccountService.getFavoritedRecipes().then((response) => {
-        this.favoriteRecipes = response.data;
+    getFavoriteRecipes() {
+      AccountService.getFavoritedRecipes().then(response => {
+        let recipes = response.data;
+        console.log('from database: ' + recipes);
+        for (let counter = 0; counter < recipes.length; counter++) {
+          console.log('entering for loop...' + recipes[counter]);
+          recipes[counter].img = this.retrieveNewImageURL(recipes[counter]);
+          console.log('exiting for loop...' + recipes[counter]);
+        }
+        this.$store.commit("SET_FAVORITED_RECIPES", recipes);
       });
     },
-    forceRefresh() {
-      this.componentKey += 1;
-    },
+    //forceRefresh() {
+    //  this.componentKey += 1;
+    //},
+    retrieveNewImageURL(recipe) {
+      RecipeService.getRecipeByUri(recipe.uri).then(response => {
+        console.log('from api: ' + response.data);
+        return recipe.img = response.data.hits[0].recipe.image;
+      });      
+    }
   },
   created() {
-    this.getAllFavoriteRecipes();
+    this.getFavoriteRecipes();
   },
 };
 </script>
