@@ -53,7 +53,6 @@ export default {
 .bar {
   background-color: white;
   border-bottom: 1px solid gray;
-  border: 1px solid gray;
 }
 .nav-header {
   padding-left: 10px;

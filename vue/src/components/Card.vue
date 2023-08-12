@@ -187,7 +187,7 @@ export default {
   border-radius: 10px;
   display: inline-block;
   width: 250px;
-  height: 425px;
+  height: 475px;
   margin: 20px;
   background-color: white;
   font-family: bitter;
@@ -220,7 +220,8 @@ export default {
 .statistics {
   font-size: .8rem;
   text-align: center;
-  margin-top: .4rem;  
+  margin-top: 0rem;  
+
 }
 
 .buttons {
@@ -240,7 +241,7 @@ export default {
 }
 
 .stats-box {
-  height: 16rem;
+  height: 18rem;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
