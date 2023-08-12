@@ -23,6 +23,7 @@ export default {
     getRecipeById(id) {
         return axios.get('/' + id);
     },
+
     //Meals
     getDashboardMeals(){
         return axios.get('/dashboard/meals')
@@ -44,5 +45,29 @@ export default {
     },
     deleteMeal(mealId) {
         return axios.delete('/deletemeal/' + mealId)
+    },
+
+    //Meal Plan
+    getAllMealPlans() {
+        return axios.get('/mymealplans');
+    },
+    getMealPlanByID(mealPlanID) {
+        return axios.get('/mymealplans/' + mealPlanID);
+    },
+    createMealPlan(mealPlan) {
+        return axios.post('/mymealplans', mealPlan);
+    },
+    updateMealPlan(mealPlan) {
+        return axios.put('mymealplans', mealPlan);
+    },
+    deleteMealPlan(mealPlanID) {
+        return axios.delete('mymealplans/' + mealPlanID);
+    },
+    addMealToMealPlan(meal, mealPlanID) {
+        return axios.post('mymealplans/' + mealPlanID, meal);
+    },
+    removeMealFromMealPlan(mealPlanID, mealID) {
+        return axios.delete('mymealplans/' + mealPlanID + '/' + mealID);
     }
+
 }
