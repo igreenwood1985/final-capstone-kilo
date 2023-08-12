@@ -20,53 +20,55 @@
     />
 
     <div class="stats-box">
-    <h2 class="recipe-name">{{ recipe.recipe.label }}</h2>
-    <h3 class="statistics">
-      {{ capitalize(formatArray(recipe.recipe.cuisineType)) }}
-      | <span v-if="recipe.recipe.totalTime != 0">{{ recipe.recipe.totalTime }} minutes |</span>
-      {{ Math.round(recipe.recipe.calories) }} calories*
-    </h3>
-    <div class="buttons">
-      <b-button size="sm"
-        class="fav-or-not"
-        v-if="$store.state.token != '' && favorited === false"
-        v-on:click="addToFavorites"
-      >
-        Add to Favorites
-      </b-button>
-      <b-button size="sm"
-        class="fav-or-not"
-        v-if="$store.state.token != '' && favorited"
-        v-on:click="removeFromFavorites"
-      >
-        Remove from Favorites
-      </b-button>
-      <b-button size="sm">Add to Meal</b-button>
-    </div>
+      <router-link v-bind:to="{name: 'recipe-details', params: {id : formatURI(recipe.recipe.uri)}}">
+        <h2 class="recipe-name">{{ recipe.recipe.label }}</h2>
+      </router-link>
+      <h3 class="statistics">
+        {{ capitalize(formatArray(recipe.recipe.cuisineType)) }}
+        | <span v-if="recipe.recipe.totalTime != 0">{{ recipe.recipe.totalTime }} minutes |</span>
+        {{ Math.round(recipe.recipe.calories) }} calories*
+      </h3>
+      <div class="buttons">
+        <b-button size="sm"
+          class="fav-or-not"
+          v-if="$store.state.token != '' && favorited === false"
+          v-on:click="addToFavorites"
+        >
+          Add to Favorites
+        </b-button>
+        <b-button size="sm"
+          class="fav-or-not"
+          v-if="$store.state.token != '' && favorited"
+          v-on:click="removeFromFavorites"
+        >
+          Remove from Favorites
+        </b-button>
+        <b-button size="sm">Add to Meal</b-button>
+      </div>
 
     
 
-    <div class="label-tags">
-      <!-- <label-tag
-        v-for="label in recipe.recipe.dietLabels"
-        v-bind:label="label"
-        v-bind:key="label.id"
-      />
-      <label-tag
-        v-for="label in recipe.recipe.healthLabels"
-        v-bind:label="label"
-        v-bind:key="label.id"
-      /> -->
-      <label-tag
-        v-for="label in combinedLabels"
-        v-bind:label="label"
-        v-bind:key="label.id"
-      />
-    </div>
-    <div class="dish-and-yield">
-      <!-- {{ capitalize(formatArray(recipe.recipe.dishType)) }} -->
-      *Makes {{ recipe.recipe.yield }} servings
-  </div>
+      <div class="label-tags">
+        <!-- <label-tag
+          v-for="label in recipe.recipe.dietLabels"
+          v-bind:label="label"
+          v-bind:key="label.id"
+        />
+        <label-tag
+          v-for="label in recipe.recipe.healthLabels"
+          v-bind:label="label"
+          v-bind:key="label.id"
+        /> -->
+        <label-tag
+          v-for="label in combinedLabels"
+          v-bind:label="label"
+          v-bind:key="label.id"
+        />
+      </div>
+      <div class="dish-and-yield">
+        <!-- {{ capitalize(formatArray(recipe.recipe.dishType)) }} -->
+        *Makes {{ recipe.recipe.yield }} servings
+      </div>
     </div>
 
     <!-- <p>{{ formatArray(recipe.recipe.dietLabels) }}</p>
@@ -177,6 +179,13 @@ export default {
 
       return newString;
     },
+    formatURI(uri) {
+      const uriIndex = uri.indexOf('recipe');
+      console.log(uriIndex);
+      uri = uri.substring(uriIndex);
+      console.log(uri);
+      return uri;
+    }
   },
 };
 </script>
