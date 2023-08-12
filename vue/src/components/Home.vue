@@ -8,7 +8,10 @@
                 <p class="second-body-text">We are your convenient and fun way to find new recipes and create 
                     awesome meal plans for healthy living! Sign up to take full advantage of our exclusive members-only features!
                 </p>
-                <a href="#"><button class="sign-up-button">Sign Up</button></a>
+                <div>
+                    <router-link v-bind:to="{name: 'register' }"><button class="sign-up-button">Sign Up</button></router-link>
+                    <router-link v-bind:to="{name: 'search' }"><button class="sign-up-button">Start Looking For Recipes</button></router-link>
+                </div>
             </div>
 
             <!-- <div class="header-image">
@@ -34,7 +37,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 body {
     display: flex;
     flex-direction: column;
@@ -95,13 +98,15 @@ li > a {
     align-items: center;
     background-color: #1F2937;
     border-radius: 50px;
+    text-align: justify;
     
 }
 
 .main-body-text {
     font-size: 56px;
     font-weight: bolder;
-    color: #F9FAF8
+    color: #F9FAF8;
+    text-align: center;
 }
 
 p {
@@ -127,6 +132,11 @@ p {
     border-radius: 10px;
     outline: 2px solid white;
     margin-bottom: 20px;
+}
+
+.button {
+    display: flex;
+    justify-content: space-around;
 }
 
 /* .header-image {
