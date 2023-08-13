@@ -102,6 +102,7 @@ export default {
   margin: 20px;
   background-color: #F8F9FA;
   border: 2px solid black;
+  overflow: hidden;
 }
 
 .recipe-info-grouping {

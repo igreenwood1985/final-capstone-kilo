@@ -6,7 +6,9 @@
       v-bind:key="recipe.id"
       v-bind:enable-add="true"
       class="favorited-card"
+      v-show="updateArray.length !== 0"
     />
+    <h1 class="empty-recipes-message" v-show="updateArray.length == 0">You do not currently have any favorite recipes. <br><br> <router-link :to="{ name : 'search' }"> Add some?</router-link></h1>
   </div>
 </template>
 
@@ -28,12 +30,12 @@ export default {
   },
   computed: {
     updateArray() {
-     return this.$store.state.favoritedRecipes;
+     return this.$store.state.favoritedRecipes.slice(0, 3);
     }
   },
   methods: {
     getFavoriteRecipes() {
-      AccountService.getDashboardRecipes().then(response => {
+      AccountService.getFavoritedRecipes().then(response => {
         let recipes = response.data;
         console.log('from database: ' + recipes);
         for (let counter = 0; counter < recipes.length; counter++) {
@@ -60,8 +62,11 @@ export default {
 };
 </script>
 
-<style>
-.favorited-card {
-  margin-top: 100rem;
+<style scoped>
+
+.empty-recipes-message {
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 104px
 }
 </style>

@@ -200,16 +200,14 @@ export default {
   margin: 20px;
   background-color: white;
   font-family: bitter;
+  overflow: hidden;
 }
 
 
 .main img {
   width: 100%;
   height: 40%;
-  border-top: 1px solid black;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-  border-bottom: 3px solid black;
+  border-bottom: 2px solid black;
 }
 
 .main .recipe-name {

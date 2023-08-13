@@ -3,16 +3,26 @@
     <div class="grid-container">
       <div class="heading"></div>
       <h1 class="greeting">
-        <h5>Logged in as <b>{{$store.state.user.username}}</b></h5>
-        My Dashboard</h1>
-
+        <h5>
+          Logged in as <b>{{ $store.state.user.username }}</b>
+        </h5>
+        My Dashboard
+        <span class="nav-text"
+          ><router-link
+            :to="{ name: 'dashboard' }"
+            class="current-page-selection"
+            >Overview</router-link
+          >
+          ∙ Favorited Recipes ∙ My Meals ∙ Meal Plans</span
+        >
+      </h1>
 
       <div class="recipes-heading">
         <h2 class="recipes-title">
           My Latest Recipes
-          <!-- <router-link v-bind:to="{ name: 'my-recipes' }">
-            <h2 class="my-recipes-link">Click here to view all.</h2>
-          </router-link> -->
+          <router-link v-bind:to="{ name: 'my-recipes' }">
+            <h2 class="my-recipes-link">(View All)</h2>
+          </router-link>
         </h2>
       </div>
 
@@ -20,29 +30,38 @@
         <dashboard-recipes class="recipes-section" />
       </div>
 
-      <h2 class="mealplans-title">My Meal Plans</h2>
-      <dashboard-meal-plans class="meal-plans-section" />
-      <h2 class="meals-title">
-        My Meals
-        <router-link v-bind:to="{ name: 'my-meals' }">
-          <h2 class="my-meals-link">Click here to view all.</h2>
-        </router-link>
+      <div class="mealplans-heading">
+        <h2 class="mealplans-title">My Meal Plans</h2>
+      </div>
 
-        <b-button v-on:click="toggleForm()">Create New Meal</b-button>
-        <b-form class="create-meal-form" v-show="createFormToggled">
-          <h1>Meal Name</h1>
-          <b-input type="text" v-model="meal.mealName" />
-          <h1>Meal Description</h1>
-          <b-input type="text" v-model="meal.description" />
-          <button
-            class="btn btn-primary"
-            type="reset"
-            v-on:click="createMeal()"
-          >
-            Submit
-          </button>
-        </b-form>
-      </h2>
+      <div class="mealplans-here">
+        <dashboard-meal-plans class="meal-plans-section" />
+      </div>
+
+      <div class="meals-heading">
+        <h2 class="meals-title">
+          My Meals
+          <router-link v-bind:to="{ name: 'my-meals' }">
+            <h2 class="my-meals-link">Click here to view all.</h2>
+          </router-link>
+
+          <b-button v-on:click="toggleForm()">Create New Meal</b-button>
+          <b-form class="create-meal-form" v-show="createFormToggled">
+            <h1>Meal Name</h1>
+            <b-input type="text" v-model="meal.mealName" />
+            <h1>Meal Description</h1>
+            <b-input type="text" v-model="meal.description" />
+            <button
+              class="btn btn-primary"
+              type="reset"
+              v-on:click="createMeal()"
+            >
+              Submit
+            </button>
+          </b-form>
+        </h2>
+      </div>
+
       <dashboard-meals class="meals-section" />
     </div>
   </div>
@@ -92,11 +111,10 @@ export default {
 </script>
 
 <style>
-.recipes-here {
-  width: 46rem;
-  margin-left: 3rem;
+.mealplans-here {
+  width: 28rem;
+  margin-right: 3.25rem;
   margin-top: 0;
-  
 }
 
 .entire-page {
@@ -111,9 +129,9 @@ export default {
   grid-template-areas:
     "header header"
     "greeting greeting"
-    "recipes-heading mealPlan-title"
+    "recipes-heading mealPlans-heading"
     "recipes mealPlan"
-    "meals-title mealPlan"
+    "meals-heading mealPlan"
     "meals mealPlan";
   width: 88%;
   margin: auto;
@@ -144,31 +162,75 @@ export default {
   border-bottom: 1px solid gray;
 }
 
+.nav-text {
+  font-size: 1.25rem;
+  margin-left: 1rem;
+}
+
+.nav-text a {
+  color: black;
+  text-decoration: none;
+}
+
 .recipes-heading {
   grid-area: recipes-heading;
-  background-color: #5194F7;
+  background-color: #5194f7;
   text-align: center;
   width: 46rem;
-  margin-left: 3rem;
+  height: 4.2rem;
+  margin-left: 3.25rem;
   margin-top: 2rem;
   border: 1px solid black;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
 }
 
-.recipes-title {
-  color: white;
-  padding: .25rem;
-}
-
+.recipes-title,
+.mealplans-title,
 .meals-title {
-  grid-area: meals-title;
-  text-align: center;
+  color: white;
+  padding: 0.25rem;
 }
 
-.mealplans-title {
-  grid-area: mealPlan-title;
+.recipes-heading a,
+.meals-heading a {
+  text-decoration: none;
+}
+
+.my-recipes-link,
+.my-meals-link {
+  color: white;
+  font-size: 1rem;
+}
+
+.my-recipes-link:hover {
+  text-decoration: underline;
+}
+
+.meals-heading {
+  grid-area: meals-heading;
+  background-color: #f75151;
   text-align: center;
+  width: 46rem;
+  height: 4.2rem;
+  margin-left: 3.25rem;
+  margin-top: 2.5rem;
+  border: 1px solid black;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+
+.mealplans-heading {
+  grid-area: mealPlans-heading;
+  background-color: #d051f7;
+  text-align: center;
+  width: 28rem;
+  height: 4.2rem;
+  margin-right: 3.25rem;
+  margin-top: 2rem;
+  border: 1px solid black;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
 }
 
 .recipes-section {
@@ -182,18 +244,31 @@ export default {
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
   background: aliceblue;
+  width: 46rem;
+  margin-left: 3.25rem;
+  margin-top: 0;
 }
 
 .meal-plans-section {
-  border: 2px solid black;
+  border: 1px solid black;
+  border-top: none;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   grid-area: mealPlan;
-  background-color: royalblue;
+  background-color: #f5f0f4;
+  height: 
 }
 .meals-section {
-  border: 2px solid black;
-  display: flex-end;
+  border: 1px solid black;
+  border-top: none;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   grid-area: meals;
-  background-color: sandybrown;
+  background-color: #f7e9e9;
+  width: 46rem;
+  margin-left: 3.25rem;
+  margin-top: 0;
+  margin-bottom: 2.45rem;
 }
 
 .btn {
@@ -201,7 +276,7 @@ export default {
   border: 2px solid black;
 }
 
-.my-recipes-link {
-  text-decoration: none;
+.current-page-selection {
+  font-weight: 700;
 }
 </style>

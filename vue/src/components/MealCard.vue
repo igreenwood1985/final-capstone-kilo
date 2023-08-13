@@ -41,13 +41,13 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 .main {
   border: 2px solid black;
   border-radius: 10px;
   display: inline-block;
-  width: 275px;
-  height: 400px;
+  max-width: 12rem;
+  max-height: 12rem;
   margin: 20px;
   background-color: white;
   overflow: hidden;
