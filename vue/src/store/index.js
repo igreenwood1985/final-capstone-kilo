@@ -22,7 +22,8 @@ export default new Vuex.Store({
     user: currentUser || {},
     searchResults: [],
     currentMeal: 0,
-    favoritedRecipes: []
+    favoritedRecipes: [],
+    mealPlans: []
   },
   getters: {
     favorite_recipes(state) {
@@ -64,5 +65,12 @@ export default new Vuex.Store({
     SET_CURRENT_MEAL(state, mealId) {
       state.currentMeal = mealId;
     },
+    SET_MEAL_PLANS(state, mealPlans) {
+      state.mealPlans = mealPlans;
+    },
+    REMOVE_MEAL_PLAN(state, mealPlan) {
+      const index = state.mealPlans.indexOf(mealPlan);
+      state.mealPlans.splice(index, 1);
+    }
   }
 })
