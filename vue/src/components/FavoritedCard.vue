@@ -4,12 +4,18 @@
     <!-- <h2 class="recipe-name">{{ recipe.label }}</h2> -->
     <!-- </router-link> -->
     <div class="card-container">
-      <router-link v-bind:to="{name: 'recipe-details', params: {id : recipe.uri}}">
+      <router-link v-bind:to="{name: 'recipe-details', params: {id : recipe.uri}}" title="View Recipe Details">
       <img v-bind:src="recipe.img" id="image" />
       <div class="centered">{{recipe.label}}</div>
       </router-link>
-      <div class="top-right"><span class="minus" v-on:click="removeFromFavorites()" title="Remove from Favorites">x</span></div>
+      <div class="top-right"><span class="minus" v-on:click="removeFromFavorites()" title="Remove from Favorites" style="cursor: pointer">-</span></div>
     </div>
+        <div class="add-to-meal-dropdown">
+      <b-dropdown id="dropdown-1" text="Add To Meal" variant="light" class="m-md-2">
+        <b-dropdown-item v-for="meal in meals" v-bind:key="meal.meal_id" v-on:click="addToMeal(meal.meal_id)">{{meal.name}}</b-dropdown-item>
+      </b-dropdown>
+    </div>
+    
     <!-- <span v-on:click="removeFromFavorites()" class="minus bg-dark">-</span>
 
     <h2 class="recipe-name">{{ recipe.label }}</h2>
@@ -28,12 +34,7 @@
       <h6 class="recipe-info">{{recipe.yield}}</h6>
     </div>
     <b-button class="bi bi-file-minus" v-on:click="removeFromFavorites()" >
-      Unfavorite</b-button>
-    <div>
-      <b-dropdown id="dropdown-1" text="Add To Meal" class="m-md-2">
-        <b-dropdown-item v-for="meal in meals" v-bind:key="meal.meal_id" v-on:click="addToMeal(meal.meal_id)">{{meal.name}}</b-dropdown-item>
-      </b-dropdown>
-    </div> -->
+      Unfavorite</b-button> -->
   </div>
 </template>
 
@@ -94,14 +95,13 @@ export default {
 
 <style scoped>
 .main {
-  border: 1px solid black;
   border-radius: 10px;
   display: inline-block;
   width: 200px;
-  height: 12rem;
+  height: 16rem;
   margin: 20px;
-  background-color: white;
-  overflow: hidden;
+  background-color: #F8F9FA;
+  border: 2px solid black;
 }
 
 .recipe-info-grouping {
@@ -145,7 +145,6 @@ export default {
 .card-container {
   position: relative;
   text-align: center;
-  color: white;
 }
 
 .centered {
@@ -175,6 +174,11 @@ export default {
   position: absolute;
   top: 5px;
   right: 20px;
+}
+
+.add-to-meal-dropdown {
+  margin-left: 1.5rem;
+  position: absolute;
 }
 
 </style>

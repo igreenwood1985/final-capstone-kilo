@@ -9,7 +9,7 @@
 
       <div class="recipes-heading">
         <h2 class="recipes-title">
-          My Favorite Recipes
+          My Latest Recipes
           <!-- <router-link v-bind:to="{ name: 'my-recipes' }">
             <h2 class="my-recipes-link">Click here to view all.</h2>
           </router-link> -->
@@ -52,7 +52,6 @@
 import AccountService from "../services/AccountService";
 import DashboardMealPlans from "./DashboardMealPlans.vue";
 import DashboardMeals from "./DashboardMeals.vue";
-// import AccountService from "../services/AccountService.js";
 import DashboardRecipes from "./DashboardRecipes.vue";
 
 export default {
@@ -97,6 +96,7 @@ export default {
   width: 46rem;
   margin-left: 3rem;
   margin-top: 0;
+  
 }
 
 .entire-page {
@@ -110,8 +110,8 @@ export default {
   grid-template-columns: 2fr 1fr;
   grid-template-areas:
     "header header"
-    "greeting mealPlan-title"
-    "recipes-heading mealPlan"
+    "greeting greeting"
+    "recipes-heading mealPlan-title"
     "recipes mealPlan"
     "meals-title mealPlan"
     "meals mealPlan";
@@ -136,15 +136,17 @@ export default {
   display: inline-block;
   color: black;
   text-align: left;
-  max-width: 40rem;
+  max-width: 95%;
   margin-left: 2rem;
   margin-top: 2rem;
   grid-area: greeting;
+  padding-bottom: 2px;
+  border-bottom: 1px solid gray;
 }
 
 .recipes-heading {
   grid-area: recipes-heading;
-  background-color: lightslategray;
+  background-color: #5194F7;
   text-align: center;
   width: 46rem;
   margin-left: 3rem;
@@ -156,6 +158,7 @@ export default {
 
 .recipes-title {
   color: white;
+  padding: .25rem;
 }
 
 .meals-title {
@@ -176,6 +179,9 @@ export default {
   border-bottom: 1px solid black;
   border-left: 1px solid black;
   border-right: 1px solid black;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background: aliceblue;
 }
 
 .meal-plans-section {
