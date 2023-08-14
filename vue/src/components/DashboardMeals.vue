@@ -1,11 +1,13 @@
 <template>
   <div>
     <meal-card
-      v-for="meal in this.favoriteMeals"
+      v-for="meal in updateMeals"
       v-bind:meal="meal"
       v-bind:key="meal.id"
       v-bind:enable-add="true"
+      v-show="updateMeals.length !== 0"
     />
+    <h1 class="empty-recipes-message" v-show="updateMeals.length == 0">You do not currently have any meals.</h1>
   </div>
 </template>
 
@@ -24,10 +26,15 @@ export default {
       componentKey: 0,
     };
   },
+  computed: {
+    updateMeals() {
+      return this.$store.state.meals;
+    }
+  },
   methods: {
     getFavoriteMeals() {
       AccountService.getDashboardMeals().then((response) => {
-        this.favoriteMeals = response.data;
+        this.$store.commit('SET_MEALS', response.data);
       });
     },
     forceRefresh() {
@@ -40,8 +47,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .heading {
   display: block;
+}
+
+.empty-recipes-message {
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 104px
 }
 </style>

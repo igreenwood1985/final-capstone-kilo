@@ -23,6 +23,7 @@ export default new Vuex.Store({
     searchResults: [],
     currentMeal: 0,
     favoritedRecipes: [],
+    meals: [],
     mealPlans: []
   },
   getters: {
@@ -57,20 +58,33 @@ export default new Vuex.Store({
     ADD_RECIPE (state, recipe) {
       state.favoritedRecipes.push(recipe);
     },
-    REMOVE_RECIPE(state, recipe) {
+    REMOVE_RECIPE(state, recipeToRemove) {
       console.log("leaving the store");
-      const index = state.favoritedRecipes.indexOf(recipe);
-      state.favoritedRecipes.splice(index, 1);
+      const recipeIndex = state.favoritedRecipes.indexOf(recipeToRemove);
+      state.favoritedRecipes.splice(recipeIndex, 1);
     },
     SET_CURRENT_MEAL(state, mealId) {
       state.currentMeal = mealId;
     },
+    SET_MEALS(state, meals) {
+      state.meals = meals;
+    },
+    ADD_MEAL(state, newMeal) {
+      state.meals.push(newMeal);
+    },
+    REMOVE_MEAL(state, mealToRemove) {
+      const mealIndex = state.favoritedRecipes.indexOf(mealToRemove);
+      state.favoritedRecipes.splice(mealIndex, 1);
+    },
     SET_MEAL_PLANS(state, mealPlans) {
       state.mealPlans = mealPlans;
     },
-    REMOVE_MEAL_PLAN(state, mealPlan) {
-      const index = state.mealPlans.indexOf(mealPlan);
-      state.mealPlans.splice(index, 1);
+    ADD_MEAL_PLAN(state, mealPlan) {
+      state.mealPlans.push(mealPlan);
+    },
+    REMOVE_MEAL_PLAN(state, mealPlanToRemove) {
+      const mealPlanIndex = state.mealPlans.indexOf(mealPlanToRemove);
+      state.mealPlans.splice(mealPlanIndex, 1);
     }
   }
 })
