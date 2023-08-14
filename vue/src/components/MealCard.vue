@@ -49,7 +49,8 @@ export default {
       return this.$store.state.meals.slice(0, 3);
     },
     updateRecipesArray() {
-      return this.meal.recipes.slice(0, 6);
+      const slicedArray = this.meal.recipes.slice(this.meal.recipes.length - 6)
+      return slicedArray.reverse();
     },
   },
   data() {
