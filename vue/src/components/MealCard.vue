@@ -1,32 +1,41 @@
 <template>
   <div class="meal-card">
+
     <div class="meal-card-heading">
       <router-link
-        v-bind:to="{ name: 'meal-editor', params: { id: meal.meal_id } }"
+        v-bind:to="{ name: 'meal-editor', params: { id: meal.meal_id } }" class="meal-name"
       >
-        <h2 class="meal-name" v-on:click="updateCurrentMealInStore()">
+        <h2 v-on:click="updateCurrentMealInStore()" v-show="mealEditToggle == false">
           {{ meal.name }}
         </h2>
       </router-link>
-      <h2 class="meal-description">{{ meal.description }}</h2>
-    </div>
-    
-    <div class="images-box">
-<div class="images-loop" v-for="recipe in meal.recipes" v-bind:key="recipe.id">
-      <div class="inner-images">
-        <img v-bind:src="recipe.img" alt="Image of Recipe" />
-      </div>
-      
-    </div>
+      <b-input size="sm" class="meal-name-input" v-bind:value="meal.name" v-show="mealEditToggle == true" />
+      <h2 class="meal-description" v-show="mealEditToggle == false">{{ meal.description }}</h2>
+      <b-input size="sm" class="meal-desc-input" v-bind:value="meal.description" v-show="mealEditToggle == true" />
+      <div class="top-right">
+        <img class="edit-btn" v-show="mealEditToggle == false" v-on:click="mealEditToggle = true" src="https://cdn-icons-png.flaticon.com/512/84/84380.png" alt="Edit button">
+        <img class="edit-btn" v-show="mealEditToggle == true" v-on:click="mealEditToggle = false" src="https://e7.pngegg.com/pngimages/154/420/png-clipart-computer-icons-button-save-angle-symbol.png" alt="Save button">
+        
+        </div>
     </div>
 
-    
+    <div class="images-box">
+      <div
+        class="images-loop"
+        v-for="recipe in updateRecipesArray"
+        v-bind:key="recipe.id"
+      >
+        <div class="inner-images">
+          <img v-bind:src="recipe.img" alt="Image of Recipe" />
+        </div>
+      </div>
+    </div>
     <div class="add-to-mealplan-dropdown">
       <b-dropdown id="dropdown-1" text="Add To Meal Plan" variant="light" class="m-md-2">
         <b-dropdown-item v-for="mealPlan in updateMealPlans" v-bind:key="mealPlan.mealPlan_id" v-on:click="addToMealPlan(mealPlan.mealPlan_id)">{{mealPlan.mealPlan_name}}</b-dropdown-item>
       </b-dropdown>
     </div>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -47,11 +56,15 @@ export default {
     updateArray() {
       return this.$store.state.meals.slice(0, 3);
     },
+    updateRecipesArray() {
+      return this.meal.recipes.slice(0, 6);
+    },
   },
   data() {
     return {
       selectedMealPlan: '',
-      mealPlan: []
+      mealPlan: [],
+      mealEditToggle: false,
     };
   },
   methods: {
@@ -79,7 +92,7 @@ export default {
   border: 2px solid black;
   border-radius: 10px;
   display: inline-block;
-  width: 12rem;
+  width: 200px;
   height: 12rem;
   margin: 20px;
   background-color: white;
@@ -87,42 +100,93 @@ export default {
 }
 
 .meal-card-heading {
-  border: solid 2px black;
-  background-color: #f8f9fa;
-  padding: 2px;
+  border-bottom: solid 3px black;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #fdfdfe;
+  margin-top: .25rem;
 }
 
 .meal-name {
-  font-size: 1rem;
   text-align: center;
+  color: black;
+}
+
+.meal-name-input {
+  text-align: center;
+  width: 75%;
+  margin-top: -5px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: .85rem;
+}
+
+.meal-desc-input {
+  text-align: center;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -5px;
+  font-size: .6rem;
+}
+
+.meal-name > h2 {
+  font-size: 1rem;
 }
 
 .meal-description {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   text-align: center;
+  margin-bottom: .25rem;
 }
 
 img {
   display: inline-block;
   max-height: 3rem;
-  max-width: 2rem;
-  border-radius: 2px;
+  max-width: 2.25rem;
+  border-radius: 5px;
 }
 
 .images-box {
   display: flex;
   justify-content: center;
-  margin-top: .5rem;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+  margin-top: 0.5rem;
   flex-wrap: wrap;
+  margin-top: -1.5px;
+  height: 8.75rem;
+  background-image: url("https://images.unsplash.com/photo-1495195134817-aeb325a55b65?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3V0dGluZyUyMGJvYXJkfGVufDB8fDB8fHww&w=1000&q=80");
+  background-size: cover;
 }
-
 
 .inner-images {
   display: inline-block;
-  border: 4px solid blue;
   margin: 3px;
-
+  border: 1px solid #cfe1ed;
+  border-radius: 5px;
 }
 
+.edit-btn {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 1rem;
+  height: 1rem;
+  font-size: 10px;
+  text-align: center;
+  border-radius: 20%;
+  background-color: transparent;
+  color: #0A3D5D;
+}
+
+.top-right {
+  position: relative;
+  top: 7.15rem;
+  right: -10.35rem;
+}
 
 </style>
