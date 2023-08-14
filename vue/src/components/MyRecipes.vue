@@ -34,12 +34,12 @@ export default {
     getFavoriteRecipes() {
       AccountService.getFavoritedRecipes().then(response => {
         let recipes = response.data;
-        console.log('from database: ' + recipes);
-        for (let counter = 0; counter < recipes.length; counter++) {
-          console.log('entering for loop...' + recipes[counter]);
-          recipes[counter].img = this.retrieveNewImageURL(recipes[counter]);
-          console.log('exiting for loop...' + recipes[counter]);
-        }
+        // console.log('from database: ' + recipes);
+        // for (let counter = 0; counter < recipes.length; counter++) {
+        //   console.log('entering for loop...' + recipes[counter]);
+        //   recipes[counter].img = this.retrieveNewImageURL(recipes[counter]);
+        //   console.log('exiting for loop...' + recipes[counter]);
+        // }
         this.$store.commit("SET_FAVORITED_RECIPES", recipes);
       });
     },
