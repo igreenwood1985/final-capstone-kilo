@@ -19,12 +19,20 @@
       
     </div>
     </div>
-    
 
+    
+    <div class="add-to-mealplan-dropdown">
+      <b-dropdown id="dropdown-1" text="Add To Meal Plan" variant="light" class="m-md-2">
+        <b-dropdown-item v-for="mealPlan in updateMealPlans" v-bind:key="mealPlan.mealPlan_id" v-on:click="addToMealPlan(mealPlan.mealPlan_id)">{{mealPlan.mealPlan_name}}</b-dropdown-item>
+      </b-dropdown>
+    </div>
   </div>
 </template>
 
 <script>
+//This was added to give functionality to the dropdown list
+import AccountService from "../services/AccountService.js";
+
 export default {
   components: {},
   name: "meal-card",
@@ -41,13 +49,28 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      selectedMealPlan: '',
+      mealPlan: []
+    };
   },
   methods: {
     updateCurrentMealInStore() {
       this.$store.commit("SET_CURRENT_MEAL", this.meal.meal_id);
     },
   },
+
+  //This was added to give functionality to the dropdown list
+  addToMealPlan(mealPlanId) {
+      AccountService.addMealToMealPlan(this.meal, mealPlanId).then((response) => {
+        if (response.status == 201) {
+          AccountService.getFavoritedMeals().then(mealResponse => {
+            this.$store.commit('SET_MEALS', mealResponse.data);
+          })
+        }
+      });
+    },
+  
 };
 </script>
 
@@ -100,4 +123,6 @@ img {
   margin: 3px;
 
 }
+
+
 </style>
