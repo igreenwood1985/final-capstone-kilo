@@ -72,6 +72,23 @@ export default new Vuex.Store({
     ADD_MEAL(state, newMeal) {
       state.meals.push(newMeal);
     },
+    ADD_RECIPE_TO_MEAL(state, recipe, mealID) {
+      console.log("adding recipe in store");
+      const mealIndex = state.meals.findIndex(meal => {
+        
+        return meal.meal_id = mealID;
+      });
+      state.meals[mealIndex].recipes.push(recipe);
+    },
+    // REMOVE_RECIPE_FROM_MEAL(state, recipeID, mealID) {
+    //   const mealIndex = state.meals.findIndex(meal => {
+    //     return meal.meal_id == mealID;
+    //   });
+    //   const recipeIndex = state.meals[mealIndex].recipes.findIndex(recipe => {
+    //     return recipe.recipe_id == recipeID;
+    //   });
+    //   state.meals[mealIndex].recipes.splice(recipeIndex, 1);
+    // },
     REMOVE_MEAL(state, mealToRemove) {
       const mealIndex = state.favoritedRecipes.indexOf(mealToRemove);
       state.favoritedRecipes.splice(mealIndex, 1);

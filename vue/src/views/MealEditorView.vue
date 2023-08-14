@@ -1,16 +1,16 @@
 <template>
   <div>
-      <meal-editor />
+      <meal-editor-component />
   </div>
 </template>
 
 <script>
-import MealEditor from '../components/MealEditor.vue'
+import MealEditorComponent from '../components/MealEditor.vue'
 
 export default {
     name: "meal-editor-view",
     components: {
-        MealEditor
+        MealEditorComponent
     }
 }
 </script>

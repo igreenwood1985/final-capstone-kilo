@@ -12,7 +12,7 @@
     </div>
         <div class="add-to-meal-dropdown">
       <b-dropdown id="dropdown-1" text="Add To Meal" variant="light" class="m-md-2">
-        <b-dropdown-item v-for="meal in meals" v-bind:key="meal.meal_id" v-on:click="addToMeal(meal.meal_id)">{{meal.name}}</b-dropdown-item>
+        <b-dropdown-item v-for="meal in updateMeals" v-bind:key="meal.meal_id" v-on:click="addToMeal(meal.meal_id)">{{meal.name}}</b-dropdown-item>
       </b-dropdown>
     </div>
     
@@ -57,6 +57,21 @@ export default {
       hover: false
     };
   },
+  computed: {
+    updateMeals() {
+      let meals = this.$store.state.meals
+      console.log("updating meals...");
+      meals = meals.filter(meal => {
+        for (let counter = 0; counter < meal.recipes.length; counter++) {
+          if (this.recipe.recipe_id == meal.recipes[counter].recipe_id) {
+            return false;
+          }
+        }
+        return true;
+      });
+      return meals;
+    }
+  },
   methods: {
     removeFromFavorites() {
       AccountService.removeRecipeFromFavorites(this.recipe.uri).then(
@@ -69,26 +84,32 @@ export default {
     },
     addToMeal(mealId) {
       AccountService.addRecipeToMeal(this.recipe, mealId).then((response) => {
-        return 201 === response.status;
+        if (response.status == 201) {
+          AccountService.getFavoritedMeals().then(mealResponse => {
+            this.$store.commit('SET_MEALS', mealResponse.data);
+          })
+        }
       });
     },
-    getAllMeals() {
-      AccountService.getFavoritedMeals().then((response) => {
-        this.meals = response.data;
-      });
-    },
+    // getAllMeals() {
+    //   let meals = this.$store.state.meals
+    //   meals.filter(meal => {
+    //     for (let counter = 0; counter < meal.recipes.length; counter++) {
+    //       if (this.recipe.recipe_id == meal.recipes[counter]) {
+    //         return false;
+    //       }
+    //     }
+    //     return true;
+    //   });
+    // },
     capitalize(string) {
-      console.log("enter capitalize");
       const firstLetter = string.charAt(0).toUpperCase();
-      console.log(firstLetter);
       string = firstLetter + string.substring(1);
-      console.log(firstLetter + string.substring(1));
-      console.log(string);
       return string;
     },
   },
   created() {
-    this.getAllMeals();
+    //this.getAllMeals();
   },
 };
 </script>
