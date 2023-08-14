@@ -181,8 +181,8 @@ export default {
   margin-left: 3.25rem;
   margin-top: 2rem;
   border: 1px solid black;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 }
 
 .recipes-title,
@@ -241,8 +241,8 @@ export default {
   border-bottom: 1px solid black;
   border-left: 1px solid black;
   border-right: 1px solid black;
-  border-bottom-right-radius: 20px;
-  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
   background: aliceblue;
   width: 46rem;
   margin-left: 3.25rem;
