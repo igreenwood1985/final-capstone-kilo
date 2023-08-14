@@ -1,16 +1,26 @@
 <template>
   <div class="main">
-    <router-link v-bind:to="{ name: 'meal-editor', params: {id: meal.meal_id} }">
+    <!-- <router-link v-bind:to="{ name: 'meal-editor', params: {id: meal.meal_id} }">
       <h2 class="meal-name" v-on:click="updateCurrentMealInStore()">{{ meal.name }}</h2>
     </router-link>
-    <h2 class="meal-description">{{ meal.description }}</h2>
+    <h2 class="meal-description">{{ meal.description }}</h2> -->
+    <mini-fav-card
+      v-for="recipe in updateArray"
+      v-bind:recipe="recipe"
+      v-bind:key="recipe.id"
+      v-bind:enable-add="true"
+      class="favorited-card"
+      v-show="updateArray.length !== 0"
+    />
   </div>
 </template>
 
 <script>
+import MiniFavCard from './MiniFavCard.vue';
 
 
 export default {
+  components: { MiniFavCard },
     name: "meal-card",
       props: {
     meal: Object,
@@ -18,6 +28,11 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+  computed: {
+    updateArray() {
+     return this.$store.state.favoritedRecipes.slice(0, 3);
+    }
   },
   data() {
     return {
