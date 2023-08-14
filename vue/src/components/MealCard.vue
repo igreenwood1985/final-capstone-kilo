@@ -1,22 +1,50 @@
 <template>
   <div class="meal-card">
-
     <div class="meal-card-heading">
       <router-link
-        v-bind:to="{ name: 'meal-editor', params: { id: meal.meal_id } }" class="meal-name"
+        v-bind:to="{ name: 'meal-editor', params: { id: meal.meal_id } }"
+        class="meal-name"
       >
-        <h2 v-on:click="updateCurrentMealInStore()" v-show="mealEditToggle == false">
+        <h2
+          v-on:click="updateCurrentMealInStore()"
+          v-show="mealEditToggle == false"
+        >
           {{ meal.name }}
         </h2>
       </router-link>
-      <b-input size="sm" class="meal-name-input" v-bind:value="meal.name" v-show="mealEditToggle == true" />
-      <h2 class="meal-description" v-show="mealEditToggle == false">{{ meal.description }}</h2>
-      <b-input size="sm" class="meal-desc-input" v-bind:value="meal.description" v-show="mealEditToggle == true" />
+      <b-input
+        size="sm"
+        class="meal-name-input"
+        v-bind:value="meal.name"
+        v-show="mealEditToggle == true"
+        v-model="enteredMealName"
+      />
+      <h2 class="meal-description" v-show="mealEditToggle == false">
+        {{ meal.description }}
+      </h2>
+      <b-input
+        size="sm"
+        class="meal-desc-input"
+        v-bind:value="meal.description"
+        v-show="mealEditToggle == true"
+        v-model="mealDesc"
+      />
       <div class="top-right">
-        <img class="edit-btn" v-show="mealEditToggle == false" v-on:click="mealEditToggle = true" src="https://cdn-icons-png.flaticon.com/512/84/84380.png" alt="Edit button">
-        <img class="edit-btn" v-show="mealEditToggle == true" v-on:click="mealEditToggle = false" src="https://e7.pngegg.com/pngimages/154/420/png-clipart-computer-icons-button-save-angle-symbol.png" alt="Save button">
-        
-        </div>
+        <img
+          class="edit-btn"
+          v-show="mealEditToggle == false"
+          v-on:click="mealEditToggle = true"
+          src="https://cdn-icons-png.flaticon.com/512/84/84380.png"
+          alt="Edit button"
+        />
+        <img
+          class="edit-btn"
+          v-show="mealEditToggle == true"
+          v-on:click="updateMealName()"
+          src="https://e7.pngegg.com/pngimages/154/420/png-clipart-computer-icons-button-save-angle-symbol.png"
+          alt="Save button"
+        />
+      </div>
     </div>
 
     <div class="images-box">
@@ -30,17 +58,28 @@
         </div>
       </div>
     </div>
-    <div class="add-to-mealplan-dropdown">
-      <b-dropdown id="dropdown-1" text="Add To Meal Plan" variant="light" class="m-md-2">
-        <b-dropdown-item v-for="mealPlan in updateMealPlans" v-bind:key="mealPlan.mealPlan_id" v-on:click="addToMealPlan(mealPlan.mealPlan_id)">{{mealPlan.mealPlan_name}}</b-dropdown-item>
+
+    <!-- <div class="add-to-mealplan-dropdown">
+      <b-dropdown
+        id="dropdown-1"
+        text="Add To Meal Plan"
+        variant="light"
+        class="m-md-2"
+      >
+        <b-dropdown-item
+          v-for="mealPlan in updateMealPlans"
+          v-bind:key="mealPlan.mealPlan_id"
+          v-on:click="addToMealPlan(mealPlan.mealPlan_id)"
+          >{{ mealPlan.mealPlan_name }}</b-dropdown-item
+        >
       </b-dropdown>
-    </div>
-    </div>
+    </div> -->
+  </div>
 </template>
 
 <script>
 //This was added to give functionality to the dropdown list
-import AccountService from "../services/AccountService.js";
+// import AccountService from "../services/AccountService.js";
 
 export default {
   components: {},
@@ -57,34 +96,51 @@ export default {
       return this.$store.state.meals.slice(0, 3);
     },
     updateRecipesArray() {
-      const slicedArray = this.meal.recipes.slice(this.meal.recipes.length - 6)
+      const slicedArray = this.meal.recipes.slice(this.meal.recipes.length - 6);
       return slicedArray.reverse();
     },
+    updatedMealName() {
+      return this.meal.name;
+    }
   },
   data() {
     return {
-      selectedMealPlan: '',
+      selectedMealPlan: "",
       mealPlan: [],
       mealEditToggle: false,
+      enteredMealName: "",
+      mealDesc: this.meal.desc,
+      mealId: 0,
     };
   },
   methods: {
+    setMealId() {
+      this.mealId = this.meal.meal_id;
+    },
     updateCurrentMealInStore() {
       this.$store.commit("SET_CURRENT_MEAL", this.meal.meal_id);
     },
+    updateMealName() {
+      this.mealEditToggle = false;
+      console.log(this.enteredMealName);
+      this.$store.commit("SET_MEAL_NAME", this.meal, "test");
+    },
+  //     addToMealPlan(mealPlanId) {
+  //   AccountService.addMealToMealPlan(this.meal, mealPlanId).then((response) => {
+  //     if (response.status == 201) {
+  //       AccountService.getFavoritedMeals().then((mealResponse) => {
+  //         this.$store.commit("SET_MEALS", mealResponse.data);
+  //       });
+  //     }
+  //   });
+  // },
   },
+  created() {
+    this.setMealId();
+  }
 
   //This was added to give functionality to the dropdown list
-  addToMealPlan(mealPlanId) {
-      AccountService.addMealToMealPlan(this.meal, mealPlanId).then((response) => {
-        if (response.status == 201) {
-          AccountService.getFavoritedMeals().then(mealResponse => {
-            this.$store.commit('SET_MEALS', mealResponse.data);
-          })
-        }
-      });
-    },
-  
+
 };
 </script>
 
@@ -94,7 +150,7 @@ export default {
   border-radius: 10px;
   display: inline-block;
   width: 200px;
-  height: 12rem;
+  height: 16rem;
   margin: 20px;
   background-color: white;
   overflow: hidden;
@@ -105,7 +161,7 @@ export default {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   background-color: #fdfdfe;
-  margin-top: .25rem;
+  margin-top: 0.25rem;
 }
 
 .meal-name {
@@ -119,7 +175,7 @@ export default {
   margin-top: -5px;
   margin-left: auto;
   margin-right: auto;
-  font-size: .85rem;
+  font-size: 0.85rem;
 }
 
 .meal-desc-input {
@@ -128,7 +184,7 @@ export default {
   margin-left: auto;
   margin-right: auto;
   margin-top: -5px;
-  font-size: .6rem;
+  font-size: 0.6rem;
 }
 
 .meal-name > h2 {
@@ -138,7 +194,7 @@ export default {
 .meal-description {
   font-size: 0.7rem;
   text-align: center;
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 img {
@@ -181,7 +237,7 @@ img {
   text-align: center;
   border-radius: 20%;
   background-color: transparent;
-  color: #0A3D5D;
+  color: #0a3d5d;
 }
 
 .top-right {
@@ -189,5 +245,4 @@ img {
   top: 7.15rem;
   right: -10.35rem;
 }
-
 </style>
