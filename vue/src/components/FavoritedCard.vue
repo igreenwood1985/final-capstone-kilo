@@ -8,11 +8,19 @@
       <img v-bind:src="recipe.img" id="image" />
       <div class="centered">{{recipe.label}}</div>
       </router-link>
-      <div class="top-right"><span class="minus" v-on:click="removeFromFavorites()" title="Remove from Favorites" style="cursor: pointer">-</span></div>
+      <div class="top-right"><span class="minus" v-on:click="removeFromFavorites()" title="Remove from Favorites" style="cursor: pointer">-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span v-show="updateRemoveFromMeals.length > 0" v-on:click="toggleRemovalMenu()">&dtrif;</span></div>
     </div>
-        <div class="add-to-meal-dropdown">
+    <!-- <div class="remove-from-meal-dropdown">
+      <b-dropdown v-show="updateRemoveFromMeals.length > 0" id="dropdown-1" text="Remove From Meal" variant="light" class="m-md-2">
+        <b-dropdown-item v-for="meal in updateRemoveFromMeals" v-bind:key="meal.meal_id" v-on:click="removeFromMeal(meal.meal_id)">{{meal.name}}</b-dropdown-item>
+      </b-dropdown>
+    </div> -->
+    <ul class="removal-dropdown">
+        <li v-show="showRemovalMenu" v-for="meal in updateRemoveFromMeals" v-bind:key="meal.meal_id" v-on:click="removeFromMeal(meal.meal_id); toggleRemovalMenu()">{{meal.name}}</li>
+      </ul>
+    <div class="add-to-meal-dropdown">
       <b-dropdown id="dropdown-1" text="Add To Meal" variant="light" class="m-md-2">
-        <b-dropdown-item v-for="meal in updateMeals" v-bind:key="meal.meal_id" v-on:click="addToMeal(meal.meal_id)">{{meal.name}}</b-dropdown-item>
+        <b-dropdown-item v-for="meal in updateAddToMeals" v-bind:key="meal.meal_id" v-on:click="addToMeal(meal.meal_id)">{{meal.name}}</b-dropdown-item>
       </b-dropdown>
     </div>
     
@@ -54,11 +62,12 @@ export default {
     return {
       healthTags: "",
       meals: [],
-      hover: false
+      hover: false,
+      showRemovalMenu: false
     };
   },
   computed: {
-    updateMeals() {
+    updateAddToMeals() {
       let meals = this.$store.state.meals
       console.log("updating meals...");
       meals = meals.filter(meal => {
@@ -68,6 +77,19 @@ export default {
           }
         }
         return true;
+      });
+      return meals;
+    },
+    updateRemoveFromMeals() {
+      let meals = this.$store.state.meals
+      console.log("updating meals...");
+      meals = meals.filter(meal => {
+        for (let counter = 0; counter < meal.recipes.length; counter++) {
+          if (this.recipe.recipe_id == meal.recipes[counter].recipe_id) {
+            return true;
+          }
+        }
+        return false;
       });
       return meals;
     }
@@ -87,7 +109,16 @@ export default {
         if (response.status == 201) {
           AccountService.getFavoritedMeals().then(mealResponse => {
             this.$store.commit('SET_MEALS', mealResponse.data);
-          })
+          });
+        }
+      });
+    },
+    removeFromMeal(mealId) {
+      AccountService.removeRecipeFromMeal(this.recipe.recipe_id, mealId).then(response => {
+        if (response.status == 204) {
+          AccountService.getFavoritedMeals().then(mealResponse => {
+            this.$store.commit('SET_MEALS', mealResponse.data);
+          });
         }
       });
     },
@@ -107,6 +138,9 @@ export default {
       string = firstLetter + string.substring(1);
       return string;
     },
+    toggleRemovalMenu() {
+      this.showRemovalMenu ? this.showRemovalMenu = false : this.showRemovalMenu = true;
+    }
   },
   created() {
     //this.getAllMeals();
@@ -177,7 +211,8 @@ export default {
   font-size: 1.25rem;
   font-weight: 700;
   color: white;
-  backdrop-filter: blur(4.5px);
+  background-color: rgb(0, 174, 255);
+  opacity: .8;
   width: 99%;
   height: 50%;
   border-radius: 20px;
@@ -196,6 +231,7 @@ export default {
   position: absolute;
   top: 5px;
   right: 20px;
+  background-color: white;
 }
 
 .add-to-meal-dropdown {
