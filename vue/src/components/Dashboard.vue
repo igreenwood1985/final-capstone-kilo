@@ -41,11 +41,12 @@
       <div class="meals-heading">
         <h2 class="meals-title">
           My Meals
-          <router-link v-bind:to="{ name: 'my-meals' }">
-            <h2 class="my-meals-link">Click here to view all.</h2>
-          </router-link>
-
-          <b-button v-on:click="toggleForm()">Create New Meal</b-button>
+          <div class="create-meal-box">
+            <img
+            src="https://thenounproject.com/api/private/icons/2251528/edit/?backgroundShape=SQUARE&backgroundShapeColor=%23000000&backgroundShapeOpacity=0&exportSize=752&flipX=false&flipY=false&foregroundColor=%23000000&foregroundOpacity=1&imageFormat=png&rotation=0"
+            alt=""
+            class="create-meal-btn"
+          />
           <b-form class="create-meal-form" v-show="createFormToggled">
             <h1>Meal Name</h1>
             <b-input type="text" v-model="meal.mealName" />
@@ -59,6 +60,13 @@
               Submit
             </button>
           </b-form>
+          </div>
+          
+          <router-link v-bind:to="{ name: 'my-meals' }">
+            <h2 class="my-meals-link">Click here to view all.</h2>
+          </router-link>
+
+          
         </h2>
       </div>
 
@@ -277,5 +285,25 @@ export default {
 
 .current-page-selection {
   font-weight: 700;
+}
+
+.create-meal-btn {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 2rem;
+  height: 2rem;
+  font-size: 10px;
+  text-align: center;
+  background-color: transparent;
+  color: white;
+}
+
+.create-meal-box {
+  position: relative;
+  top: -2rem;
+  right: -27.1rem;
 }
 </style>
