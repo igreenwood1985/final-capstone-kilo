@@ -234,9 +234,9 @@ export default {
   border-radius: 10px;
   display: inline-block;
   width: 200px;
-  height: 16rem;
+  height: 15.5rem;
   margin: 20px;
-  background-color: white;
+  background-color: #F8F9FA;
   overflow: hidden;
 }
 
@@ -244,7 +244,7 @@ export default {
   border-bottom: solid 3px black;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background-color: #fdfdfe;
+  background-color: white;
   margin-top: 0.25rem;
 }
 

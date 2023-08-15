@@ -103,10 +103,14 @@ public class JdbcMealPlanDAO implements MealPlanDAO{
     @Override
     public void addMealPlan(MealPlanDTO mealPlan, int userID) {
         String sql = "INSERT INTO meal_plans (meal_plan_name, description, user_id) " +
-                "VALUES (?, ?, ?);";
+                "VALUES (?, ?, ?) RETURNING meal_plan_id;";
+
+        String createTemplateSql = "INSERT INTO meal_plan_meal (meal_plan_id, meal_id)" +
+                "VALUES (?, 69)";
 
         try {
-            jdbcTemplate.update(sql, mealPlan.getName(), mealPlan.getDescription(), userID);
+            int mealPlanId = jdbcTemplate.queryForObject(sql, Integer.class, mealPlan.getName(), mealPlan.getDescription(), userID);
+            jdbcTemplate.queryForRowSet(createTemplateSql, mealPlanId);
 
         } catch (CannotGetJdbcConnectionException exception) {
 

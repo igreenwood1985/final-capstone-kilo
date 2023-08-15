@@ -32,6 +32,42 @@
 
       <div class="mealplans-heading">
         <h2 class="mealplans-title">My Meal Plans</h2>
+        <div class="create-meal-plan-box">
+          <img
+            src="../../plus-5-xxl.png"
+            alt="Create New Meal Plan Button"
+            class="create-meal-btn"
+            v-on:click="toggleFormMealPlan()"
+          />
+          <div class="create-meal-plan-form" v-show="createFormToggledMealPlan">
+            <h4 class="new-meal-form-text">Create a New Meal Plan</h4>
+            <form>
+              <input
+                type="text"
+                id="newMealName"
+                name="newMealName"
+                v-model="mealPlan.mealPlanName"
+                placeholder="New Meal Plan Name"
+              />
+              <input
+                type="text"
+                id="newMealDesc"
+                name="newMealDesc"
+                v-model="mealPlan.mealPlanDescription"
+                placeholder="New Meal Plan Description"
+              />
+              <br />
+              <button
+                class="btn submit-new-meal-btn btn-primary"
+                size="sm"
+                type="reset"
+                v-on:click="createMealPlan()"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
 
       <div class="mealplans-here">
@@ -43,8 +79,8 @@
           My Meals
           <div class="create-meal-box">
             <img
-              src="https://thenounproject.com/api/private/icons/2251528/edit/?backgroundShape=SQUARE&backgroundShapeColor=%23000000&backgroundShapeOpacity=0&exportSize=752&flipX=false&flipY=false&foregroundColor=%23000000&foregroundOpacity=1&imageFormat=png&rotation=0"
-              alt=""
+              src="../../plus-5-xxl.png"
+              alt="Create New Meal Button"
               class="create-meal-btn"
               v-on:click="toggleForm()"
             />
@@ -96,10 +132,15 @@ export default {
   data() {
     return {
       createFormToggled: false,
+      createFormToggledMealPlan: false,
       meal: {
         mealName: "",
         description: "",
       },
+      mealPlan: {
+        mealPlanName: "",
+        mealPlanDescription: "",
+      }
     };
   },
   methods: {
@@ -112,11 +153,34 @@ export default {
       this.meal.description = "";
       location.reload();
     },
+    createMealPlan() {
+      AccountService.createMealPlan(this.formatMealPlan()).then((response) => {
+        return response.status == 200;
+      });
+      this.toggleFormMealPlan();
+      this.mealPlan.mealPlanName = "";
+      this.mealPlan.mealPlanDescription = "";
+      location.reload();
+    },
     checkForEmptyName() {
       if (this.meal.mealName == "") {
         return "New Meal";
       } else {
         return this.meal.mealName;
+      }
+    },
+    checkForEmptyNameMealPlan() {
+      if (this.mealPlan.mealPlanName == "") {
+        return "New Meal Plan";
+      } else {
+        return this.mealPlan.mealPlanName;
+      }
+    },
+    checkForEmptyDescMealPlan() {
+      if (this.mealPlan.mealPlanDescription == "") {
+        return "Empty Meal Plan Description";
+      } else {
+        return this.mealPlan.mealPlanDescription;
       }
     },
     checkForEmptyDesc() {
@@ -133,17 +197,29 @@ export default {
         description: this.checkForEmptyDesc(),
         user_id: 0,
       };
-      console.log(formattedMeal);
       return formattedMeal;
+    },
+    formatMealPlan() {
+      const formattedMealPlan = {
+        mealPlanId: 0,
+        name: this.checkForEmptyNameMealPlan(),
+        description: this.checkForEmptyDescMealPlan(),
+        userId: 0
+      };
+      return formattedMealPlan;
     },
     toggleForm() {
       this.createFormToggled = this.createFormToggled == false ? true : false;
+    },
+    toggleFormMealPlan() {
+      this.createFormToggledMealPlan =
+        this.createFormToggledMealPlan == false ? true : false;
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
 .mealplans-here {
   width: 28rem;
   margin-right: 3.25rem;
@@ -262,14 +338,13 @@ export default {
   margin-right: 3.25rem;
   margin-top: 2rem;
   border: 1px solid black;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 }
 
 .recipes-section {
   grid-area: recipes;
-  display: flex-end;
-  align-items: center;
+  display: flex;
   justify-content: space-around;
   border-bottom: 1px solid black;
   border-left: 1px solid black;
@@ -292,6 +367,8 @@ export default {
 }
 .meals-section {
   border: 1px solid black;
+  display: flex;
+  justify-content: space-around;
   border-top: none;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -318,8 +395,8 @@ export default {
   justify-content: center;
   align-items: center;
   color: white;
-  width: 2rem;
-  height: 2rem;
+  width: 1.25rem;
+  height: 1.25rem;
   font-size: 10px;
   text-align: center;
   background-color: transparent;
@@ -328,8 +405,14 @@ export default {
 
 .create-meal-box {
   position: relative;
-  top: -2rem;
-  right: -27.1rem;
+  top: -2.5rem;
+  right: .10rem;
+}
+
+.create-meal-plan-box {
+  position: relative;
+  top: -3.95rem;
+  right: -0.15rem;
 }
 
 .new-meal-form-text {
@@ -344,12 +427,12 @@ export default {
   flex-direction: column;
   border: 1px solid black;
   border-radius: 5px;
-  width: 15rem;
+ width: 23.5rem;
   background-color: white;
-  opacity: 0.95;
   height: 11rem;
   margin-left: 2rem;
   padding: 2px;
+  opacity: .97;
 }
 
 #newMealName,
@@ -366,6 +449,23 @@ export default {
 }
 
 .mealplans-title {
-  margin-top: .7rem;
+  margin-top: 0.7rem;
+}
+
+.create-meal-plan-form {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 23.5rem;
+  background-color: white;
+  height: 11rem;
+  margin-left: 2rem;
+  padding: 2px;
+  opacity: .97;
 }
 </style>

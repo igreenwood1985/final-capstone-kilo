@@ -17,7 +17,6 @@
         <h2 class="meal-plan-description" v-show="mealPlanEditToggle == false">
           {{ mealPlan.description }}
         </h2>
-        <h3>Includes meals such as: "{{mealPlan.meals[0].name}}"", "{{mealPlan.meals[1].name}}", and more!</h3>
         </div>
 
         <!-- <b-input
