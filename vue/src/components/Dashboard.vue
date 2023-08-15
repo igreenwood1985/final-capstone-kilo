@@ -25,15 +25,15 @@ export default {
     },
     data() {
         return {
-            showOverview: false,
+            showOverview: true,
             showRecipes: false,
             showMeals: false,
-            showMealPlans: true
+            showMealPlans: false
         }
     }
 };
 </script>
 
-<style>
+<style scoped>
 
 </style>

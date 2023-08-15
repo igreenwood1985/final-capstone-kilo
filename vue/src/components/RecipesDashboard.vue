@@ -83,7 +83,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .mealplans-here {
   width: 28rem;
   margin-right: 3.25rem;
