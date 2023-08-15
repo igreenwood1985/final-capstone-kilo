@@ -144,8 +144,8 @@ public class JdbcMealPlanDAO implements MealPlanDAO{
                 "WHERE meal_plan_id = ?;";
 
         try {
-            jdbcTemplate.update(joinSql);
-            jdbcTemplate.update(mealPlanSql);
+            jdbcTemplate.update(joinSql, mealPlanID);
+            jdbcTemplate.update(mealPlanSql, mealPlanID);
         } catch (CannotGetJdbcConnectionException exception) {
 
         } catch (DataIntegrityViolationException exception) {

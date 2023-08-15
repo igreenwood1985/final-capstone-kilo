@@ -13,7 +13,7 @@
 
 <script>
 import AccountService from "../services/AccountService";
-import MealCard from "../components/MealCard.vue";
+import MealCard from "./MealCard.vue";
 
 export default {
   name: "dashboard-meals",
