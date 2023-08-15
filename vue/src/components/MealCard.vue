@@ -1,6 +1,11 @@
 <template>
   <div class="meal-card">
     <div class="meal-card-heading" v-if="renderComponent === true">
+
+      <div class="top-left">
+        <img src="../../delete-xxl.png" alt="Delete Icon" class="delete-btn">
+      </div>
+      
       <router-link
         v-bind:to="{ name: 'meal-editor', params: { id: meal.meal_id } }"
         class="meal-name"
@@ -32,7 +37,7 @@
         v-show="mealEditToggle == true"
         v-model="enteredDescription"
       />
-      <div class="top-right">
+      <div class="bottom-right">
         <img
           class="edit-btn"
           v-show="mealEditToggle == false"
@@ -266,7 +271,7 @@ img {
   border-radius: 5px;
 }
 
-.edit-btn {
+.edit-btn, .delete-btn {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -281,9 +286,17 @@ img {
   color: #0a3d5d;
 }
 
-.top-right {
+
+.bottom-right {
   position: relative;
   top: 7.15rem;
   right: -10.35rem;
+}
+
+.top-left {
+  position: relative;
+  top: .4rem;
+  right: -.7rem;
+  
 }
 </style>
