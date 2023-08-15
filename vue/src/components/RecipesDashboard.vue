@@ -27,7 +27,7 @@
         <div class="">
             <div class="recipes-heading">
                 <h2 class="recipes-title">
-                My Latest Recipes
+               My Recipes
                 </h2>
             </div>
 
@@ -147,8 +147,8 @@ export default {
   grid-area: recipes-heading;
   background-color: #5194f7;
   text-align: center;
-  width: 46rem;
-  height: 4.2rem;
+  width: 76rem;
+  height: 3.2rem;
   margin-left: 3.25rem;
   margin-top: 2rem;
   border: 1px solid black;
@@ -179,19 +179,17 @@ export default {
 }
 
 .recipes-section {
-  grid-area: recipes;
-  display: flex-end;
-  align-items: center;
-  justify-content: space-around;
+  grid-area: recipes; 
+  
   border-bottom: 1px solid black;
   border-left: 1px solid black;
   border-right: 1px solid black;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
   background: aliceblue;
-  width: 46rem;
-  margin-left: 3.25rem;
-  margin-top: 0;
+  width: 76rem;
+ 
+ 
 }
 
 
