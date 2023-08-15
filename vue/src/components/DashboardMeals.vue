@@ -28,8 +28,7 @@ export default {
   },
   computed: {
     updateMeals() {
-      const slicedArray = this.$store.state.meals.slice(0, 3);
-      return slicedArray.reverse();
+      return this.$store.state.meals;
     }
   },
   methods: {
