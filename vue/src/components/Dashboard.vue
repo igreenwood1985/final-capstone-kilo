@@ -30,19 +30,8 @@ export default {
             showMeals: false,
             showMealPlans: true
         }
-    },
-    computed: {
-        getActiveComponent() {
-            return 1;
-        }
-    },
-    methods: {
-        toggleActiveComponent() {
-
-        }
     }
-
-}
+};
 </script>
 
 <style>

@@ -415,8 +415,8 @@
           </div>
         </div>
         <div class="filter-btns" v-show="advancedSearchVisible">
-          <b-button size="lg" style="background-color: green; font-weight: bold;" class="filter-btn"  v-on:click.prevent="toggleAdvancedSearch(); filtersSetTrue();">Set Filters</b-button>
-            <b-button size="lg" style="background-color: red; font-weight: bold;" class="reset-btn" v-on:click.prevent="emptyTheArray(); filtersSetFalse();">Clear Filters</b-button>
+          <b-button size="lg" style="background-color: green;" class="filter-btn"  v-on:click.prevent="toggleAdvancedSearch(); filtersSetTrue();">Set Filters</b-button>
+            <b-button size="lg" style="background-color: red;" class="reset-btn" v-on:click.prevent="emptyTheArray(); filtersSetFalse();">Clear Filters</b-button>
         </div>
       </div>
     </div>
@@ -596,9 +596,7 @@ h2 {
   outline: 2px solid black;
 }
 
-.filter-btns {
-  padding: 10px;
-}
+
 
 .tagline {
   padding: 5.8rem;
