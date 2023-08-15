@@ -13,16 +13,19 @@
             class="current-page-selection"
             >Overview</router-link
           >
-          ∙ Favorited Recipes ∙ My Meals ∙ Meal Plans</span
-        >
+          ∙
+          <router-link
+          :to="{name:'my-recipes'}" 
+          >Recipes</router-link> ∙<router-link
+          :to="{name:'my-meals'}">
+          
+           My Meals</router-link> ∙ Meal Plans</span>
+        
       </h1>
 
       <div class="recipes-heading">
         <h2 class="recipes-title">
           My Latest Recipes
-          <router-link v-bind:to="{ name: 'my-recipes' }">
-            <h2 class="my-recipes-link">(View All)</h2>
-          </router-link>
         </h2>
       </div>
 
@@ -41,9 +44,7 @@
       <div class="meals-heading">
         <h2 class="meals-title">
           My Meals
-          <router-link v-bind:to="{ name: 'my-meals' }">
-            <h2 class="my-meals-link">Click here to view all.</h2>
-          </router-link>
+          
 
           <b-button v-on:click="toggleForm()">Create New Meal</b-button>
           <b-form class="create-meal-form" v-show="createFormToggled">

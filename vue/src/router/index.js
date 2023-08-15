@@ -11,6 +11,7 @@ import MyRecipesView from '../views/MyRecipesView.vue'
 import MyMealsView from '../views/MyMealsView.vue'
 import MealEditorView from '../views/MealEditorView.vue'
 import SearchView from '../views/SearchView.vue'
+import MealPlanDetailsView from '../views/MealPlanDetailsView.vue'
 
 Vue.use(Router)
 
@@ -82,7 +83,15 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
+    }, {
+      path: '/dashboard/meal-plan-details/:id',
+      name: 'meal-plan-details',
+      component: MealPlanDetailsView,
+      meta: {
+        requiresAuth: true
+      }
     },
+
     {
       path: "/login",
       name: "login",
