@@ -5,14 +5,28 @@
     <!-- </router-link> -->
     <div class="card-container">
       <router-link v-bind:to="{name: 'recipe-details', params: {id : recipe.uri}}" title="View Recipe Details">
-      <img v-bind:src="recipe.img" id="image" />
-      <div class="centered">{{recipe.label}}</div>
+        <img v-bind:src="recipe.img" id="image" />
+        <div class="centered">{{recipe.label}}</div>
       </router-link>
-      <div class="top-right"><span class="minus" v-on:click="removeFromFavorites()" title="Remove from Favorites" style="cursor: pointer">-</span></div>
+      <div class="top-right">
+        <span class="minus" v-on:click="removeFromFavorites()" title="Remove from Favorites" style="cursor: pointer">-</span>
+        <!-- &nbsp;&nbsp;&nbsp;&nbsp;
+        <span v-show="updateRemoveFromMeals.length > 0" v-on:click="toggleRemovalMenu()">
+        &dtrif;
+        </span> -->
+      </div>
     </div>
-        <div class="add-to-meal-dropdown">
-      <b-dropdown id="dropdown-1" text="Add To Meal" variant="light" class="m-md-2">
-        <b-dropdown-item v-for="meal in updateMeals" v-bind:key="meal.meal_id" v-on:click="addToMeal(meal.meal_id)">{{meal.name}}</b-dropdown-item>
+    <!-- <div class="removal-dropdown">
+        <p class="grouping-to-remove" v-show="showRemovalMenu" v-for="meal in updateRemoveFromMeals" v-bind:key="meal.meal_id" v-on:click="removeFromMeal(meal.meal_id); toggleRemovalMenu()">{{meal.name}}</p>
+      </div> -->
+    <div v-show="updateAddToMeal.length > 0" class="add-to-meal-dropdown">
+      <b-dropdown id="dropdown-1" text="Add" variant="light" class="m-md-2">
+        <b-dropdown-item v-for="meal in updateAddToMeal" v-bind:key="meal.meal_id" v-on:click="addToMeal(meal.meal_id)">{{meal.name}}</b-dropdown-item>
+      </b-dropdown>
+    </div>
+    <div v-show="updateRemoveFromMeal.length > 0" class="remove-from-meal-dropdown">
+      <b-dropdown id="dropdown-1" text="Remove" variant="light" class="m-md-2">
+        <b-dropdown-item v-for="meal in updateRemoveFromMeal" v-bind:key="meal.meal_id" v-on:click="removeFromMeal(meal.meal_id)">{{meal.name}}</b-dropdown-item>
       </b-dropdown>
     </div>
     
@@ -58,7 +72,7 @@ export default {
     };
   },
   computed: {
-    updateMeals() {
+    updateAddToMeal() {
       let meals = this.$store.state.meals
       console.log("updating meals...");
       meals = meals.filter(meal => {
@@ -68,6 +82,19 @@ export default {
           }
         }
         return true;
+      });
+      return meals;
+    },
+    updateRemoveFromMeal() {
+      let meals = this.$store.state.meals
+      console.log("removing meals...");
+      meals = meals.filter(meal => {
+        for (let counter = 0; counter < meal.recipes.length; counter++) {
+          if (this.recipe.recipe_id == meal.recipes[counter].recipe_id) {
+            return true;
+          }
+        }
+        return false;
       });
       return meals;
     }
@@ -82,14 +109,22 @@ export default {
         }
       );
     },
-    addToMeal(mealId) {
-      AccountService.addRecipeToMeal(this.recipe, mealId).then((response) => {
+    addToMeal(mealID) {
+      AccountService.addRecipeToMeal(this.recipe, mealID).then((response) => {
         if (response.status == 201) {
           AccountService.getFavoritedMeals().then(mealResponse => {
             this.$store.commit('SET_MEALS', mealResponse.data);
           })
         }
-
+      });
+    },
+    removeFromMeal(mealID) {
+      AccountService.removeRecipeFromMeal(this.recipe.recipe_id, mealID).then((response) => {
+        if (response.status == 204) {
+          AccountService.getFavoritedMeals().then(mealResponse => {
+            this.$store.commit('SET_MEALS', mealResponse.data);
+          });
+        }
       });
     },
     // getAllMeals() {
@@ -176,7 +211,8 @@ export default {
   font-size: 1.25rem;
   font-weight: 700;
   color: white;
-  backdrop-filter: blur(4.5px);
+  background-color: rgb(0, 174, 255);
+  opacity: .8;
   width: 99%;
   height: 50%;
   border-radius: 20px;
@@ -198,7 +234,12 @@ export default {
 }
 
 .add-to-meal-dropdown {
-  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  position: absolute;
+}
+
+.remove-from-meal-dropdown {
+  margin-left: 4.5rem;
   position: absolute;
 }
 

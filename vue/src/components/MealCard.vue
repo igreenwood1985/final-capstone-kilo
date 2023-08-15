@@ -3,7 +3,8 @@
     <div class="meal-card-heading" v-if="renderComponent === true">
 
       <div class="top-left">
-        <img src="../../delete-xxl.png" alt="Delete Icon" class="delete-btn">
+        <img src="../../delete-xxl.png" alt="Delete Icon" class="delete-btn"
+        v-show="mealEditToggle == true" v-on:click="deleteMeal()">
       </div>
       
       <router-link
@@ -66,22 +67,19 @@
         </div>
       </div>
     </div>
-
-    <!-- <div class="add-to-mealplan-dropdown">
-      <b-dropdown
-        id="dropdown-1"
-        text="Add To Meal Plan"
-        variant="light"
-        class="m-md-2"
-      >
-        <b-dropdown-item
-          v-for="mealPlan in updateMealPlans"
-          v-bind:key="mealPlan.mealPlan_id"
-          v-on:click="addToMealPlan(mealPlan.mealPlan_id)"
-          >{{ mealPlan.mealPlan_name }}</b-dropdown-item
-        >
-      </b-dropdown>
-    </div> -->
+    <div class="drop-down-container">
+      <div v-show="updateAddToMealPlan.length > 0" class="add-to-meal-plan-dropdown">
+        <b-dropdown id="dropdown-1" text="Add" variant="light" class="m-md-2">
+          <b-dropdown-item v-for="mealPlan in updateAddToMealPlan" v-bind:key="mealPlan.mealPlanId" v-on:click="addToMealPlan(mealPlan.mealPlanId)">{{mealPlan.name}}</b-dropdown-item>
+        </b-dropdown>
+      </div>
+      <div v-show="updateRemoveFromMealPlan.length > 0" class="remove-from-meal-plan-dropdown">
+        <b-dropdown id="dropdown-1" text="Remove" variant="light" class="m-md-2">
+          <b-dropdown-item v-for="mealPlan in updateRemoveFromMealPlan" v-bind:key="mealPlan.mealPlanId" v-on:click="removeFromMealPlan(mealPlan.mealPlanId)">{{mealPlan.name}}</b-dropdown-item>
+        </b-dropdown>
+      </div>
+    </div>
+    
   </div>
 </template>
 
@@ -100,11 +98,37 @@ export default {
     },
   },
   computed: {
+    updateAddToMealPlan() {
+      let mealPlans = this.$store.state.mealPlans
+      console.log("adding to meal plan...");
+      mealPlans = mealPlans.filter(mealPlan => {
+        for (let counter = 0; counter < mealPlan.meals.length; counter++) {
+          if (this.meal.meal_id == mealPlan.meals[counter].meal_id) {
+            return false;
+          }
+        }
+        return true;
+      });
+      return mealPlans;
+    },
+    updateRemoveFromMealPlan() {
+      let mealPlans = this.$store.state.mealPlans
+      console.log("removing from meal plan...");
+      mealPlans = mealPlans.filter(mealPlan => {
+        for (let counter = 0; counter < mealPlan.meals.length; counter++) {
+          if (this.meal.meal_id == mealPlan.meals[counter].meal_id) {
+            return true;
+          }
+        }
+        return false;
+      });
+      return mealPlans;
+    },
     updateArray() {
-      return this.$store.state.meals.slice(0, 3);
+      return this.$store.state.meals;
     },
     updateRecipesArray() {
-      const slicedArray = this.meal.recipes.slice(this.meal.recipes.length - 6);
+      const slicedArray = this.meal.recipes;
       return slicedArray.reverse();
     },
     updatedMealName() {
@@ -146,8 +170,14 @@ export default {
           });
         }
       });
-
       this.mealEditToggle = false;
+    },
+    deleteMeal() {
+      AccountService.deleteMeal(this.meal.meal_id).then((response) => {
+        if (response.status != 200) {
+          this.$store.commit("REMOVE_MEAL", this.meal);
+        }
+      })
     },
     checkForEmptyName() {
       if (this.enteredMealName == "") {
@@ -171,22 +201,29 @@ export default {
       };
       return formattedMeal;
     },
-    //     addToMealPlan(mealPlanId) {
-    //   AccountService.addMealToMealPlan(this.meal, mealPlanId).then((response) => {
-    //     if (response.status == 201) {
-    //       AccountService.getFavoritedMeals().then((mealResponse) => {
-    //         this.$store.commit("SET_MEALS", mealResponse.data);
-    //       });
-    //     }
-    //   });
-    // },
-
-    created() {
-      this.setMealId();
+    addToMealPlan(mealPlanId) {
+      AccountService.addMealToMealPlan(this.meal, mealPlanId).then((response) => {
+        if (response.status == 201) {
+          AccountService.getAllMealPlans().then((mealPlanResponse) => {
+            this.$store.commit("SET_MEAL_PLANS", mealPlanResponse.data);
+          });
+        }
+      });
     },
-
+    removeFromMealPlan(mealPlanId) {
+      AccountService.removeMealFromMealPlan(mealPlanId, this.meal.meal_id).then((response) => {
+        if (response.status == 204) {
+          AccountService.getAllMealPlans().then((mealPlanResponse) => {
+            this.$store.commit("SET_MEAL_PLANS", mealPlanResponse.data);
+          });
+        }
+      });
+    }
     //This was added to give functionality to the dropdown list
   },
+  created() {
+
+  }
 };
 </script>
 
@@ -217,7 +254,7 @@ export default {
 
 .meal-name-input {
   text-align: center;
-  width: 75%;
+  width: 60%;
   margin-top: -5px;
   margin-left: auto;
   margin-right: auto;
@@ -226,7 +263,7 @@ export default {
 
 .meal-desc-input {
   text-align: center;
-  width: 80%;
+  width: 70%;
   margin-left: auto;
   margin-right: auto;
   margin-top: -5px;
@@ -296,7 +333,21 @@ img {
 .top-left {
   position: relative;
   top: .4rem;
-  right: -.7rem;
-  
+  right: -.5rem;  
 }
+
+.drop-down-container {
+  align-content: center;
+}
+
+.add-to-meal-plan-dropdown {
+  margin-right: 1.5rem;
+  position: absolute;
+}
+
+.remove-from-meal-plan-dropdown {
+  margin-left: 4.5rem;
+  position: absolute;
+}
+
 </style>

@@ -72,7 +72,7 @@ public class MealPlanController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path = "mymealplans/{mealPlanId}/{mealID}", method = RequestMethod.DELETE)
-    public void removeMealFromMealPlan(@PathVariable int mealPlanId, int mealID) {
+    public void removeMealFromMealPlan(@PathVariable int mealPlanId, @PathVariable int mealID) {
         mealPlanDAO.removeMealFromMealPlan(mealPlanId, mealID);
     }
 
