@@ -10,37 +10,20 @@
         <span class="nav-text"
           ><router-link
             :to="{ name: 'dashboard' }"
-            class="current-page-selection"
             >Overview</router-link
           >
           ∙
           <router-link
           :to="{name:'my-recipes'}" 
           >Recipes</router-link> ∙<router-link
-          :to="{name:'my-meals'}">
+          :to="{name:'my-meals'}"
+          class="current-page-selection"
+          >
           
            My Meals</router-link> ∙<router-link
            :to="{name: 'my-meal-plans'}"> Meal Plans</router-link></span>
         
       </h1>
-
-      <div class="recipes-heading">
-        <h2 class="recipes-title">
-          My Latest Recipes
-        </h2>
-      </div>
-
-      <div class="recipes-here">
-        <overview-recipes class="recipes-section" />
-      </div>
-
-      <div class="mealplans-heading">
-        <h2 class="mealplans-title">My Meal Plans</h2>
-      </div>
-
-      <div class="mealplans-here">
-        <overview-meal-plans class="meal-plans-section" />
-      </div>
 
       <div class="meals-heading">
         <h2 class="meals-title">
@@ -82,12 +65,12 @@
 
 <script>
 import AccountService from "../services/AccountService";
-import OverviewMealPlans from "./OverviewMealPlans.vue";
 import OverviewMeals from "./OverviewMeals.vue";
-import OverviewRecipes from "./OverviewRecipes.vue";
 
 export default {
-  components: { OverviewRecipes, OverviewMealPlans, OverviewMeals },
+  components: {
+    OverviewMeals
+    },
   data() {
     return {
       createFormToggled: false,
