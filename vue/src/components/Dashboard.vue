@@ -19,7 +19,8 @@
           >Recipes</router-link> ∙<router-link
           :to="{name:'my-meals'}">
           
-           My Meals</router-link> ∙ Meal Plans</span>
+           My Meals</router-link> ∙<router-link
+           :to="{name: 'meal-plan-details'}"> Meal Plans</router-link></span>
         
       </h1>
 
@@ -44,8 +45,6 @@
       <div class="meals-heading">
         <h2 class="meals-title">
           My Meals
-          
-
           <b-button v-on:click="toggleForm()">Create New Meal</b-button>
           <b-form class="create-meal-form" v-show="createFormToggled">
             <h1>Meal Name</h1>
