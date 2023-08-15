@@ -256,6 +256,10 @@ export default {
   padding-bottom: .5rem;
 }
 
+.main:hover {
+  border: 3px solid burlywood;
+}
+
 .dish-and-yield {
   font-size: .7rem;
   text-align: center;
