@@ -257,7 +257,6 @@ export default {
   border-bottom-right-radius: 20px;
   grid-area: mealPlan;
   background-color: #f5f0f4;
-  height: 
 }
 .meals-section {
   border: 1px solid black;

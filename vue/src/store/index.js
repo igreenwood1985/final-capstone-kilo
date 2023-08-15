@@ -66,6 +66,13 @@ export default new Vuex.Store({
     SET_CURRENT_MEAL(state, mealId) {
       state.currentMeal = mealId;
     },
+    SET_MEAL_INFO(state, {meal, mealName, mealDesc}) {
+      const mealIndex = state.meals.findIndex(item => {
+        return item.meal_id = meal.meal_id;
+      });
+      state.meals[mealIndex].name = mealName;
+      state.meals[mealIndex].description = mealDesc;
+    },
     SET_MEALS(state, meals) {
       state.meals = meals;
     },

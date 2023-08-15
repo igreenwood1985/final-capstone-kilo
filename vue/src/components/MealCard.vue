@@ -1,22 +1,53 @@
 <template>
   <div class="meal-card">
-
-    <div class="meal-card-heading">
+    <div class="meal-card-heading" v-if="renderComponent === true">
       <router-link
-        v-bind:to="{ name: 'meal-editor', params: { id: meal.meal_id } }" class="meal-name"
+        v-bind:to="{ name: 'meal-editor', params: { id: meal.meal_id } }"
+        class="meal-name"
       >
-        <h2 v-on:click="updateCurrentMealInStore()" v-show="mealEditToggle == false">
+        <h2
+          v-on:click="updateCurrentMealInStore()"
+          v-show="mealEditToggle == false"
+          v-bind:key="meal.name"
+        >
           {{ meal.name }}
         </h2>
       </router-link>
-      <b-input size="sm" class="meal-name-input" v-bind:value="meal.name" v-show="mealEditToggle == true" />
-      <h2 class="meal-description" v-show="mealEditToggle == false">{{ meal.description }}</h2>
-      <b-input size="sm" class="meal-desc-input" v-bind:value="meal.description" v-show="mealEditToggle == true" />
+      <b-input
+        size="sm"
+        class="meal-name-input"
+        v-bind:value="meal.name"
+        v-bind:placeholder="'Meal Name'"
+        v-show="mealEditToggle == true"
+        v-model="enteredMealName"
+      />
+      <h2 class="meal-description" v-show="mealEditToggle == false">
+        {{ meal.description }}
+      </h2>
+      <b-input
+        size="sm"
+        class="meal-desc-input"
+        v-bind:value="meal.description"
+        v-bind:placeholder="'Meal Description'"
+        v-show="mealEditToggle == true"
+        v-model="enteredDescription"
+      />
       <div class="top-right">
-        <img class="edit-btn" v-show="mealEditToggle == false" v-on:click="mealEditToggle = true" src="https://cdn-icons-png.flaticon.com/512/84/84380.png" alt="Edit button">
-        <img class="edit-btn" v-show="mealEditToggle == true" v-on:click="mealEditToggle = false" src="https://e7.pngegg.com/pngimages/154/420/png-clipart-computer-icons-button-save-angle-symbol.png" alt="Save button">
-        
-        </div>
+        <img
+          class="edit-btn"
+          v-show="mealEditToggle == false"
+          v-on:click="mealEditToggle = true"
+          src="https://cdn-icons-png.flaticon.com/512/84/84380.png"
+          alt="Edit button"
+        />
+        <img
+          class="edit-btn"
+          v-show="mealEditToggle == true"
+          v-on:click="updateMealName()"
+          src="https://e7.pngegg.com/pngimages/154/420/png-clipart-computer-icons-button-save-angle-symbol.png"
+          alt="Save button"
+        />
+      </div>
     </div>
 
     <div class="images-box">
@@ -30,10 +61,29 @@
         </div>
       </div>
     </div>
+
+    <!-- <div class="add-to-mealplan-dropdown">
+      <b-dropdown
+        id="dropdown-1"
+        text="Add To Meal Plan"
+        variant="light"
+        class="m-md-2"
+      >
+        <b-dropdown-item
+          v-for="mealPlan in updateMealPlans"
+          v-bind:key="mealPlan.mealPlan_id"
+          v-on:click="addToMealPlan(mealPlan.mealPlan_id)"
+          >{{ mealPlan.mealPlan_name }}</b-dropdown-item
+        >
+      </b-dropdown>
+    </div> -->
   </div>
 </template>
 
 <script>
+//This was added to give functionality to the dropdown list
+import AccountService from "../services/AccountService.js";
+
 export default {
   components: {},
   name: "meal-card",
@@ -49,18 +99,88 @@ export default {
       return this.$store.state.meals.slice(0, 3);
     },
     updateRecipesArray() {
-      return this.meal.recipes.slice(0, 6);
+      const slicedArray = this.meal.recipes.slice(this.meal.recipes.length - 6);
+      return slicedArray.reverse();
+    },
+    updatedMealName() {
+      return this.meal.name;
     },
   },
   data() {
     return {
+      selectedMealPlan: "",
+      mealPlan: [],
       mealEditToggle: false,
+      enteredMealName: "",
+      enteredDescription: "",
+      mealId: 0,
+      renderComponent: true,
     };
   },
   methods: {
+    setMealId() {
+      this.mealId = this.meal.meal_id;
+    },
+    async forceRerender() {
+      this.renderComponent = false;
+      await this.$nextTick();
+      this.renderComponent = true;
+    },
     updateCurrentMealInStore() {
       this.$store.commit("SET_CURRENT_MEAL", this.meal.meal_id);
     },
+    updateMealName() {
+      AccountService.updateMeal(this.formatMeal()).then((response) => {
+        if (response.status == 200) {
+          AccountService.getFavoritedMeals().then((response) => {
+            if (response.status == 200) {
+              this.$store.commit("SET_MEALS", response.data);
+              this.enteredDescription = "";
+              this.enteredMealName = "";
+            }
+          });
+        }
+      });
+
+      this.mealEditToggle = false;
+    },
+    checkForEmptyName() {
+      if (this.enteredMealName == "") {
+        return "New Meal #" + this.meal.meal_id;
+      } else {
+        return this.enteredMealName;
+      }
+    },
+    checkForEmptyDesc() {
+      if (this.enteredDescription == "") {
+        return "Empty Meal Description";
+      } else {
+        return this.enteredDescription;
+      }
+    },
+    formatMeal() {
+      const formattedMeal = {
+        meal_id: this.meal.meal_id,
+        name: this.checkForEmptyName(),
+        description: this.checkForEmptyDesc(),
+      };
+      return formattedMeal;
+    },
+    //     addToMealPlan(mealPlanId) {
+    //   AccountService.addMealToMealPlan(this.meal, mealPlanId).then((response) => {
+    //     if (response.status == 201) {
+    //       AccountService.getFavoritedMeals().then((mealResponse) => {
+    //         this.$store.commit("SET_MEALS", mealResponse.data);
+    //       });
+    //     }
+    //   });
+    // },
+
+    created() {
+      this.setMealId();
+    },
+
+    //This was added to give functionality to the dropdown list
   },
 };
 </script>
@@ -71,7 +191,7 @@ export default {
   border-radius: 10px;
   display: inline-block;
   width: 200px;
-  height: 12rem;
+  height: 16rem;
   margin: 20px;
   background-color: white;
   overflow: hidden;
@@ -82,7 +202,7 @@ export default {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   background-color: #fdfdfe;
-  margin-top: .25rem;
+  margin-top: 0.25rem;
 }
 
 .meal-name {
@@ -96,7 +216,7 @@ export default {
   margin-top: -5px;
   margin-left: auto;
   margin-right: auto;
-  font-size: .85rem;
+  font-size: 0.85rem;
 }
 
 .meal-desc-input {
@@ -105,7 +225,7 @@ export default {
   margin-left: auto;
   margin-right: auto;
   margin-top: -5px;
-  font-size: .6rem;
+  font-size: 0.6rem;
 }
 
 .meal-name > h2 {
@@ -115,7 +235,7 @@ export default {
 .meal-description {
   font-size: 0.7rem;
   text-align: center;
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 img {
@@ -158,7 +278,7 @@ img {
   text-align: center;
   border-radius: 20%;
   background-color: transparent;
-  color: #0A3D5D;
+  color: #0a3d5d;
 }
 
 .top-right {
@@ -166,5 +286,4 @@ img {
   top: 7.15rem;
   right: -10.35rem;
 }
-
 </style>

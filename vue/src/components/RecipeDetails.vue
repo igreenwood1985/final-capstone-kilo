@@ -6,7 +6,7 @@
       <a v-bind:href="recipe.recipe.url">Instructions On How to Make</a>
       <h3>{{capitalize(formatArray(recipe.recipe.cuisineType))}} | <span v-if="recipe.recipe.totalTime != 0">{{ recipe.recipe.totalTime }} minutes | </span>{{Math.round(recipe.recipe.calories)}} calories</h3>
       <p>{{capitalize(formatArray(recipe.recipe.dishType))}}</p>
-      <p>{{recipe.recipe.yield}} servings</p>
+      <p>{{recipe.recipe.yield}} servings ({{Math.round(recipe.recipe.calories)/recipe.recipe.yield}} calories per serving)</p>
       <p>{{formatArray(recipe.recipe.dietLabels)}}</p>
       <p>Dietary Tags: {{formatArray(recipe.recipe.healthLabels)}}</p>
       <p>Ingredients: {{formatArray(recipe.recipe.ingredientLines)}}</p>

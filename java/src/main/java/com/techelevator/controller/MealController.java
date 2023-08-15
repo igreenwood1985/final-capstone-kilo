@@ -80,7 +80,7 @@ public class MealController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(path = "/mymeals/", method = RequestMethod.PUT)
+    @RequestMapping(path = "/mymeals", method = RequestMethod.PUT)
     public void updateMeal(@RequestBody MealDTO meal, Principal principal) {
         mealDao.updateMeal(meal);
 
