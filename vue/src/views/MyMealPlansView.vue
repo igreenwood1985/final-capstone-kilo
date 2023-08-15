@@ -1,14 +1,14 @@
 <template>
   <div>
-      <my-meal-plans/>
+      <meal-plans-dashboard />
   </div>
 </template>
 
 <script>
-import MyMealPlans from '../components/MyMealPlans.vue'
+import MealPlansDashboard from '../components/MealPlansDashboard.vue'
 export default {
     name:"my-meal-plans-view",
-  components: { MyMealPlans },
+  components: { MealPlansDashboard },
 
 }
 </script>

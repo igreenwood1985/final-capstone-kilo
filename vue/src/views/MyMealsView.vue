@@ -1,16 +1,16 @@
 <template>
   <div>
-      <my-meals />
+      <meals-dashboard />
   </div>
 </template>
 
 <script>
-import MyMeals from '../components/MyMeals.vue'
+import MealsDashboard from '../components/MealsDashboard.vue'
 
 export default {
     name: 'my-meals-view',
     components: {
-        MyMeals
+        MealsDashboard
     }
 
 }

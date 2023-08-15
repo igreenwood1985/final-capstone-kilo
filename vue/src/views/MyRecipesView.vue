@@ -1,16 +1,16 @@
 <template>
   <div>
-      <my-recipes />
+      <recipes-dashboard />
   </div>
 </template>
 
 <script>
-import MyRecipes from '../components/MyRecipes.vue'
+import RecipesDashboard from '../components/RecipesDashboard.vue'
 
 export default {
     name: 'my-recipes-view',
     components: {
-        MyRecipes
+        RecipesDashboard
     }
     
 
