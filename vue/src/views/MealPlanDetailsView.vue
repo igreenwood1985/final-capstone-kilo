@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h2>hi?</h2>
+    
       <meal-plan-details-component/>
   </div>
 </template>

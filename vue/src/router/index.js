@@ -12,7 +12,7 @@ import MyMealsView from '../views/MyMealsView.vue'
 import MealEditorView from '../views/MealEditorView.vue'
 import SearchView from '../views/SearchView.vue'
 import MealPlanDetailsView from '../views/MealPlanDetailsView.vue'
-
+import MyMealPlansView from '../views/MealPlanDetailsView.vue'
 Vue.use(Router)
 
 /**
@@ -83,7 +83,16 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
-    }, {
+    },
+    {
+      path: '/dashboard/mymealplans/',
+      name: 'my-meal-plans',
+      component: MyMealPlansView,
+      meta: {
+        requiresAuth: true
+      },
+    },
+    {
       path: '/dashboard/meal-plan-details/:id',
       name: 'meal-plan-details',
       component: MealPlanDetailsView,

@@ -20,7 +20,7 @@
           :to="{name:'my-meals'}">
           
            My Meals</router-link> ∙<router-link
-           :to="{name: 'meal-plan-details'}"> Meal Plans</router-link></span>
+           :to="{name: 'my-meal-plans'}"> Meal Plans</router-link></span>
         
       </h1>
 
