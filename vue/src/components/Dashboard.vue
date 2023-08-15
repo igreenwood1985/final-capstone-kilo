@@ -45,7 +45,6 @@
       <div class="meals-heading">
         <h2 class="meals-title">
           My Meals
-          <b-button v-on:click="toggleForm()">Create New Meal</b-button>
           <div class="create-meal-box">
             <img
             src="https://thenounproject.com/api/private/icons/2251528/edit/?backgroundShape=SQUARE&backgroundShapeColor=%23000000&backgroundShapeOpacity=0&exportSize=752&flipX=false&flipY=false&foregroundColor=%23000000&foregroundOpacity=1&imageFormat=png&rotation=0"
