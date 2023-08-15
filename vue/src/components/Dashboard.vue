@@ -13,16 +13,20 @@
             class="current-page-selection"
             >Overview</router-link
           >
-          ∙ Favorited Recipes ∙ My Meals ∙ Meal Plans</span
-        >
+          ∙
+          <router-link
+          :to="{name:'my-recipes'}" 
+          >Recipes</router-link> ∙<router-link
+          :to="{name:'my-meals'}">
+          
+           My Meals</router-link> ∙<router-link
+           :to="{name: 'my-meal-plans'}"> Meal Plans</router-link></span>
+        
       </h1>
 
       <div class="recipes-heading">
         <h2 class="recipes-title">
           My Latest Recipes
-          <router-link v-bind:to="{ name: 'my-recipes' }">
-            <h2 class="my-recipes-link">(View All)</h2>
-          </router-link>
         </h2>
       </div>
 
@@ -41,6 +45,7 @@
       <div class="meals-heading">
         <h2 class="meals-title">
           My Meals
+          <b-button v-on:click="toggleForm()">Create New Meal</b-button>
           <div class="create-meal-box">
             <img
             src="https://thenounproject.com/api/private/icons/2251528/edit/?backgroundShape=SQUARE&backgroundShapeColor=%23000000&backgroundShapeOpacity=0&exportSize=752&flipX=false&flipY=false&foregroundColor=%23000000&foregroundOpacity=1&imageFormat=png&rotation=0"

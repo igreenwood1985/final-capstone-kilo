@@ -5,7 +5,7 @@
     <meal-plan-card
       v-for="mealPlan in updateMealPlans"
       v-bind:mealPlan="mealPlan"
-      v-bind:key="mealPlan.meal_plan_id"
+      v-bind:key="mealPlan.mealPlanId"
       v-bind:enable-add="true"
     />
   </div>
@@ -41,5 +41,6 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
 </style>
