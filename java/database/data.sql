@@ -35,9 +35,9 @@ INSERT INTO user_recipe (user_id, recipe_id) VALUES (1, 1), (1, 2), (1, 3), (1, 
 --meals
 INSERT INTO meals (meal_name, description, user_id) VALUES ('Interesting Mix', 'Texmex AND Italian?', 1);
 INSERT INTO meals (meal_name, description, user_id) VALUES ('Soup and Salad', 'Thai Stew and Chicken Salad', 1);
-INSERT INTO meals (meal_name, description, user_id) VALUES ('Desayuno', 'Breakfast: Mexican Style!', 1);
-INSERT INTO meals (meal_name, description, user_id) VALUES ('Lunch in Northern India', 'Paneer Makhani and Naan', 1);
-INSERT INTO meals (meal_name, description, user_id) VALUES ('Dinner in England', 'Bangers and Mash for supper and Apple Pie for desert', 1);
+INSERT INTO meals (meal_name, description, user_id) VALUES ('Desayuno', 'Breakfast: Mexican Style!', 3);
+INSERT INTO meals (meal_name, description, user_id) VALUES ('Lunch in Northern India', 'Paneer Makhani and Naan', 3);
+INSERT INTO meals (meal_name, description, user_id) VALUES ('Dinner in England', 'Bangers and Mash for supper and Apple Pie for desert', 3);
 
 --meal_recipe join
 INSERT INTO meal_recipe (meal_id, recipe_id) VALUES (1, 1), (1, 2), (1, 69), (2, 3), (2, 4), (3, 5), (3, 6), (4, 7), (4, 8), (5, 9), (5, 10), (2, 69);
