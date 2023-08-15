@@ -102,10 +102,10 @@ export default {
   },
   computed: {
     updateArray() {
-      return this.$store.state.meals.slice(0, 3);
+      return this.$store.state.meals;
     },
     updateRecipesArray() {
-      const slicedArray = this.meal.recipes.slice(this.meal.recipes.length - 6);
+      const slicedArray = this.meal.recipes;
       return slicedArray.reverse();
     },
     updatedMealName() {

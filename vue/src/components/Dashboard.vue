@@ -46,25 +46,26 @@
             src="https://thenounproject.com/api/private/icons/2251528/edit/?backgroundShape=SQUARE&backgroundShapeColor=%23000000&backgroundShapeOpacity=0&exportSize=752&flipX=false&flipY=false&foregroundColor=%23000000&foregroundOpacity=1&imageFormat=png&rotation=0"
             alt=""
             class="create-meal-btn"
+            v-on:click="toggleForm()"
           />
-          <b-form class="create-meal-form" v-show="createFormToggled">
-            <h1>Meal Name</h1>
-            <b-input type="text" v-model="meal.mealName" />
-            <h1>Meal Description</h1>
-            <b-input type="text" v-model="meal.description" />
+          <div class="create-meal-form" v-show="createFormToggled">
+            <h4 class="new-meal-form-text">Create a New Meal</h4>
+            <form>
+            <input type="text" id="newMealName" name="newMealName" v-model="meal.mealName" placeholder="New Meal Name" />
+            <input type="text" id="newMealDesc" name="newMealDesc" v-model="meal.description" placeholder="New Meal Description" />
+            <br>
             <button
-              class="btn btn-primary"
+              class="btn submit-new-meal-btn btn-primary"
+              size="sm"
               type="reset"
               v-on:click="createMeal()"
             >
               Submit
             </button>
-          </b-form>
+          </form>
           </div>
           
-          <router-link v-bind:to="{ name: 'my-meals' }">
-            <h2 class="my-meals-link">Click here to view all.</h2>
-          </router-link>
+          </div>
 
           
         </h2>
@@ -220,12 +221,12 @@ export default {
   background-color: #f75151;
   text-align: center;
   width: 46rem;
-  height: 4.2rem;
+  height: 3.2rem;
   margin-left: 3.25rem;
   margin-top: 2.5rem;
   border: 1px solid black;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 }
 
 .mealplans-heading {
@@ -268,8 +269,8 @@ export default {
 .meals-section {
   border: 1px solid black;
   border-top: none;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   grid-area: meals;
   background-color: #f7e9e9;
   width: 46rem;
@@ -305,5 +306,37 @@ export default {
   position: relative;
   top: -2rem;
   right: -27.1rem;
+}
+
+.new-meal-form-text {
+  color: black;
+  margin-top: 5px;
+}
+
+.create-meal-form {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 15rem;
+  background-color: white;
+  opacity: .95;
+  height: 11rem;
+  margin-left: 2rem;
+  padding: 2px;
+}
+
+#newMealName, #newMealDesc {
+  width: 10rem;
+  height: 2rem;
+  font-size: .75rem;
+  text-align: center;
+}
+
+.submit-new-meal-btn {
+  outline: 1px solid black;
+  margin: .5rem;
 }
 </style>
