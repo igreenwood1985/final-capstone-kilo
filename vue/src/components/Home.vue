@@ -46,7 +46,7 @@ body {
 
 .section-1 {
   color: #f9faf8;
-  background-image: linear-gradient(to right, #0d6efd, #e5e7eb);
+  background-image: linear-gradient(to right, #0d6efd,#e5e7eb);
   width: 100%;
   height: 86.29vh;
 }
