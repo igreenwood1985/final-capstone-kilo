@@ -20,12 +20,12 @@
         <p class="grouping-to-remove" v-show="showRemovalMenu" v-for="meal in updateRemoveFromMeals" v-bind:key="meal.meal_id" v-on:click="removeFromMeal(meal.meal_id); toggleRemovalMenu()">{{meal.name}}</p>
       </div> -->
     <div v-show="updateAddToMeal.length > 0" class="add-to-meal-dropdown">
-      <b-dropdown id="dropdown-1" text="Add To Meal" variant="light" class="m-md-2">
+      <b-dropdown id="dropdown-1" text="Add" variant="light" class="m-md-2">
         <b-dropdown-item v-for="meal in updateAddToMeal" v-bind:key="meal.meal_id" v-on:click="addToMeal(meal.meal_id)">{{meal.name}}</b-dropdown-item>
       </b-dropdown>
     </div>
     <div v-show="updateRemoveFromMeal.length > 0" class="remove-from-meal-dropdown">
-      <b-dropdown id="dropdown-1" text="Remove From Meal" variant="light" class="m-md-2">
+      <b-dropdown id="dropdown-1" text="Remove" variant="light" class="m-md-2">
         <b-dropdown-item v-for="meal in updateRemoveFromMeal" v-bind:key="meal.meal_id" v-on:click="removeFromMeal(meal.meal_id)">{{meal.name}}</b-dropdown-item>
       </b-dropdown>
     </div>
@@ -234,7 +234,12 @@ export default {
 }
 
 .add-to-meal-dropdown {
-  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  position: absolute;
+}
+
+.remove-from-meal-dropdown {
+  margin-left: 4.5rem;
   position: absolute;
 }
 
