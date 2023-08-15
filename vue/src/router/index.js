@@ -12,7 +12,7 @@ import MyMealsView from '../views/MyMealsView.vue'
 import MealEditorView from '../views/MealEditorView.vue'
 import SearchView from '../views/SearchView.vue'
 import MealPlanDetailsView from '../views/MealPlanDetailsView.vue'
-import MyMealPlansView from '../views/MealPlanDetailsView.vue'
+import MyMealPlansView from '../views/MyMealPlansView.vue'
 Vue.use(Router)
 
 /**

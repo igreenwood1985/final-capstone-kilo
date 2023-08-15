@@ -27,7 +27,7 @@ export default {
   methods: {
       getAllFavoriteMealPlans() {
           AccountService.getAllMealPlans().then((response)=>{
-              this.favortieMealPlans = response.data;
+              this.favoriteMealPlans = response.data;
           });
       }
   },
