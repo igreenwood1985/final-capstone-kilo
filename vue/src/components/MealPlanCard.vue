@@ -56,8 +56,6 @@
             alt="Save button"
           />
         </div>
-
-        <h3 v-show="mealPlanEditToggle == false">Includes meals such as: "{{mealPlan.meals[0].name}}"", "{{mealPlan.meals[1].name}}", and more!</h3>
         </div>
 
         <!-- <b-input
