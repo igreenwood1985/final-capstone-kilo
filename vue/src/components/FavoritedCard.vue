@@ -8,25 +8,11 @@
       <img v-bind:src="recipe.img" id="image" />
       <div class="centered">{{recipe.label}}</div>
       </router-link>
-      <div v-show="updateRemoveFromMeals.length < 1" class="top-right"><span class="minus" v-on:click="removeFromFavorites()" title="Remove from Favorites" style="cursor: pointer">X</span>
-        <!-- &nbsp;&nbsp;&nbsp;&nbsp;
-        <span v-show="updateRemoveFromMeals.length > 0" v-on:click="toggleRemovalMenu()">
-        &dtrif;
-        </span> -->
-      </div>
+      <div class="top-right"><span class="minus" v-on:click="removeFromFavorites()" title="Remove from Favorites" style="cursor: pointer">-</span></div>
     </div>
-      <!-- <div class="removal-dropdown">
-        <p class="grouping-to-remove" v-show="showRemovalMenu" v-for="meal in updateRemoveFromMeals" v-bind:key="meal.meal_id" v-on:click="removeFromMeal(meal.meal_id); toggleRemovalMenu()">{{meal.name}}</p>
-      </div> -->
-    <div v-show="updateAddToMeals.length > 0" class="add-to-meal-dropdown">
+        <div class="add-to-meal-dropdown">
       <b-dropdown id="dropdown-1" text="Add To Meal" variant="light" class="m-md-2">
-        <b-dropdown-item v-for="meal in meals" v-bind:key="meal.meal_id" v-on:click="addToMeal(meal.meal_id)">{{meal.name}}</b-dropdown-item>
-      </b-dropdown>
-    </div>
-
-    <div class="remove-from-meal-dropdown">
-      <b-dropdown v-show="updateRemoveFromMeals.length > 0" id="dropdown-1" text="Remove From Meal" variant="light" class="m-md-2">
-        <b-dropdown-item v-for="meal in updateRemoveFromMeals" v-bind:key="meal.meal_id" v-on:click="removeFromMeal(meal.meal_id)">{{meal.name}}</b-dropdown-item>
+        <b-dropdown-item v-for="meal in updateMeals" v-bind:key="meal.meal_id" v-on:click="addToMeal(meal.meal_id)">{{meal.name}}</b-dropdown-item>
       </b-dropdown>
     </div>
     
@@ -71,6 +57,21 @@ export default {
       hover: false
     };
   },
+  computed: {
+    updateMeals() {
+      let meals = this.$store.state.meals
+      console.log("updating meals...");
+      meals = meals.filter(meal => {
+        for (let counter = 0; counter < meal.recipes.length; counter++) {
+          if (this.recipe.recipe_id == meal.recipes[counter].recipe_id) {
+            return false;
+          }
+        }
+        return true;
+      });
+      return meals;
+    }
+  },
   methods: {
     removeFromFavorites() {
       AccountService.removeRecipeFromFavorites(this.recipe.uri).then(
@@ -83,14 +84,19 @@ export default {
     },
     addToMeal(mealId) {
       AccountService.addRecipeToMeal(this.recipe, mealId).then((response) => {
-        return 201 === response.status;
+        if (response.status == 201) {
+          AccountService.getFavoritedMeals().then(mealResponse => {
+            this.$store.commit('SET_MEALS', mealResponse.data);
+          })
+        }
+
       });
     },
-    getAllMeals() {
-      AccountService.getFavoritedMeals().then((response) => {
-        this.meals = response.data;
-      });
-    },
+    // getAllMeals() {
+    //   AccountService.getFavoritedMeals().then((response) => {
+    //     this.meals = response.data;
+    //   });
+    // },
     capitalize(string) {
       console.log("enter capitalize");
       const firstLetter = string.charAt(0).toUpperCase();
@@ -102,14 +108,13 @@ export default {
     },
   },
   created() {
-    this.getAllMeals();
+    //this.getAllMeals();
   },
 };
 </script>
 
 <style scoped>
 .main {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   border-radius: 10px;
   display: inline-block;
   width: 200px;
@@ -195,12 +200,6 @@ export default {
 .add-to-meal-dropdown {
   margin-left: 1.5rem;
   position: absolute;
-}
-
-.grouping-to-remove {
-  text-align: center;
-  background-color: red;
-  width: 80%;
 }
 
 </style>
