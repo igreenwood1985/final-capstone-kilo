@@ -220,8 +220,8 @@ export default {
 
 
 .favorited {
-  background-color: yellow;
-  border: 10px solid black;
+  background-color: lightgoldenrodyellow;
+  border: 3px solid burlywood;
 }
 
 .statistics {
