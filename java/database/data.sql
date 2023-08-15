@@ -38,9 +38,11 @@ INSERT INTO meals (meal_name, description, user_id) VALUES ('Soup and Salad', 'T
 INSERT INTO meals (meal_name, description, user_id) VALUES ('Desayuno', 'Breakfast: Mexican Style!', 3);
 INSERT INTO meals (meal_name, description, user_id) VALUES ('Lunch in Northern India', 'Paneer Makhani and Naan', 3);
 INSERT INTO meals (meal_name, description, user_id) VALUES ('Dinner in England', 'Bangers and Mash for supper and Apple Pie for desert', 3);
+INSERT INTO meals (meal_id, meal_name, description) VALUES (69, 'Add A New Meal!', 'Your meal plan currently has no meals. Try adding some.');
+
 
 --meal_recipe join
-INSERT INTO meal_recipe (meal_id, recipe_id) VALUES (1, 1), (1, 2), (1, 69), (2, 3), (2, 4), (3, 5), (3, 6), (4, 7), (4, 8), (5, 9), (5, 10), (2, 69);
+INSERT INTO meal_recipe (meal_id, recipe_id) VALUES (1, 1), (1, 2), (2, 3), (2, 4), (3, 5), (3, 6), (4, 7), (4, 8), (5, 9), (5, 10), (69, 69);
 
 --meal plans
 INSERT INTO meal_plans (meal_plan_name, description, user_id) VALUES ('Family Dinner', 'For when the family gets together', 1);

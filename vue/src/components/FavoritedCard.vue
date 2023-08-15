@@ -19,9 +19,9 @@
     <!-- <div class="removal-dropdown">
         <p class="grouping-to-remove" v-show="showRemovalMenu" v-for="meal in updateRemoveFromMeals" v-bind:key="meal.meal_id" v-on:click="removeFromMeal(meal.meal_id); toggleRemovalMenu()">{{meal.name}}</p>
       </div> -->
-    <div class="add-to-meal-dropdown">
+    <div v-show="updateAddToMeal.length > 0" class="add-to-meal-dropdown">
       <b-dropdown id="dropdown-1" text="Add" variant="light" class="m-md-2">
-        <b-dropdown-item v-for="meal in updatedMeals" v-bind:key="meal.meal_id" v-on:click="addToMeal(meal.meal_id); updateAddToMeal();">{{meal.name}}</b-dropdown-item>
+        <b-dropdown-item v-for="meal in updateAddToMeal" v-bind:key="meal.meal_id" v-on:click="addToMeal(meal.meal_id)">{{meal.name}}</b-dropdown-item>
       </b-dropdown>
     </div>
     <div v-show="updateRemoveFromMeal.length > 0" class="remove-from-meal-dropdown">
@@ -72,8 +72,18 @@ export default {
     };
   },
   computed: {
-    updatedMeals() {
-      return this.$store.state.meals;
+    updateAddToMeal() {
+      let meals = this.$store.state.meals
+      console.log("updating meals...");
+      meals = meals.filter(meal => {
+        for (let counter = 0; counter < meal.recipes.length; counter++) {
+          if (this.recipe.recipe_id == meal.recipes[counter].recipe_id) {
+            return false;
+          }
+        }
+        return true;
+      });
+      return meals;
     },
     updateRemoveFromMeal() {
       let meals = this.$store.state.meals
@@ -98,19 +108,6 @@ export default {
           }
         }
       );
-    },
-    updateAddToMeal() {
-      let meals = this.$store.state.meals
-      console.log("updating meals...");
-      meals = meals.filter(meal => {
-        for (let counter = 0; counter < meal.recipes.length; counter++) {
-          if (this.recipe.recipe_id == meal.recipes[counter].recipe_id) {
-            return false;
-          }
-        }
-        return true;
-      });
-      return meals;
     },
     addToMeal(mealID) {
       AccountService.addRecipeToMeal(this.recipe, mealID).then((response) => {
@@ -214,11 +211,11 @@ export default {
   font-size: 1.25rem;
   font-weight: 700;
   color: white;
-  background-color: rgb(0, 174, 255);
+  background-color: #5d9bf8;
   opacity: .8;
   width: 99%;
   height: 50%;
-  border-radius: 20px;
+  border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
