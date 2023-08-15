@@ -161,7 +161,7 @@ export default {
   background-color: white;
   border-radius: 10px;
   width: 22rem;
-  height: 12rem;
+  height: 16rem;
   margin-top: 5px;
   text-align: center;
 }
@@ -185,7 +185,7 @@ export default {
 }
 
 .edit-btn, .delete-btn {
-  position: absolute;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
