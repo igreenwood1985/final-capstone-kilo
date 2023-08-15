@@ -42,12 +42,14 @@ export default {
 <style scoped>
 .cards-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   position: absolute;
-  border: 2px solid black;
-  padding: 1.4rem;
+  padding: 2.95rem;
+  height: 42.59rem;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 </style>
