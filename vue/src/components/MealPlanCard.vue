@@ -60,9 +60,9 @@ export default {
 .meal-plan-card {
   border: 2px solid black;
   background-color: white;
-  border-radius: 20px;
-  width: 25rem;
-  height: 15rem;
+  border-radius: 10px;
+  width: 22rem;
+  height: 12rem;
   margin-top: 5px;
   text-align: center;
 }

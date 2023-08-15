@@ -14,20 +14,16 @@
             >Overview</router-link
           >
           ∙
-          <router-link
-          :to="{name:'my-recipes'}" 
-          >Recipes</router-link> ∙<router-link
-          :to="{name:'my-meals'}">
-          
-           My Meals</router-link> ∙<router-link
-           :to="{name: 'my-meal-plans'}"> Meal Plans</router-link></span>
-        
+          <router-link :to="{ name: 'my-recipes' }">Recipes</router-link>
+          ∙<router-link :to="{ name: 'my-meals' }"> My Meals</router-link>
+          ∙<router-link :to="{ name: 'my-meal-plans' }">
+            Meal Plans</router-link
+          ></span
+        >
       </h1>
 
       <div class="recipes-heading">
-        <h2 class="recipes-title">
-          My Latest Recipes
-        </h2>
+        <h2 class="recipes-title">My Latest Recipes</h2>
       </div>
 
       <div class="recipes-here">
@@ -47,31 +43,40 @@
           My Meals
           <div class="create-meal-box">
             <img
-            src="https://thenounproject.com/api/private/icons/2251528/edit/?backgroundShape=SQUARE&backgroundShapeColor=%23000000&backgroundShapeOpacity=0&exportSize=752&flipX=false&flipY=false&foregroundColor=%23000000&foregroundOpacity=1&imageFormat=png&rotation=0"
-            alt=""
-            class="create-meal-btn"
-            v-on:click="toggleForm()"
-          />
-          <div class="create-meal-form" v-show="createFormToggled">
-            <h4 class="new-meal-form-text">Create a New Meal</h4>
-            <form>
-            <input type="text" id="newMealName" name="newMealName" v-model="meal.mealName" placeholder="New Meal Name" />
-            <input type="text" id="newMealDesc" name="newMealDesc" v-model="meal.description" placeholder="New Meal Description" />
-            <br>
-            <button
-              class="btn submit-new-meal-btn btn-primary"
-              size="sm"
-              type="reset"
-              v-on:click="createMeal()"
-            >
-              Submit
-            </button>
-          </form>
+              src="https://thenounproject.com/api/private/icons/2251528/edit/?backgroundShape=SQUARE&backgroundShapeColor=%23000000&backgroundShapeOpacity=0&exportSize=752&flipX=false&flipY=false&foregroundColor=%23000000&foregroundOpacity=1&imageFormat=png&rotation=0"
+              alt=""
+              class="create-meal-btn"
+              v-on:click="toggleForm()"
+            />
+            <div class="create-meal-form" v-show="createFormToggled">
+              <h4 class="new-meal-form-text">Create a New Meal</h4>
+              <form>
+                <input
+                  type="text"
+                  id="newMealName"
+                  name="newMealName"
+                  v-model="meal.mealName"
+                  placeholder="New Meal Name"
+                />
+                <input
+                  type="text"
+                  id="newMealDesc"
+                  name="newMealDesc"
+                  v-model="meal.description"
+                  placeholder="New Meal Description"
+                />
+                <br />
+                <button
+                  class="btn submit-new-meal-btn btn-primary"
+                  size="sm"
+                  type="reset"
+                  v-on:click="createMeal()"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
           </div>
-          
-          </div>
-
-          
         </h2>
       </div>
 
@@ -105,12 +110,27 @@ export default {
       this.toggleForm();
       this.meal.mealName = "";
       this.meal.description = "";
+      location.reload();
+    },
+    checkForEmptyName() {
+      if (this.meal.mealName == "") {
+        return "New Meal";
+      } else {
+        return this.meal.mealName;
+      }
+    },
+    checkForEmptyDesc() {
+      if (this.meal.description == "") {
+        return "Empty Meal Description";
+      } else {
+        return this.meal.description;
+      }
     },
     formatMeal() {
       const formattedMeal = {
         meal_id: 0,
-        name: this.meal.mealName,
-        description: this.meal.description,
+        name: this.checkForEmptyName(),
+        description: this.checkForEmptyDesc(),
         user_id: 0,
       };
       console.log(formattedMeal);
@@ -156,7 +176,7 @@ export default {
   border-bottom: 0.5px solid #1f2937;
   background-image: url("../../dashboard-banner.jpg");
   background-position: center;
-  height: 20rem;
+  height: 12rem;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
   border-top-right-radius: 1px;
@@ -190,7 +210,7 @@ export default {
   background-color: #5194f7;
   text-align: center;
   width: 46rem;
-  height: 4.2rem;
+  height: 3.2rem;
   margin-left: 3.25rem;
   margin-top: 2rem;
   border: 1px solid black;
@@ -259,7 +279,7 @@ export default {
   background: aliceblue;
   width: 46rem;
   margin-left: 3.25rem;
-  margin-top: 0;
+  margin-top: -1rem;
 }
 
 .meal-plans-section {
@@ -326,21 +346,26 @@ export default {
   border-radius: 5px;
   width: 15rem;
   background-color: white;
-  opacity: .95;
+  opacity: 0.95;
   height: 11rem;
   margin-left: 2rem;
   padding: 2px;
 }
 
-#newMealName, #newMealDesc {
+#newMealName,
+#newMealDesc {
   width: 10rem;
   height: 2rem;
-  font-size: .75rem;
+  font-size: 0.75rem;
   text-align: center;
 }
 
 .submit-new-meal-btn {
   outline: 1px solid black;
-  margin: .5rem;
+  margin: 0.5rem;
+}
+
+.mealplans-title {
+  margin-top: .7rem;
 }
 </style>

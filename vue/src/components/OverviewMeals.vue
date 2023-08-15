@@ -28,7 +28,8 @@ export default {
   },
   computed: {
     updateMeals() {
-      return this.$store.state.meals;
+      const array = this.$store.state.meals;
+      return array.reverse();
     }
   },
   methods: {
