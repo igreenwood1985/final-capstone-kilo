@@ -4,7 +4,7 @@
 
       <div class="top-left">
         <img src="../../delete-xxl.png" alt="Delete Icon" class="delete-btn"
-        v-show="mealEditToggle == true" v-on:click="deleteMeal()">
+        v-show="mealEditToggle == true" v-on:click="deleteMeal(); mealEditToggle = false;">
       </div>
       
       <router-link
@@ -176,12 +176,13 @@ export default {
       AccountService.deleteMeal(this.meal.meal_id).then((response) => {
         if (response.status != 200) {
           this.$store.commit("REMOVE_MEAL", this.meal);
+          location.reload();
         }
       })
     },
     checkForEmptyName() {
       if (this.enteredMealName == "") {
-        return "New Meal #" + this.meal.meal_id;
+        return "Meal #" + this.meal.meal_id;
       } else {
         return this.enteredMealName;
       }

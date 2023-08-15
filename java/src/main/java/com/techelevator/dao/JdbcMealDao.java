@@ -99,6 +99,7 @@ public class JdbcMealDao implements MealDao {
         try {
             int mealID = jdbcTemplate.queryForObject(sql, Integer.class, meal.getName(), meal.getDescription(), user_id);
             meal.setMeal_id(mealID);
+            jdbcTemplate.queryForRowSet(sqlJoin, meal.getMeal_id(), 69);
 //            for(int counter = 0;  ){
 //
 //            }
@@ -146,6 +147,8 @@ public class JdbcMealDao implements MealDao {
         String sql = "INSERT INTO meal_recipe (meal_id, recipe_id) " +
                 "VALUES (?, ?)";
         jdbcTemplate.update(sql, mealId, recipeId);
+        String removeTemplateSql = "DELETE FROM meal_recipe WHERE meal_id = ? AND recipe_id = 69";
+        jdbcTemplate.update(removeTemplateSql, mealId);
     }
 
     @Override
@@ -153,6 +156,9 @@ public class JdbcMealDao implements MealDao {
         String sql = "DELETE FROM meal_recipe " +
         "WHERE meal_id = ? AND recipe_id = ?";
         jdbcTemplate.update(sql, mealId, recipeId);
+//        String insertTemplateSql = "INSERT INTO meal_recipe (meal_id, recipe_id) " +
+//                "VALUES (?, ?)";
+//        jdbcTemplate.queryForRowSet(insertTemplateSql, mealId, 69);
     }
 
     @Override

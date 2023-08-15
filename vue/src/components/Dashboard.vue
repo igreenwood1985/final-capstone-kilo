@@ -102,15 +102,28 @@ export default {
       AccountService.createMeal(this.formatMeal()).then((response) => {
         return response.status == 200; //change to 201 when server status codes updated
       });
-      this.toggleForm();
-      this.meal.mealName = "";
-      this.meal.description = "";
+      this.$store.commit("ADD_MEAL", this.meal);
+      location.reload();
+    },
+    checkForEmptyName() {
+      if (this.meal.mealName == "") {
+        return "New Meal";
+      } else {
+        return this.meal.mealName;
+      }
+    },
+    checkForEmptyDesc() {
+      if (this.meal.description == "") {
+        return "Empty Meal Description";
+      } else {
+        return this.meal.description;
+      }
     },
     formatMeal() {
       const formattedMeal = {
         meal_id: 0,
-        name: this.meal.mealName,
-        description: this.meal.description,
+        name: this.checkForEmptyName(),
+        description: this.checkForEmptyDesc(),
         user_id: 0,
       };
       console.log(formattedMeal);
@@ -156,7 +169,7 @@ export default {
   border-bottom: 0.5px solid #1f2937;
   background-image: url("../../dashboard-banner.jpg");
   background-position: center;
-  height: 20rem;
+  height: 10rem;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
   border-top-right-radius: 1px;
@@ -190,7 +203,7 @@ export default {
   background-color: #5194f7;
   text-align: center;
   width: 46rem;
-  height: 4.2rem;
+  height: 3.2rem;
   margin-left: 3.25rem;
   margin-top: 2rem;
   border: 1px solid black;
@@ -259,7 +272,7 @@ export default {
   background: aliceblue;
   width: 46rem;
   margin-left: 3.25rem;
-  margin-top: 0;
+  margin-top: -1rem;
 }
 
 .meal-plans-section {
