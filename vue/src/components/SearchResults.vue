@@ -45,7 +45,6 @@
           Search
         </button> -->
         <br />
-        <br />
         <a 
           style="color: white;"
           class = "advanced-search"
@@ -54,6 +53,8 @@
           v-on:click.prevent="toggleAdvancedSearch()"
           >Advanced Search</a
         >
+        <br />
+        
         <!-- <div class="search-in-title">
           <input
             type="checkbox"
