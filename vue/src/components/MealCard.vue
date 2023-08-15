@@ -1,6 +1,6 @@
 <template>
   <div class="meal-card">
-    <div class="meal-card-heading">
+    <div class="meal-card-heading" v-if="renderComponent === true">
       <router-link
         v-bind:to="{ name: 'meal-editor', params: { id: meal.meal_id } }"
         class="meal-name"
@@ -8,6 +8,7 @@
         <h2
           v-on:click="updateCurrentMealInStore()"
           v-show="mealEditToggle == false"
+          v-bind:key="meal.name"
         >
           {{ meal.name }}
         </h2>
@@ -16,6 +17,7 @@
         size="sm"
         class="meal-name-input"
         v-bind:value="meal.name"
+        v-bind:placeholder="'Meal Name'"
         v-show="mealEditToggle == true"
         v-model="enteredMealName"
       />
@@ -26,8 +28,9 @@
         size="sm"
         class="meal-desc-input"
         v-bind:value="meal.description"
+        v-bind:placeholder="'Meal Description'"
         v-show="mealEditToggle == true"
-        v-model="mealDesc"
+        v-model="enteredDescription"
       />
       <div class="top-right">
         <img
@@ -79,7 +82,7 @@
 
 <script>
 //This was added to give functionality to the dropdown list
-// import AccountService from "../services/AccountService.js";
+import AccountService from "../services/AccountService.js";
 
 export default {
   components: {},
@@ -101,7 +104,7 @@ export default {
     },
     updatedMealName() {
       return this.meal.name;
-    }
+    },
   },
   data() {
     return {
@@ -109,38 +112,76 @@ export default {
       mealPlan: [],
       mealEditToggle: false,
       enteredMealName: "",
-      mealDesc: this.meal.desc,
+      enteredDescription: "",
       mealId: 0,
+      renderComponent: true,
     };
   },
   methods: {
     setMealId() {
       this.mealId = this.meal.meal_id;
     },
+    async forceRerender() {
+      this.renderComponent = false;
+      await this.$nextTick();
+      this.renderComponent = true;
+    },
     updateCurrentMealInStore() {
       this.$store.commit("SET_CURRENT_MEAL", this.meal.meal_id);
     },
     updateMealName() {
+      AccountService.updateMeal(this.formatMeal()).then((response) => {
+        if (response.status == 200) {
+          AccountService.getFavoritedMeals().then((response) => {
+            if (response.status == 200) {
+              this.$store.commit("SET_MEALS", response.data);
+              this.enteredDescription = "";
+              this.enteredMealName = "";
+            }
+          });
+        }
+      });
+
       this.mealEditToggle = false;
-      console.log(this.enteredMealName);
-      this.$store.commit("SET_MEAL_NAME", this.meal, "test");
     },
-  //     addToMealPlan(mealPlanId) {
-  //   AccountService.addMealToMealPlan(this.meal, mealPlanId).then((response) => {
-  //     if (response.status == 201) {
-  //       AccountService.getFavoritedMeals().then((mealResponse) => {
-  //         this.$store.commit("SET_MEALS", mealResponse.data);
-  //       });
-  //     }
-  //   });
-  // },
+    checkForEmptyName() {
+      if (this.enteredMealName == "") {
+        return "New Meal #" + this.meal.meal_id;
+      } else {
+        return this.enteredMealName;
+      }
+    },
+    checkForEmptyDesc() {
+      if (this.enteredDescription == "") {
+        return "Empty Meal Description";
+      } else {
+        return this.enteredDescription;
+      }
+    },
+    formatMeal() {
+      const formattedMeal = {
+        meal_id: this.meal.meal_id,
+        name: this.checkForEmptyName(),
+        description: this.checkForEmptyDesc(),
+      };
+      return formattedMeal;
+    },
+    //     addToMealPlan(mealPlanId) {
+    //   AccountService.addMealToMealPlan(this.meal, mealPlanId).then((response) => {
+    //     if (response.status == 201) {
+    //       AccountService.getFavoritedMeals().then((mealResponse) => {
+    //         this.$store.commit("SET_MEALS", mealResponse.data);
+    //       });
+    //     }
+    //   });
+    // },
+
+    created() {
+      this.setMealId();
+    },
+
+    //This was added to give functionality to the dropdown list
   },
-  created() {
-    this.setMealId();
-  }
-
-  //This was added to give functionality to the dropdown list
-
 };
 </script>
 

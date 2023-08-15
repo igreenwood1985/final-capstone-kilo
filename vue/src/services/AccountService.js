@@ -46,6 +46,9 @@ export default {
     deleteMeal(mealId) {
         return axios.delete('/deletemeal/' + mealId)
     },
+    updateMeal(meal) {
+        return axios.put('/mymeals', meal)
+    },
 
     //Meal Plan
     getAllMealPlans() {
