@@ -19,7 +19,7 @@ CREATE TABLE users (
 CREATE TABLE recipes (
 	recipe_id SERIAL,
 	uri varchar(120) NOT NULL,
-	recipe_name varchar(50) NOT NULL,
+	recipe_name varchar(200) NOT NULL,
 	img text NOT NULL,
 	total_calories numeric NOT NULL,
 	servings int NOT NULL,
