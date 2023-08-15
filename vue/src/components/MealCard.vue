@@ -3,7 +3,8 @@
     <div class="meal-card-heading" v-if="renderComponent === true">
 
       <div class="top-left">
-        <img src="../../delete-xxl.png" alt="Delete Icon" class="delete-btn">
+        <img src="../../delete-xxl.png" alt="Delete Icon" class="delete-btn"
+        v-show="mealEditToggle == true" v-on:click="deleteMeal()">
       </div>
       
       <router-link
@@ -149,6 +150,13 @@ export default {
 
       this.mealEditToggle = false;
     },
+    deleteMeal() {
+      AccountService.deleteMeal(this.meal.meal_id).then((response) => {
+        if (response.status != 200) {
+          this.$store.commit("REMOVE_MEAL", this.meal);
+        }
+      })
+    },
     checkForEmptyName() {
       if (this.enteredMealName == "") {
         return "New Meal #" + this.meal.meal_id;
@@ -217,7 +225,7 @@ export default {
 
 .meal-name-input {
   text-align: center;
-  width: 75%;
+  width: 60%;
   margin-top: -5px;
   margin-left: auto;
   margin-right: auto;
@@ -226,7 +234,7 @@ export default {
 
 .meal-desc-input {
   text-align: center;
-  width: 80%;
+  width: 70%;
   margin-left: auto;
   margin-right: auto;
   margin-top: -5px;
@@ -296,7 +304,7 @@ img {
 .top-left {
   position: relative;
   top: .4rem;
-  right: -.7rem;
+  right: -.5rem;
   
 }
 </style>

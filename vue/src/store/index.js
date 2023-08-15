@@ -98,7 +98,7 @@ export default new Vuex.Store({
     // },
     REMOVE_MEAL(state, mealToRemove) {
       const mealIndex = state.favoritedRecipes.indexOf(mealToRemove);
-      state.favoritedRecipes.splice(mealIndex, 1);
+      state.meals.splice(mealIndex, 1);
     },
     SET_MEAL_PLANS(state, mealPlans) {
       state.mealPlans = mealPlans;

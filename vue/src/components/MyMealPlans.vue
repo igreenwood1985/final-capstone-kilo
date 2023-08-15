@@ -3,7 +3,7 @@
       <meal-plan-card 
       v-for="mealPlan in this.favoriteMealPlans"
       v-bind:mealPlan="mealPlan"
-      v-bind:key="mealPlan.meal_plan_id"
+      v-bind:key="mealPlan.mealPlanId"
       v-bind:enable-add="true"
       
       />
@@ -21,7 +21,7 @@ export default {
   components: { MealPlanCard },
   data() {
       return { 
-        favortieMealPlans: [],
+        favoriteMealPlans: [],
       }
   },
   methods: {

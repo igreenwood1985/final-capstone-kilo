@@ -5,7 +5,7 @@
         <router-link
           v-bind:to="{
             name: 'meal-plan-details',
-            params: { id: mealPlan.meal_plan_id }
+            params: { id: mealPlan.mealPlanId }
           }"
           class="meal-plan-name"
         >
