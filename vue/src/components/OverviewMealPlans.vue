@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <h1>My Meal Plans</h1>
-
+  <div class="cards-container">
     <meal-plan-card
       v-for="mealPlan in updateMealPlans"
       v-bind:mealPlan="mealPlan"
@@ -42,5 +40,14 @@ export default {
 </script>
 
 <style scoped>
+.cards-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  border: 2px solid black;
+  padding: 1.4rem;
+}
 
 </style>

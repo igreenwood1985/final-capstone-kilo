@@ -105,6 +105,7 @@ export default {
       this.toggleForm();
       this.meal.mealName = "";
       this.meal.description = "";
+      location.reload();
     },
     formatMeal() {
       const formattedMeal = {
@@ -127,7 +128,7 @@ export default {
 .mealplans-here {
   width: 28rem;
   margin-right: 3.25rem;
-  margin-top: 0;
+  margin-top: 0px;
 }
 
 .entire-page {
@@ -156,7 +157,7 @@ export default {
   border-bottom: 0.5px solid #1f2937;
   background-image: url("../../dashboard-banner.jpg");
   background-position: center;
-  height: 20rem;
+  height: 15rem;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
   border-top-right-radius: 1px;
@@ -190,7 +191,7 @@ export default {
   background-color: #5194f7;
   text-align: center;
   width: 46rem;
-  height: 4.2rem;
+  height: 3.2rem;
   margin-left: 3.25rem;
   margin-top: 2rem;
   border: 1px solid black;
@@ -246,6 +247,10 @@ export default {
   border-top-left-radius: 20px;
 }
 
+.mealplans-title {
+  margin-top: .6rem;
+}
+
 .recipes-section {
   grid-area: recipes;
   display: flex-end;
@@ -259,14 +264,14 @@ export default {
   background: aliceblue;
   width: 46rem;
   margin-left: 3.25rem;
-  margin-top: 0;
+  margin-top: -1rem;
 }
 
 .meal-plans-section {
   border: 1px solid black;
   border-top: none;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   grid-area: mealPlan;
   background-color: #f5f0f4;
 }
