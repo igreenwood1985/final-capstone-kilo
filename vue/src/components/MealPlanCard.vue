@@ -245,10 +245,8 @@ export default {
 }
 
 a {
-  text-decoration: none;
+  text-decoration-color: black;
 }
-
-
 
 .meal-plan-description {
   font-size: 1rem;

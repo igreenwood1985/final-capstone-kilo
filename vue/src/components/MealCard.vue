@@ -367,8 +367,5 @@ img {
   position: absolute;
 }
 
-a {
-  text-decoration: none;
-}
 
 </style>

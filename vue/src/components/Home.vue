@@ -38,7 +38,7 @@ export default {
 } */
 .search-button:hover{
   border:3px solid lightgray;
-  color: lightgray;
+  color: rgb(247, 246, 246);
 }
 
 

@@ -164,6 +164,7 @@ export default {
 .meal-heading {
   background-color: #f5f0f4;
   padding: 10px;
+  padding-bottom: 30px;
   border-bottom: 2px solid #1f2937;
 }
 
@@ -188,7 +189,7 @@ export default {
 
 .top-right {
   position: absolute;
-  bottom: 36.35rem;
+  bottom: 37.35rem;
   right: 24.25rem;
 }
 
@@ -209,8 +210,8 @@ export default {
 
 .bottom-right {
   position: relative;
-  bottom: 1.35rem;
-  left: 33.5rem;
+  bottom: -0.5rem;
+  left: 23rem;
 }
 
 .inputs {
