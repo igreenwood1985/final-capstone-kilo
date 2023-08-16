@@ -379,8 +379,8 @@ export default {
 .meal-plans-section {
   border: 1px solid black;
   border-top: none;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   grid-area: mealPlan;
   background-color: #f5f0f4;
 }
