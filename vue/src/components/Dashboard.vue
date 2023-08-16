@@ -14,9 +14,9 @@
             >Overview</router-link
           >
           ∙
-          <router-link :to="{ name: 'my-recipes' }">Recipes</router-link>
-          ∙<router-link :to="{ name: 'my-meals' }"> My Meals</router-link>
-          ∙<router-link :to="{ name: 'my-meal-plans' }">
+          <router-link class="link-recipe" :to="{ name: 'my-recipes' }">Recipes</router-link>
+          ∙<router-link class="link-meal" :to="{ name: 'my-meals' }"> My Meals</router-link>
+          ∙<router-link class="link-plan" :to="{ name: 'my-meal-plans' }">
             Meal Plans</router-link
           ></span
         >
@@ -224,6 +224,21 @@ export default {
 </script>
 
 <style scoped>
+.current-page-selection:hover{
+  color:chartreuse;
+}
+.link-recipe:hover{
+  color: #5194f7;
+}
+
+.link-meal:hover{
+  color: #f75151;
+}
+
+.link-plan:hover{
+  color: #d051f7;
+}
+
 .mealplans-here {
   width: 28rem;
   margin-right: 3.25rem;

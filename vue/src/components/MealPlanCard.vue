@@ -170,7 +170,7 @@ export default {
 }
 
 .meal-plan-card:hover {
-  border: 3px solid lightpink;
+  border: 3px solid #e1b0f0;
 }
 
 .meal-plan-name-input {

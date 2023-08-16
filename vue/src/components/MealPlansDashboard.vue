@@ -8,14 +8,14 @@
         </h5>
         My Dashboard
         <span class="nav-text"
-          ><router-link
+          ><router-link class="overview"
             :to="{ name: 'dashboard' }"
             >Overview</router-link
           >
           ∙
-          <router-link
+          <router-link class="link-recipe"
           :to="{name:'my-recipes'}" 
-          >Recipes</router-link> ∙<router-link
+          >Recipes</router-link> ∙<router-link class="link-meal"
           :to="{name:'my-meals'}">
           
            My Meals</router-link> ∙<router-link
@@ -138,6 +138,19 @@ export default {
 </script>
 
 <style scoped>
+.overview:hover{
+  color:chartreuse;
+}
+.link-recipe:hover{
+  color: #5194f7;
+}
+.link-meal:hover{
+  color: #f75151;
+}
+.current-page-selection:hover{
+  color: #d051f7;
+}
+
 .mealplans-here {
   width: 28rem;
   margin-right: 3.25rem;

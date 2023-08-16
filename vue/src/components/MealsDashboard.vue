@@ -8,19 +8,19 @@
         </h5>
         My Dashboard
         <span class="nav-text"
-          ><router-link
+          ><router-link class="overview"
             :to="{ name: 'dashboard' }"
             >Overview</router-link
           >
           ∙
-          <router-link
+          <router-link class="link-recipe"
           :to="{name:'my-recipes'}" 
           >Recipes</router-link> ∙<router-link
           :to="{name:'my-meals'}"
           class="current-page-selection"
           >
           
-           My Meals</router-link> ∙<router-link
+           My Meals</router-link> ∙<router-link class="link-plan"
            :to="{name: 'my-meal-plans'}"> Meal Plans</router-link></span>
         
       </h1>
@@ -107,6 +107,21 @@ export default {
 </script>
 
 <style scoped>
+.overview:hover{
+  color:chartreuse;
+}
+.link-recipe:hover{
+  color: #5194f7;
+}
+
+.current-page-selection:hover{
+  color: #f75151;
+}
+
+.link-plan:hover{
+  color: #d051f7;
+}
+
 .mealplans-here {
   width: 28rem;
   margin-right: 3.25rem;
