@@ -43,7 +43,7 @@
         >
           Remove from Favorites
         </b-button>
-        <b-button size="sm">Add to Meal</b-button>
+       
       </div>
 
     
@@ -191,8 +191,6 @@ export default {
 </script>
 
 <style scoped>
-
-
 .main {
   border: 2px solid black;
   border-radius: 10px;
@@ -204,7 +202,6 @@ export default {
   font-family: bitter;
   overflow: hidden;
 }
-
 
 .main img {
   width: 100%;

@@ -24,7 +24,7 @@
         
       </h1>
 
-        <div class="">
+        <div class="recipes-container">
             <div class="recipes-heading">
                 <h2 class="recipes-title">
                My Recipes
@@ -58,26 +58,17 @@ export default {
     };
   },
   methods: {
-    createMeal() {
-      AccountService.createMeal(this.formatMeal()).then((response) => {
-        return response.status == 200; //change to 201 when server status codes updated
+    getFavoriteRecipes() {
+      AccountService.getFavoritedRecipes().then(response => {
+        let recipes = response.data;
+        // console.log('from database: ' + recipes);
+        // for (let counter = 0; counter < recipes.length; counter++) {
+        //   console.log('entering for loop...' + recipes[counter]);
+        //   recipes[counter].img = this.retrieveNewImageURL(recipes[counter]);
+        //   console.log('exiting for loop...' + recipes[counter]);
+        // }
+        this.$store.commit("SET_FAVORITED_RECIPES", recipes);
       });
-      this.toggleForm();
-      this.meal.mealName = "";
-      this.meal.description = "";
-    },
-    formatMeal() {
-      const formattedMeal = {
-        meal_id: 0,
-        name: this.meal.mealName,
-        description: this.meal.description,
-        user_id: 0,
-      };
-      console.log(formattedMeal);
-      return formattedMeal;
-    },
-    toggleForm() {
-      this.createFormToggled = this.createFormToggled == false ? true : false;
     },
   },
 };
@@ -156,6 +147,18 @@ export default {
   border-top-left-radius: 10px;
 }
 
+.recipes-section {
+  grid-area: recipes; 
+  background: aliceblue;
+  width: 76rem;
+  margin-left: 3.25rem;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
 .recipes-title,
 .mealplans-title,
 .meals-title {
@@ -178,19 +181,7 @@ export default {
   text-decoration: underline;
 }
 
-.recipes-section {
-  grid-area: recipes; 
-  
-  border-bottom: 1px solid black;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  background: aliceblue;
-  width: 76rem;
- 
- 
-}
+
 
 
 .btn {
