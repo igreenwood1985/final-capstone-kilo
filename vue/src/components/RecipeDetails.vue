@@ -62,7 +62,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .recipe-details {
     margin: auto;
     width: 50%;

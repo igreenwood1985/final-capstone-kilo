@@ -49,7 +49,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .bar {
   background-color: white;
   border-bottom: 1px solid gray;

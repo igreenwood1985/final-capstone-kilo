@@ -6,6 +6,7 @@
       v-bind:key="mealPlan.mealPlanId"
       v-bind:enable-add="true"
     />
+    <h1 class="empty-meal-plans-message" v-show="updateMealPlans.length == 0">You do not currently have any meal plans.</h1>
   </div>
 </template>
 
@@ -50,6 +51,11 @@ export default {
   height: 41.35rem;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+
+.empty-meal-plans-message {
+  text-align: center;
+  font-size: 1.5rem;
 }
 
 </style>

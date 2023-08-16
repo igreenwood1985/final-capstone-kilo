@@ -139,7 +139,7 @@ export default {
   border-bottom: 0.5px solid #1f2937;
   background-image: url("../../dashboard-banner.jpg");
   background-position: center;
-  height: 20rem;
+  height: 12rem;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
   border-top-right-radius: 1px;
@@ -173,7 +173,7 @@ export default {
   background-color: #5194f7;
   text-align: center;
   width: 46rem;
-  height: 4.2rem;
+  height: 3.2rem;
   margin-left: 3.25rem;
   margin-top: 2rem;
   border: 1px solid black;
@@ -225,14 +225,13 @@ export default {
   margin-right: 3.25rem;
   margin-top: 2rem;
   border: 1px solid black;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 }
 
 .recipes-section {
   grid-area: recipes;
-  display: flex-end;
-  align-items: center;
+  display: flex;
   justify-content: space-around;
   border-bottom: 1px solid black;
   border-left: 1px solid black;
@@ -242,7 +241,7 @@ export default {
   background: aliceblue;
   width: 46rem;
   margin-left: 3.25rem;
-  margin-top: 0;
+  margin-top: -1rem;
 }
 
 .meal-plans-section {
@@ -255,6 +254,8 @@ export default {
 }
 .meals-section {
   border: 1px solid black;
+  display: flex;
+  justify-content: space-around;
   border-top: none;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -281,8 +282,8 @@ export default {
   justify-content: center;
   align-items: center;
   color: white;
-  width: 2rem;
-  height: 2rem;
+  width: 1.25rem;
+  height: 1.25rem;
   font-size: 10px;
   text-align: center;
   background-color: transparent;
@@ -291,8 +292,14 @@ export default {
 
 .create-meal-box {
   position: relative;
-  top: -2rem;
-  right: -27.1rem;
+  top: -2.5rem;
+  right: .10rem;
+}
+
+.create-meal-plan-box {
+  position: relative;
+  top: -3.95rem;
+  right: -0.15rem;
 }
 
 .new-meal-form-text {
@@ -307,23 +314,45 @@ export default {
   flex-direction: column;
   border: 1px solid black;
   border-radius: 5px;
-  width: 15rem;
+ width: 23.5rem;
   background-color: white;
-  opacity: .95;
   height: 11rem;
   margin-left: 2rem;
   padding: 2px;
+  opacity: .97;
 }
 
-#newMealName, #newMealDesc {
+#newMealName,
+#newMealDesc {
   width: 10rem;
   height: 2rem;
-  font-size: .75rem;
+  font-size: 0.75rem;
   text-align: center;
 }
 
 .submit-new-meal-btn {
   outline: 1px solid black;
-  margin: .5rem;
+  margin: 0.5rem;
+}
+
+.mealplans-title {
+  margin-top: 0.7rem;
+}
+
+.create-meal-plan-form {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 23.5rem;
+  background-color: white;
+  height: 11rem;
+  margin-left: 2rem;
+  padding: 2px;
+  opacity: .97;
 }
 </style>
