@@ -18,7 +18,7 @@
           >Recipes</router-link> ∙<router-link class="link-meal"
           :to="{name:'my-meals'}">
           
-           My Meals</router-link> ∙<router-link
+           Meals</router-link> ∙<router-link
            :to="{name: 'my-meal-plans'}"
            class="current-page-selection"
            > Meal Plans</router-link></span>

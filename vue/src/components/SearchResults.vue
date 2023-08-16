@@ -466,6 +466,9 @@
         class="display-card"
       />
     </div>
+    <div>
+      <h1 class="empty-search" v-if="chooseSearch()== true" v-show="searchResults.length == 0">There's none bucko! Try again. <br><br></h1>
+    </div>
     <div class="tagline">
       <h1 class="tag-title">Hungry?</h1>
       <h1>You came to the right place.</h1>
