@@ -262,7 +262,7 @@ export default {
 
 .create-meal-plan-box {
   position: relative;
-  top: -3.95rem;
+  top: -3.91rem;
   right: -0.15rem;
 }
 
