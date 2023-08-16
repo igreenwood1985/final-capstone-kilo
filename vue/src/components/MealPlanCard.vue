@@ -26,6 +26,7 @@
         v-bind:placeholder="'Meal Plan Name'"
         v-show="mealPlanEditToggle == true"
         v-model="enteredMealPlanName"
+        max-length="24"
         />
 
         <h2 class="meal-plan-description" v-show="mealPlanEditToggle == false">
@@ -39,6 +40,7 @@
         v-bind:placeholder="'Meal Plan Description'"
         v-show="mealPlanEditToggle == true"
         v-model="enteredDescription"
+        maxlength="32"
         />
         <div class="bottom-right">
           <img
@@ -156,7 +158,9 @@ export default {
 <style scoped>
 .meal-plan-card {
   border: 2px solid black;
-  background-color: white;
+  background-image: url("https://images.squarespace-cdn.com/content/v1/5960f8d115d5db554bc42928/1547070313750-245D1CXNTKYZ3A2HF2E3/Meal_Plans_Banner3.jpg?format=2500w");
+  background-position: cover;
+  background-size: 37.5rem;
   border-radius: 10px;
   width: 22rem;
   height: 16rem;
@@ -204,14 +208,58 @@ export default {
 
 .bottom-right {
   position: relative;
-  top: 7.15rem;
-  right: -10.35rem;
+  top: -.5rem;
+  left: 8.75rem;
 }
 
 .top-left {
   position: relative;
   top: .4rem;
-  right: -.5rem;  
+  right: 9rem;  
 }
+
+.meal-plan-card-heading {
+  border: .5px solid #8AB1C9;
+  border-radius: 5px;
+  background-color:  #F8F9FA;
+  opacity: .95;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2.6rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.meal-plan-name > h2 {
+  color: black;
+  font-size: 1.5rem;
+  margin-top: 3.75rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+
+.meal-plan-description {
+  font-size: 1rem;
+  margin-bottom: 2.75rem;
+}
+
+.meal-plan-name-input {
+  height: 2rem;
+  font-size: 1.25rem;
+  margin-top: 2.25rem;
+  margin-bottom: .5rem;
+}
+
+.meal-plan-desc-input {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
 
 </style>

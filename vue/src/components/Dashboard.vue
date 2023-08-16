@@ -48,6 +48,7 @@
                 name="newMealName"
                 v-model="mealPlan.mealPlanName"
                 placeholder="New Meal Plan Name"
+                maxlength="24"
               />
               <input
                 type="text"
@@ -55,6 +56,7 @@
                 name="newMealDesc"
                 v-model="mealPlan.mealPlanDescription"
                 placeholder="New Meal Plan Description"
+                maxlength="32"
               />
               <br />
               <button
@@ -93,6 +95,7 @@
                   name="newMealName"
                   v-model="meal.mealName"
                   placeholder="New Meal Name"
+                  maxlength="24"
                 />
                 <input
                   type="text"
@@ -100,6 +103,7 @@
                   name="newMealDesc"
                   v-model="meal.description"
                   placeholder="New Meal Description"
+                  maxlength="32"
                 />
                 <br />
                 <button

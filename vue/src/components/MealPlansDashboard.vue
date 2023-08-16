@@ -29,6 +29,42 @@
 
       <div class="mealplans-heading">
         <h2 class="mealplans-title">My Meal Plans</h2>
+        <div class="create-meal-plan-box">
+          <img
+            src="../../plus-5-xxl.png"
+            alt="Create New Meal Plan Button"
+            class="create-meal-btn"
+            v-on:click="toggleFormMealPlan()"
+          />
+          <div class="create-meal-plan-form" v-show="createFormToggledMealPlan">
+            <h4 class="new-meal-form-text">Create a New Meal Plan</h4>
+            <form>
+              <input
+                type="text"
+                id="newMealName"
+                name="newMealName"
+                v-model="mealPlan.mealPlanName"
+                placeholder="New Meal Plan Name"
+              />
+              <input
+                type="text"
+                id="newMealDesc"
+                name="newMealDesc"
+                v-model="mealPlan.mealPlanDescription"
+                placeholder="New Meal Plan Description"
+              />
+              <br />
+              <button
+                class="btn submit-new-meal-btn btn-primary"
+                size="sm"
+                type="reset"
+                v-on:click="createMealPlan()"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
 
       <div class="mealplans-here">
@@ -53,34 +89,49 @@ export default {
       },
   data() {
     return {
-      createFormToggled: false,
-      meal: {
-        mealName: "",
-        description: "",
-      },
+      createFormToggledMealPlan: false,
+      mealPlan: {
+        mealPlanName: "",
+        mealPlanDescription: "",
+      }
     };
   },
   methods: {
-    createMeal() {
-      AccountService.createMeal(this.formatMeal()).then((response) => {
-        return response.status == 200; //change to 201 when server status codes updated
+    createMealPlan() {
+      AccountService.createMealPlan(this.formatMealPlan()).then((response) => {
+        return response.status == 200;
       });
-      this.toggleForm();
-      this.meal.mealName = "";
-      this.meal.description = "";
+      this.toggleFormMealPlan();
+      this.mealPlan.mealPlanName = "";
+      this.mealPlan.mealPlanDescription = "";
+      location.reload();
     },
-    formatMeal() {
-      const formattedMeal = {
-        meal_id: 0,
-        name: this.meal.mealName,
-        description: this.meal.description,
-        user_id: 0,
+    checkForEmptyNameMealPlan() {
+      if (this.mealPlan.mealPlanName == "") {
+        return "New Meal Plan";
+      } else {
+        return this.mealPlan.mealPlanName;
+      }
+    },
+    checkForEmptyDescMealPlan() {
+      if (this.mealPlan.mealPlanDescription == "") {
+        return "Empty Meal Plan Description";
+      } else {
+        return this.mealPlan.mealPlanDescription;
+      }
+    },
+    formatMealPlan() {
+      const formattedMealPlan = {
+        mealPlanId: 0,
+        name: this.checkForEmptyNameMealPlan(),
+        description: this.checkForEmptyDescMealPlan(),
+        userId: 0
       };
-      console.log(formattedMeal);
-      return formattedMeal;
+      return formattedMealPlan;
     },
-    toggleForm() {
-      this.createFormToggled = this.createFormToggled == false ? true : false;
+    toggleFormMealPlan() {
+      this.createFormToggledMealPlan =
+        this.createFormToggledMealPlan == false ? true : false;
     },
   },
 };
@@ -172,7 +223,8 @@ export default {
 }
 
 .my-recipes-link,
-.my-meals-link {
+.my-meals-link,
+.my-meal-plans-link {
   color: white;
   font-size: 1rem;
 }
@@ -181,22 +233,27 @@ export default {
   grid-area: mealPlans-heading;
   background-color: #d051f7;
   text-align: center;
-  width: 28rem;
-  height: 4.2rem;
-  margin-right: 3.25rem;
+  width: 76rem;
+  height: 3.2rem;
+  margin-left: 3.25rem;
   margin-top: 2rem;
   border: 1px solid black;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 }
 
 .meal-plans-section {
-  border: 1px solid black;
-  border-top: none;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
   grid-area: mealPlan;
   background-color: #f5f0f4;
+  width: 76rem;
+  margin-left: 3.25rem;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin-top: 0;
+  margin-bottom: 2.45rem;
 }
 
 .btn {
@@ -206,6 +263,65 @@ export default {
 
 .current-page-selection {
   font-weight: 700;
+}
+
+.create-meal-plan-box {
+  position: relative;
+  top: -3.95rem;
+  right: -0.15rem;
+}
+
+.mealplans-title {
+  margin-top: 0.7rem;
+}
+
+.create-meal-plan-form {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 23.5rem;
+  background-color: white;
+  height: 11rem;
+  margin-left: 2rem;
+  padding: 2px;
+  opacity: .97;
+}
+
+.create-meal-btn {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 1.25rem;
+  height: 1.25rem;
+  font-size: 10px;
+  text-align: center;
+  background-color: transparent;
+  color: white;
+}
+
+.new-meal-form-text {
+  color: black;
+  margin-top: 5px;
+}
+
+#newMealName,
+#newMealDesc {
+  width: 10rem;
+  height: 2rem;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.submit-new-meal-btn {
+  outline: 1px solid black;
+  margin: 0.5rem;
 }
 
 </style>
