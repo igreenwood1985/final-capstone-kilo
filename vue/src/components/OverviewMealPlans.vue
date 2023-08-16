@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     updateMealPlans() {
-      return this.$store.state.mealPlans.slice(0, 2);
+      return this.$store.state.mealPlans.slice(this.$store.state.mealPlans.length -2).reverse();
     },
   },
   methods: {

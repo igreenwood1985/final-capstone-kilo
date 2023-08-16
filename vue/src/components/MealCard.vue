@@ -163,7 +163,7 @@ export default {
     updateMealName() {
       AccountService.updateMeal(this.formatMeal()).then((response) => {
         if (response.status == 200) {
-          AccountService.getFavoritedMeals().then((response) => {
+          AccountService.getDashboardMeals().then((response) => {
             if (response.status == 200) {
               this.$store.commit("SET_MEALS", response.data);
               this.enteredDescription = "";

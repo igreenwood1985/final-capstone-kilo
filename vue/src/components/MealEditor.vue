@@ -185,6 +185,7 @@ export default {
 .page {
   background-image: url("../../dashboard-banner.jpg");
   background-position: right;
+  background-size: 190rem;
 }
 
 .top-right {

@@ -117,7 +117,7 @@ export default {
   border-bottom: 0.5px solid #1f2937;
   background-image: url("../../dashboard-banner.jpg");
   background-position: center;
-  height: 20rem;
+  height: 12rem;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
   border-top-right-radius: 1px;

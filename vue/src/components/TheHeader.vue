@@ -26,7 +26,7 @@
               >Find Recipes Online</router-link
             ></b-navbar-item
           >
-          <b-navbar-item><router-link v-if="$store.state.token != ''" v-bind:to="{name: 'dashboard'}" class="link-text">&nbsp;|&nbsp;My Dashboard</router-link></b-navbar-item>
+          <b-navbar-item><span class="divider">&nbsp;|&nbsp;</span><router-link v-if="$store.state.token != ''" v-bind:to="{name: 'dashboard'}" class="link-text">My Dashboard</router-link></b-navbar-item>
         </div>
 
         <div class="right-nav">
@@ -84,7 +84,7 @@ export default {
 .title-text:hover{
   color: #0d6efd;
 }
-.link-text {
+.link-text, .divider {
   color: black;
   text-decoration: none;
   font-size: 12px;
