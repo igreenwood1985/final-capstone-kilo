@@ -164,8 +164,9 @@ export default {
   border-radius: 10px;
   width: 22rem;
   height: 16rem;
-  margin-top: 5px;
+  margin-top: 0rem;
   text-align: center;
+  margin-bottom: 3rem;
 }
 
 .meal-plan-card:hover {
@@ -232,7 +233,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 2.6rem;
+  margin-top: 2rem;
   margin-left: 1rem;
   margin-right: 1rem;
 }

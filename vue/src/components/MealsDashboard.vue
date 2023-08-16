@@ -30,8 +30,8 @@
           My Meals
           <div class="create-meal-box">
             <img
-            src="https://thenounproject.com/api/private/icons/2251528/edit/?backgroundShape=SQUARE&backgroundShapeColor=%23000000&backgroundShapeOpacity=0&exportSize=752&flipX=false&flipY=false&foregroundColor=%23000000&foregroundOpacity=1&imageFormat=png&rotation=0"
-            alt=""
+            src="../../plus-5-xxl.png"
+            alt="Create New Meal Button"
             class="create-meal-btn"
             v-on:click="toggleForm()"
           />
@@ -58,18 +58,18 @@
         </h2>
       </div>
 
-      <overview-meals class="meals-section" />
+      <my-meals class="meals-section" />
     </div>
   </div>
 </template>
 
 <script>
 import AccountService from "../services/AccountService";
-import OverviewMeals from "./OverviewMeals.vue";
+import MyMeals from "./MyMeals.vue";
 
 export default {
   components: {
-    OverviewMeals
+    MyMeals
     },
   data() {
     return {
@@ -140,10 +140,8 @@ export default {
   grid-template-areas:
     "header header"
     "greeting greeting"
-    "recipes-heading mealPlans-heading"
-    "recipes mealPlan"
-    "meals-heading mealPlan"
-    "meals mealPlan";
+    "meals-heading meals-heading"
+    "meals meals";
   width: 88%;
   margin: auto;
 }
@@ -183,19 +181,6 @@ export default {
   text-decoration: none;
 }
 
-.recipes-heading {
-  grid-area: recipes-heading;
-  background-color: #5194f7;
-  text-align: center;
-  width: 46rem;
-  height: 3.2rem;
-  margin-left: 3.25rem;
-  margin-top: 2rem;
-  border: 1px solid black;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-}
-
 .recipes-title,
 .mealplans-title,
 .meals-title {
@@ -222,7 +207,7 @@ export default {
   grid-area: meals-heading;
   background-color: #f75151;
   text-align: center;
-  width: 46rem;
+  width: 76rem;
   height: 3.2rem;
   margin-left: 3.25rem;
   margin-top: 2.5rem;
@@ -231,54 +216,15 @@ export default {
   border-top-left-radius: 10px;
 }
 
-.mealplans-heading {
-  grid-area: mealPlans-heading;
-  background-color: #d051f7;
-  text-align: center;
-  width: 28rem;
-  height: 4.2rem;
-  margin-right: 3.25rem;
-  margin-top: 2rem;
-  border: 1px solid black;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-}
-
-.recipes-section {
-  grid-area: recipes;
-  display: flex;
-  justify-content: space-around;
-  border-bottom: 1px solid black;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  background: aliceblue;
-  width: 46rem;
-  margin-left: 3.25rem;
-  margin-top: -1rem;
-}
-
-.meal-plans-section {
-  border: 1px solid black;
-  border-top: none;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  grid-area: mealPlan;
-  background-color: #f5f0f4;
-}
 .meals-section {
-  border: 1px solid black;
-  display: flex;
-  justify-content: space-around;
-  border-top: none;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
   grid-area: meals;
   background-color: #f7e9e9;
-  width: 46rem;
+  width: 76rem;
   margin-left: 3.25rem;
-  margin-top: 0;
+  border: 1px solid black;
+  border-top: none;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   margin-bottom: 2.45rem;
 }
 
@@ -302,7 +248,6 @@ export default {
   font-size: 10px;
   text-align: center;
   background-color: transparent;
-  color: white;
 }
 
 .create-meal-box {

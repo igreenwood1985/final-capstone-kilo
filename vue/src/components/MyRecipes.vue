@@ -5,7 +5,9 @@
       v-bind:recipe="recipe"
       v-bind:key="recipe.id"
       v-bind:enable-add="true"
+      v-show="updateArray.length !== 0"
     />
+    <h1 class="empty-recipes-message" v-show="updateArray.length == 0">You do not currently have any favorite recipes. <br><br> <router-link :to="{ name : 'search' }"> Add some?</router-link></h1>
   </div>
 </template>
 
@@ -60,7 +62,9 @@ export default {
 </script>
 
 <style>
-.heading {
-  display: block;
+.empty-recipes-message {
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 104px
 }
 </style>
