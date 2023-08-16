@@ -28,7 +28,7 @@
       <div class="meal-plans-container">
 
       <div class="mealplans-heading">
-        <h2 class="mealplans-title">My Meal Plans</h2>
+        <h2 class="meal-plans-title">My Meal Plans</h2>
         <div class="create-meal-plan-box">
           <img
             src="../../plus-5-xxl.png"
@@ -67,9 +67,7 @@
         </div>
       </div>
 
-      <div class="mealplans-here">
         <my-meal-plans class="meal-plans-section" />
-      </div>
 
       </div>
 
@@ -139,7 +137,7 @@ export default {
 
 <style scoped>
 .overview:hover{
-  color:chartreuse;
+  color:#1f2937;
 }
 .link-recipe:hover{
   color: #5194f7;
@@ -149,12 +147,6 @@ export default {
 }
 .current-page-selection:hover{
   color: #d051f7;
-}
-
-.mealplans-here {
-  width: 28rem;
-  margin-right: 3.25rem;
-  margin-top: 0;
 }
 
 .entire-page {
@@ -211,7 +203,7 @@ export default {
 }
 
 .recipes-title,
-.mealplans-title,
+.meal-plans-title,
 .meals-title {
   color: white;
   padding: 0.25rem;
@@ -269,10 +261,6 @@ export default {
   right: -0.15rem;
 }
 
-.mealplans-title {
-  margin-top: 0.7rem;
-}
-
 .create-meal-plan-form {
   position: relative;
   z-index: 1;
@@ -302,6 +290,12 @@ export default {
   text-align: center;
   background-color: transparent;
   color: white;
+  margin-top: 10px;
+}
+
+.create-meal-btn:hover {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .new-meal-form-text {

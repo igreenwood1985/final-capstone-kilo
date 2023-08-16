@@ -243,7 +243,7 @@ export default {
 }
 
 .meal-card:hover {
-  border: 3px solid burlywood;
+  border: 3px solid #f58585;
 }
 
 .meal-card-heading {
@@ -330,6 +330,16 @@ img {
   color: #0a3d5d;
 }
 
+.delete-btn:hover{
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.edit-btn:hover{
+  width: 1.5rem;
+  height:1.5rem;
+}
+
 
 .bottom-right {
   position: relative;
@@ -355,6 +365,10 @@ img {
 .remove-from-meal-plan-dropdown {
   margin-left: 4.5rem;
   position: absolute;
+}
+
+a {
+  text-decoration: none;
 }
 
 </style>

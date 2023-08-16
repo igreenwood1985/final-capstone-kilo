@@ -203,6 +203,10 @@ export default {
   border: 1px solid black;
 }
 
+.minus:hover {
+  width: 20px;
+  height: 20px;
+}
 
 .card-container {
   position: relative;

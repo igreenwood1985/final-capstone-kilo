@@ -225,7 +225,7 @@ export default {
 
 <style scoped>
 .current-page-selection:hover{
-  color:chartreuse;
+  color:#1f2937;
 }
 .link-recipe:hover{
   color: #5194f7;
@@ -420,6 +420,12 @@ export default {
   text-align: center;
   background-color: transparent;
   color: white;
+}
+
+.create-meal-btn:hover{
+  width: 1.5rem;
+  height: 1.5rem;
+  
 }
 
 .create-meal-box {
