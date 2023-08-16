@@ -85,6 +85,13 @@ export default {
     FavoritedCard,
   },
   methods: {
+    getAllMeals() {
+      AccountService.getFavoritedMeals().then(response => {
+        if (response.status == 200) {
+          this.$store.commit('SET_MEALS', response.data);
+        }
+      });
+    },
     retrieveMealByID() {
       AccountService.getMealById(this.$route.params.id).then((response) => {
         this.meal = response.data;
@@ -138,6 +145,7 @@ export default {
   },
   created() {
     this.retrieveMealByID();
+    this.getAllMeals();
   },
 };
 </script>
