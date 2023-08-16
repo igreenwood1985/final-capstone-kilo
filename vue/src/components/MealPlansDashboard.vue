@@ -293,6 +293,11 @@ export default {
   margin-top: 10px;
 }
 
+.create-meal-btn:hover {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 .new-meal-form-text {
   color: black;
   margin-top: 5px;
