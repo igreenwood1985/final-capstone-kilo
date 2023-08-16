@@ -125,10 +125,8 @@ export default {
   grid-template-areas:
     "header header"
     "greeting greeting"
-    "recipes-heading mealPlans-heading"
-    "recipes mealPlan"
-    "meals-heading mealPlan"
-    "meals mealPlan";
+    "meals-heading meals-heading"
+    "meals meals";
   width: 88%;
   margin: auto;
 }
@@ -168,32 +166,15 @@ export default {
   text-decoration: none;
 }
 
-.recipes-heading {
-  grid-area: recipes-heading;
-  background-color: #5194f7;
-  text-align: center;
-  width: 46rem;
-  height: 4.2rem;
-  margin-left: 3.25rem;
-  margin-top: 2rem;
-  border: 1px solid black;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-}
-
-.recipes-title,
-.mealplans-title,
 .meals-title {
   color: white;
   padding: 0.25rem;
 }
 
-.recipes-heading a,
 .meals-heading a {
   text-decoration: none;
 }
 
-.my-recipes-link,
 .my-meals-link {
   color: white;
   font-size: 1rem;
@@ -207,7 +188,7 @@ export default {
   grid-area: meals-heading;
   background-color: #f75151;
   text-align: center;
-  width: 46rem;
+  width: 76rem;
   height: 3.2rem;
   margin-left: 3.25rem;
   margin-top: 2.5rem;
@@ -216,43 +197,6 @@ export default {
   border-top-left-radius: 10px;
 }
 
-.mealplans-heading {
-  grid-area: mealPlans-heading;
-  background-color: #d051f7;
-  text-align: center;
-  width: 28rem;
-  height: 4.2rem;
-  margin-right: 3.25rem;
-  margin-top: 2rem;
-  border: 1px solid black;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
-}
-
-.recipes-section {
-  grid-area: recipes;
-  display: flex-end;
-  align-items: center;
-  justify-content: space-around;
-  border-bottom: 1px solid black;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  background: aliceblue;
-  width: 46rem;
-  margin-left: 3.25rem;
-  margin-top: 0;
-}
-
-.meal-plans-section {
-  border: 1px solid black;
-  border-top: none;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  grid-area: mealPlan;
-  background-color: #f5f0f4;
-}
 .meals-section {
   border: 1px solid black;
   border-top: none;
@@ -260,7 +204,7 @@ export default {
   border-bottom-right-radius: 10px;
   grid-area: meals;
   background-color: #f7e9e9;
-  width: 46rem;
+  width: 76rem;
   margin-left: 3.25rem;
   margin-top: 0;
   margin-bottom: 2.45rem;

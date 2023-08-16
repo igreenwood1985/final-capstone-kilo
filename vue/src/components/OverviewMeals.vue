@@ -7,7 +7,7 @@
       v-bind:enable-add="true"
       v-show="updateMeals.length !== 0"
     />
-    <h1 class="empty-recipes-message" v-show="updateMeals.length == 0">You do not currently have any meals.</h1>
+    <h1 class="empty-meals-message" v-show="updateMeals.length == 0">You do not currently have any meals.</h1>
   </div>
 </template>
 
@@ -53,7 +53,7 @@ export default {
   display: block;
 }
 
-.empty-recipes-message {
+.empty-meals-message {
   text-align: center;
   font-size: 1.5rem;
   padding: 104px
