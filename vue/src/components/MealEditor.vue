@@ -56,7 +56,7 @@
         </div>
       </div>
       <br />
-      <p>This meal includes the following recipes:</p>
+      <p>This Meal includes the following Recipes:</p>
       <favorited-card
         v-for="recipe in meal.recipes"
         v-bind:recipe="recipe"
