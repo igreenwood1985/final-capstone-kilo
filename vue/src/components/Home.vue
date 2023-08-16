@@ -37,8 +37,8 @@ export default {
     outline: 2px solid red;
 } */
 .search-button:hover{
-  border:3px solid chartreuse;
-  color: chartreuse;
+  border:3px solid lightgray;
+  color: rgb(247, 246, 246);
 }
 
 

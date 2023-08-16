@@ -137,7 +137,7 @@ export default {
 
 <style scoped>
 .overview:hover{
-  color:#1f2937;
+  color:#00ca54;
 }
 .link-recipe:hover{
   color: #5194f7;
@@ -173,7 +173,7 @@ export default {
   border-bottom: 0.5px solid #1f2937;
   background-image: url("../../dashboard-banner.jpg");
   background-position: center;
-  height: 20rem;
+  height: 12rem;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
   border-top-right-radius: 1px;
@@ -244,6 +244,11 @@ export default {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   margin-bottom: 2.45rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 3rem;
 }
 
 .btn {
@@ -315,5 +320,7 @@ export default {
   outline: 1px solid black;
   margin: 0.5rem;
 }
+
+
 
 </style>
