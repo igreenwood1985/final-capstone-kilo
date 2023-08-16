@@ -554,9 +554,6 @@ export default {
 </script>
 
 <style scoped>
-.advanced-search:hover {
-  color: chartreuse;
-}
 .search-section {
   display: block;
   text-align: center;
@@ -612,6 +609,14 @@ div h4 {
   font-size: 18px;
   text-decoration: underline;
   text-align: left;
+}
+
+.filter-btn:hover {
+  border: 3px solid white;
+}
+
+.reset-btn:hover {
+  border: 3px solid white;
 }
 
 label {
