@@ -160,6 +160,12 @@ export default {
   overflow: hidden;
 }
 
+.main img {
+  width: 100%;
+  height: 40%;
+  border-bottom: 2px solid black;
+}
+
 .recipe-info-grouping {
   display: flex;
   justify-content: space-around;

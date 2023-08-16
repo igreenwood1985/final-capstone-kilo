@@ -190,7 +190,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .main {
   border: 2px solid black;
   border-radius: 10px;
@@ -202,7 +202,6 @@ export default {
   font-family: bitter;
   overflow: hidden;
 }
-
 
 .main img {
   width: 100%;
