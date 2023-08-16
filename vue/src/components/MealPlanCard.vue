@@ -51,10 +51,10 @@
             alt="Edit button"
           />
           <img
-            class="edit-btn"
+            class="save-btn"
             v-show="mealPlanEditToggle == true"
             v-on:click="updateMealPlanName()"
-            src="../../Download_Icon.png"
+            src="../../Save_Icon.png"
             alt="Save button"
           />
         </div>
@@ -206,9 +206,29 @@ export default {
   color: #0a3d5d;
 }
 
+.save-btn {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 1.2rem;
+  height: 1.2rem;
+  font-size: 10px;
+  text-align: center;
+  border-radius: 20%;
+  background-color: transparent;
+  color: #0a3d5d;
+}
+
 .edit-btn:hover {
   width: 1.5rem;
   height: 1.5rem;
+}
+
+.save-btn:hover {
+  width: 1.7rem;
+  height: 1.7rem;
 }
 
 
