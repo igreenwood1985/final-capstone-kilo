@@ -40,17 +40,17 @@
             class="edit-btn"
             v-show="mealEditToggle == false"
             v-on:click="mealEditToggle = true"
-            src="https://cdn-icons-png.flaticon.com/512/84/84380.png"
+            src="../../Edit_Icon.png"
             alt="Edit button"
           />
           <img
-            class="edit-btn"
+            class="save-btn"
             v-show="mealEditToggle == true"
             v-on:click="
               updateMealName();
               mealEditToggle = false;
             "
-            src="https://e7.pngegg.com/pngimages/154/420/png-clipart-computer-icons-button-save-angle-symbol.png"
+            src="../../Save_Icon.png"
             alt="Save button"
           />
         </div>
@@ -85,6 +85,13 @@ export default {
     FavoritedCard,
   },
   methods: {
+    getAllMeals() {
+      AccountService.getFavoritedMeals().then(response => {
+        if (response.status == 200) {
+          this.$store.commit('SET_MEALS', response.data);
+        }
+      });
+    },
     retrieveMealByID() {
       AccountService.getMealById(this.$route.params.id).then((response) => {
         this.meal = response.data;
@@ -138,6 +145,7 @@ export default {
   },
   created() {
     this.retrieveMealByID();
+    this.getAllMeals();
   },
 };
 </script>
@@ -207,6 +215,31 @@ export default {
   border-radius: 20%;
   background-color: transparent;
   color: #0a3d5d;
+}
+
+.save-btn {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 1.2rem;
+  height: 1.2rem;
+  font-size: 10px;
+  text-align: center;
+  border-radius: 20%;
+  background-color: transparent;
+  color: #0a3d5d;
+}
+
+.edit-btn:hover {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.save-btn:hover {
+  width: 1.7rem;
+  height: 1.7rem;
 }
 
 .bottom-right {
