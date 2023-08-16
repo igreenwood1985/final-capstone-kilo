@@ -240,6 +240,10 @@ export default {
   overflow: hidden;
 }
 
+.meal-card:hover {
+  border: 3px solid burlywood;
+}
+
 .meal-card-heading {
   border-bottom: solid 3px black;
   border-top-left-radius: 10px;

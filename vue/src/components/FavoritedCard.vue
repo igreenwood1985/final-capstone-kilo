@@ -209,6 +209,10 @@ export default {
   text-align: center;
 }
 
+.main:hover {
+  border: 3px solid lightskyblue;
+}
+
 .centered {
   position: absolute;
   top: 50%;
