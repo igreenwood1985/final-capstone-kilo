@@ -140,10 +140,8 @@ export default {
   grid-template-areas:
     "header header"
     "greeting greeting"
-    "recipes-heading mealPlans-heading"
-    "recipes mealPlan"
-    "meals-heading mealPlan"
-    "meals mealPlan";
+    "meals-heading meals-heading"
+    "meals meals";
   width: 88%;
   margin: auto;
 }
@@ -181,19 +179,6 @@ export default {
 .nav-text a {
   color: black;
   text-decoration: none;
-}
-
-.recipes-heading {
-  grid-area: recipes-heading;
-  background-color: #5194f7;
-  text-align: center;
-  width: 46rem;
-  height: 3.2rem;
-  margin-left: 3.25rem;
-  margin-top: 2rem;
-  border: 1px solid black;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
 }
 
 .recipes-title,
