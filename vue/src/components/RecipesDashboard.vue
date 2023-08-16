@@ -76,7 +76,7 @@ export default {
 
 <style scoped>
 .overview:hover{
-  color:#1f2937;
+  color:#00ca54;
 }
 .current-page-selection:hover{
   color: #5194f7;
