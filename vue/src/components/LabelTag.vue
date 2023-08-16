@@ -12,7 +12,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 /* .label-tag {
   display: inline-block;
  font-size: 10px;

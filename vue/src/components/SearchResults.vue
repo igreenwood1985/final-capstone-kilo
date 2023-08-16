@@ -520,7 +520,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .search-section {
   display: block;
   text-align: center;
