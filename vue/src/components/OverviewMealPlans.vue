@@ -43,7 +43,7 @@ export default {
 <style scoped>
 .cards-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: top;
   align-items: center;
   flex-direction: column;
   position: absolute;
@@ -56,6 +56,7 @@ export default {
 .empty-meal-plans-message {
   text-align: center;
   font-size: 1.5rem;
+  max-width: 22rem;
 }
 
 </style>
