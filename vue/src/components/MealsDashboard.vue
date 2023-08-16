@@ -108,7 +108,7 @@ export default {
 
 <style scoped>
 .overview:hover{
-  color:chartreuse;
+  color:#1f2937;
 }
 .link-recipe:hover{
   color: #5194f7;
