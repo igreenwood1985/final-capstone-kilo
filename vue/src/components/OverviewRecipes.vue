@@ -63,7 +63,6 @@ export default {
 </script>
 
 <style scoped>
-
 .empty-recipes-message {
   text-align: center;
   font-size: 1.5rem;
