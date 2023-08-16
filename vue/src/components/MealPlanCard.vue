@@ -277,7 +277,8 @@ export default {
 }
 
 a {
-  text-decoration-color: black;
+  text-decoration: none;
+  color: black;
 }
 
 .meal-plan-description {
@@ -297,10 +298,7 @@ a {
   margin-bottom:3.4rem;
   
 }
-a {
-  text-decoration: none;
-  color: black;
-}
+
 .edit-container {
   margin-top: 20px;
 }
