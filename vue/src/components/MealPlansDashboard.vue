@@ -67,9 +67,7 @@
         </div>
       </div>
 
-      <div class="mealplans-here">
         <my-meal-plans class="meal-plans-section" />
-      </div>
 
       </div>
 
@@ -149,12 +147,6 @@ export default {
 }
 .current-page-selection:hover{
   color: #d051f7;
-}
-
-.mealplans-here {
-  width: 28rem;
-  margin-right: 3.25rem;
-  margin-top: 0;
 }
 
 .entire-page {
