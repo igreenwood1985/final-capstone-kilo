@@ -205,6 +205,11 @@ export default {
   color: #0a3d5d;
 }
 
+.edit-btn:hover {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 
 .bottom-right {
   position: relative;
