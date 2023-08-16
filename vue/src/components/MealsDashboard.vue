@@ -30,8 +30,8 @@
           My Meals
           <div class="create-meal-box">
             <img
-            src="https://thenounproject.com/api/private/icons/2251528/edit/?backgroundShape=SQUARE&backgroundShapeColor=%23000000&backgroundShapeOpacity=0&exportSize=752&flipX=false&flipY=false&foregroundColor=%23000000&foregroundOpacity=1&imageFormat=png&rotation=0"
-            alt=""
+            src="../../plus-5-xxl.png"
+            alt="Create New Meal Button"
             class="create-meal-btn"
             v-on:click="toggleForm()"
           />
@@ -248,7 +248,6 @@ export default {
   font-size: 10px;
   text-align: center;
   background-color: transparent;
-  color: white;
 }
 
 .create-meal-box {
