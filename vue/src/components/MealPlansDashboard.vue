@@ -28,7 +28,7 @@
       <div class="meal-plans-container">
 
       <div class="mealplans-heading">
-        <h2 class="mealplans-title">My Meal Plans</h2>
+        <h2 class="meal-plans-title">My Meal Plans</h2>
         <div class="create-meal-plan-box">
           <img
             src="../../plus-5-xxl.png"
@@ -67,9 +67,7 @@
         </div>
       </div>
 
-      <div class="mealplans-here">
-        <overview-meal-plans class="meal-plans-section" />
-      </div>
+        <my-meal-plans class="meal-plans-section" />
 
       </div>
 
@@ -81,11 +79,11 @@
 
 <script>
 import AccountService from "../services/AccountService";
-import OverviewMealPlans from "./OverviewMealPlans.vue";
+import MyMealPlans from "./MyMealPlans.vue";
 
 export default {
   components: {
-      OverviewMealPlans
+      MyMealPlans
       },
   data() {
     return {
@@ -151,12 +149,6 @@ export default {
   color: #d051f7;
 }
 
-.mealplans-here {
-  width: 28rem;
-  margin-right: 3.25rem;
-  margin-top: 0;
-}
-
 .entire-page {
   display: block;
   background-color: #1f2937;
@@ -211,7 +203,7 @@ export default {
 }
 
 .recipes-title,
-.mealplans-title,
+.meal-plans-title,
 .meals-title {
   color: white;
   padding: 0.25rem;
@@ -247,12 +239,10 @@ export default {
   background-color: #f5f0f4;
   width: 76rem;
   margin-left: 3.25rem;
-  border-bottom: 1px solid black;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-  border-bottom-right-radius: 10px;
+  border: 1px solid black;
+  border-top: none;
   border-bottom-left-radius: 10px;
-  margin-top: 0;
+  border-bottom-right-radius: 10px;
   margin-bottom: 2.45rem;
 }
 
@@ -269,10 +259,6 @@ export default {
   position: relative;
   top: -3.95rem;
   right: -0.15rem;
-}
-
-.mealplans-title {
-  margin-top: 0.7rem;
 }
 
 .create-meal-plan-form {
@@ -304,6 +290,12 @@ export default {
   text-align: center;
   background-color: transparent;
   color: white;
+  margin-top: 10px;
+}
+
+.create-meal-btn:hover {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .new-meal-form-text {

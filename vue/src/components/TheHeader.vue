@@ -80,17 +80,31 @@ export default {
   font-size: 20px;
   font-family: saira;
 }
+
+.title-text:hover{
+  color: #0d6efd;
+}
 .link-text {
   color: black;
   text-decoration: none;
   font-size: 12px;
   font-family: montserrat;
 }
+
+.link-text:hover{
+  color:#f75151;
+  font-size: 16px;
+}
+
 .user-link-text {
     color: black;
     text-decoration: none;
     font-size: 14px;
     font-family: montserrat;
+}
+
+.user-link-text:hover {
+  color:#0d6efd;
 }
 .header-logo {
   max-width: 3%;

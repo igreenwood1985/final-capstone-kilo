@@ -422,6 +422,12 @@ export default {
   color: white;
 }
 
+.create-meal-btn:hover{
+  width: 1.5rem;
+  height: 1.5rem;
+  
+}
+
 .create-meal-box {
   position: relative;
   top: -2.5rem;
