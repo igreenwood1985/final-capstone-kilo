@@ -15,7 +15,7 @@
           >
           ∙
           <router-link class="link-recipe" :to="{ name: 'my-recipes' }">Recipes</router-link>
-          ∙<router-link class="link-meal" :to="{ name: 'my-meals' }"> My Meals</router-link>
+          ∙<router-link class="link-meal" :to="{ name: 'my-meals' }"> Meals</router-link>
           ∙<router-link class="link-plan" :to="{ name: 'my-meal-plans' }">
             Meal Plans</router-link
           ></span
@@ -23,7 +23,7 @@
       </h1>
 
       <div class="recipes-heading">
-        <h2 class="recipes-title">My Latest Recipes</h2>
+        <h2 class="recipes-title">My Recipes</h2>
       </div>
 
       <div class="recipes-here">
@@ -379,8 +379,8 @@ export default {
 .meal-plans-section {
   border: 1px solid black;
   border-top: none;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   grid-area: mealPlan;
   background-color: #f5f0f4;
 }

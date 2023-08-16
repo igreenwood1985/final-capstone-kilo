@@ -45,14 +45,14 @@
           class="edit-btn"
           v-show="mealEditToggle == false"
           v-on:click="mealEditToggle = true"
-          src="https://cdn-icons-png.flaticon.com/512/84/84380.png"
+          src="../../Edit_Icon.png"
           alt="Edit button"
         />
         <img
-          class="edit-btn"
+          class="save-btn"
           v-show="mealEditToggle == true"
           v-on:click="updateMealName()"
-          src="https://e7.pngegg.com/pngimages/154/420/png-clipart-computer-icons-button-save-angle-symbol.png"
+          src="../../Save_Icon.png"
           alt="Save button"
         />
       </div>
@@ -163,7 +163,7 @@ export default {
     updateMealName() {
       AccountService.updateMeal(this.formatMeal()).then((response) => {
         if (response.status == 200) {
-          AccountService.getFavoritedMeals().then((response) => {
+          AccountService.getDashboardMeals().then((response) => {
             if (response.status == 200) {
               this.$store.commit("SET_MEALS", response.data);
               this.enteredDescription = "";
@@ -330,6 +330,21 @@ img {
   color: #0a3d5d;
 }
 
+.save-btn {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 1.2rem;
+  height: 1.2rem;
+  font-size: 10px;
+  text-align: center;
+  border-radius: 20%;
+  background-color: transparent;
+  color: #0a3d5d;
+}
+
 .delete-btn:hover{
   width: 1.25rem;
   height: 1.25rem;
@@ -338,6 +353,11 @@ img {
 .edit-btn:hover{
   width: 1.5rem;
   height:1.5rem;
+}
+
+.save-btn:hover {
+  width: 1.7rem;
+  height: 1.7rem;
 }
 
 

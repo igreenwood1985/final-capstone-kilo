@@ -15,10 +15,13 @@
           class="meal-plan-name"
         >
           <h2 v-show="mealPlanEditToggle == false">
-            {{ mealPlan.name }}
-          </h2>
+            {{ mealPlan.name }}   </h2>
+             <p class="meal-plan-description" v-show="mealPlanEditToggle == false">
+          {{ mealPlan.description }}
+        </p>
+       
         </router-link>
-
+      <div class="edit-container">
         <b-input
         size="sm"
         class="meal-plan-name-input"
@@ -26,12 +29,11 @@
         v-bind:placeholder="'Meal Plan Name'"
         v-show="mealPlanEditToggle == true"
         v-model="enteredMealPlanName"
-        max-length="24"
+        maxlength="24"
         />
+        
 
-        <h2 class="meal-plan-description" v-show="mealPlanEditToggle == false">
-          {{ mealPlan.description }}
-        </h2>
+     
 
         <b-input
         size="sm"
@@ -42,6 +44,7 @@
         v-model="enteredDescription"
         maxlength="32"
         />
+        </div>
         <div class="bottom-right">
           <img
             class="edit-btn"
@@ -50,14 +53,17 @@
             src="../../Edit_Icon.png"
             alt="Edit button"
           />
+          </div>
+          <div class="bottom-right">
           <img
-            class="edit-btn"
+            class="save-btn"
             v-show="mealPlanEditToggle == true"
             v-on:click="updateMealPlanName()"
-            src="../../Download_Icon.png"
+            src="../../Save_Icon.png"
             alt="Save button"
           />
-        </div>
+          </div>
+        
         </div>
 
         <!-- <b-input
@@ -175,7 +181,7 @@ export default {
 
 .meal-plan-name-input {
   text-align: center;
-  width: 60%;
+  width: 70%;
   margin-top: -5px;
   margin-left: auto;
   margin-right: auto;
@@ -192,7 +198,7 @@ export default {
 }
 
 .edit-btn, .delete-btn {
-  position: relative;
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -206,17 +212,43 @@ export default {
   color: #0a3d5d;
 }
 
+.save-btn {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 1.2rem;
+  height: 1.2rem;
+  font-size: 10px;
+  text-align: center;
+  border-radius: 20%;
+  background-color: transparent;
+  color: #0a3d5d;
+}
+
 .edit-btn:hover {
   width: 1.5rem;
   height: 1.5rem;
 }
 
+.save-btn:hover {
+  width: 1.7rem;
+  height: 1.7rem;
+}
+.delete-btn:hover {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+
 
 .bottom-right {
   position: relative;
-  top: -.5rem;
-  left: 8.75rem;
+ top: -1.75rem;
+  left: 8rem;
 }
+
 
 .top-left {
   position: relative;
@@ -262,7 +294,15 @@ a {
 
 .meal-plan-desc-input {
   font-size: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom:3.4rem;
+  
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+.edit-container {
+  margin-top: 20px;
 }
 
 

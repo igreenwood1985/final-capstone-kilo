@@ -20,7 +20,7 @@
           class="current-page-selection"
           >
           
-           My Meals</router-link> ∙<router-link class="link-plan"
+           Meals</router-link> ∙<router-link class="link-plan"
            :to="{name: 'my-meal-plans'}"> Meal Plans</router-link></span>
         
       </h1>
@@ -210,7 +210,7 @@ export default {
   width: 76rem;
   height: 3.2rem;
   margin-left: 3.25rem;
-  margin-top: 2.5rem;
+  margin-top: 2rem;
   border: 1px solid black;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;

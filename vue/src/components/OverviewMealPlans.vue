@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     updateMealPlans() {
-      return this.$store.state.mealPlans.slice(0, 2);
+      return this.$store.state.mealPlans.slice(this.$store.state.mealPlans.length -2).reverse();
     },
   },
   methods: {
@@ -48,7 +48,7 @@ export default {
   flex-direction: column;
   position: absolute;
   padding: 2.95rem;
-  height: 41.75rem;
+  height: 41.27rem;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }

@@ -18,7 +18,7 @@
           >Recipes</router-link> ∙<router-link class="link-meal"
           :to="{name:'my-meals'}">
           
-           My Meals</router-link> ∙<router-link
+           Meals</router-link> ∙<router-link
            :to="{name: 'my-meal-plans'}"
            class="current-page-selection"
            > Meal Plans</router-link></span>
@@ -173,7 +173,7 @@ export default {
   border-bottom: 0.5px solid #1f2937;
   background-image: url("../../dashboard-banner.jpg");
   background-position: center;
-  height: 20rem;
+  height: 12rem;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
   border-top-right-radius: 1px;
@@ -244,6 +244,11 @@ export default {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   margin-bottom: 2.45rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 3rem;
 }
 
 .btn {
@@ -257,7 +262,7 @@ export default {
 
 .create-meal-plan-box {
   position: relative;
-  top: -3.95rem;
+  top: -3.91rem;
   right: -0.15rem;
 }
 
@@ -315,5 +320,7 @@ export default {
   outline: 1px solid black;
   margin: 0.5rem;
 }
+
+
 
 </style>
