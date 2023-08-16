@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     updateMealPlans() {
-      return this.$store.state.mealPlans;
+      return this.$store.state.mealPlans.slice(0, 2);
     },
   },
   methods: {
@@ -42,12 +42,12 @@ export default {
 <style scoped>
 .cards-container {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
   flex-direction: column;
   position: absolute;
   padding: 2.95rem;
-  height: 42.1rem;
+  height: 41.35rem;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }

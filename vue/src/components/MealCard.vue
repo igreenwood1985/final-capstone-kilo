@@ -26,6 +26,7 @@
         v-bind:placeholder="'Meal Name'"
         v-show="mealEditToggle == true"
         v-model="enteredMealName"
+        maxlength="24"
       />
       <h2 class="meal-description" v-show="mealEditToggle == false">
         {{ meal.description }}
@@ -37,6 +38,7 @@
         v-bind:placeholder="'Meal Description'"
         v-show="mealEditToggle == true"
         v-model="enteredDescription"
+        maxlength="32"
       />
       <div class="bottom-right">
         <img
@@ -128,7 +130,7 @@ export default {
       return this.$store.state.meals;
     },
     updateRecipesArray() {
-      const slicedArray = this.meal.recipes;
+      const slicedArray = this.meal.recipes.slice(0, 6);
       return slicedArray.reverse();
     },
     updatedMealName() {

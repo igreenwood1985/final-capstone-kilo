@@ -17,13 +17,17 @@
             v-on:keydown.enter="chooseSearch()"
           ></b-form-input>
 
-          <b-input-group-append>
+          <div class="search-btn">
+              <b-input-group-append>
             <b-button
               size="lg"
               variant="primary"
               v-on:click="chooseSearch()"
               >⌕‍
             </b-button>
+             </b-input-group-append>
+          </div>
+        
 
             <!-- <b-button
               size="lg"
@@ -32,7 +36,7 @@
               v-on:click="searchByFilters"
               >⌕‍
             </b-button> -->
-          </b-input-group-append>
+         
         </b-input-group>
         <!-- <input class="search-box" type="text" placeholder="Find your next meal..." v-model="searchTerm" /> -->
         <!-- <button
@@ -604,6 +608,14 @@ h2 {
   text-align: center;
   background-color: white;
   font-family: bitter;
+}
+
+.search-btn {
+  border: 1px solid #0D6EFD;
+  border-left: 2px solid #0D6EFD;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #0D6EFD;
 }
 
 
