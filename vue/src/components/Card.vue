@@ -190,7 +190,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
+
 .main {
   border: 2px solid black;
   border-radius: 10px;

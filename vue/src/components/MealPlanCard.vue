@@ -164,6 +164,10 @@ export default {
   text-align: center;
 }
 
+.meal-plan-card:hover {
+  border: 3px solid lightpink;
+}
+
 .meal-plan-name-input {
   text-align: center;
   width: 60%;
