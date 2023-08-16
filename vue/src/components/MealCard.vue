@@ -1,12 +1,19 @@
 <template>
   <div class="meal-card">
     <div class="meal-card-heading" v-if="renderComponent === true">
-
       <div class="top-left">
-        <img src="../../delete-xxl.png" alt="Delete Icon" class="delete-btn"
-        v-show="mealEditToggle == true" v-on:click="deleteMeal(); mealEditToggle = false;">
+        <img
+          src="../../delete-xxl.png"
+          alt="Delete Icon"
+          class="delete-btn"
+          v-show="mealEditToggle == true"
+          v-on:click="
+            deleteMeal();
+            mealEditToggle = false;
+          "
+        />
       </div>
-      
+
       <router-link
         v-bind:to="{ name: 'meal-editor', params: { id: meal.meal_id } }"
         class="meal-name"
@@ -18,6 +25,9 @@
         >
           {{ meal.name }}
         </h2>
+        <p class="meal-description" v-show="mealEditToggle == false">
+          {{ meal.description }}
+        </p>
       </router-link>
       <b-input
         size="sm"
@@ -28,9 +38,7 @@
         v-model="enteredMealName"
         maxlength="24"
       />
-      <h2 class="meal-description" v-show="mealEditToggle == false">
-        {{ meal.description }}
-      </h2>
+
       <b-input
         size="sm"
         class="meal-desc-input"
@@ -70,18 +78,38 @@
       </div>
     </div>
     <div class="drop-down-container">
-      <div v-show="updateAddToMealPlan.length > 0" class="add-to-meal-plan-dropdown">
+      <div
+        v-show="updateAddToMealPlan.length > 0"
+        class="add-to-meal-plan-dropdown"
+      >
         <b-dropdown id="dropdown-1" text="Add" variant="light" class="m-md-2">
-          <b-dropdown-item v-for="mealPlan in updateAddToMealPlan" v-bind:key="mealPlan.mealPlanId" v-on:click="addToMealPlan(mealPlan.mealPlanId)">{{mealPlan.name}}</b-dropdown-item>
+          <b-dropdown-item
+            v-for="mealPlan in updateAddToMealPlan"
+            v-bind:key="mealPlan.mealPlanId"
+            v-on:click="addToMealPlan(mealPlan.mealPlanId)"
+            >{{ mealPlan.name }}</b-dropdown-item
+          >
         </b-dropdown>
       </div>
-      <div v-show="updateRemoveFromMealPlan.length > 0" class="remove-from-meal-plan-dropdown">
-        <b-dropdown id="dropdown-1" text="Remove" variant="light" class="m-md-2">
-          <b-dropdown-item v-for="mealPlan in updateRemoveFromMealPlan" v-bind:key="mealPlan.mealPlanId" v-on:click="removeFromMealPlan(mealPlan.mealPlanId)">{{mealPlan.name}}</b-dropdown-item>
+      <div
+        v-show="updateRemoveFromMealPlan.length > 0"
+        class="remove-from-meal-plan-dropdown"
+      >
+        <b-dropdown
+          id="dropdown-1"
+          text="Remove"
+          variant="light"
+          class="m-md-2"
+        >
+          <b-dropdown-item
+            v-for="mealPlan in updateRemoveFromMealPlan"
+            v-bind:key="mealPlan.mealPlanId"
+            v-on:click="removeFromMealPlan(mealPlan.mealPlanId)"
+            >{{ mealPlan.name }}</b-dropdown-item
+          >
         </b-dropdown>
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -101,9 +129,9 @@ export default {
   },
   computed: {
     updateAddToMealPlan() {
-      let mealPlans = this.$store.state.mealPlans
+      let mealPlans = this.$store.state.mealPlans;
       console.log("adding to meal plan...");
-      mealPlans = mealPlans.filter(mealPlan => {
+      mealPlans = mealPlans.filter((mealPlan) => {
         for (let counter = 0; counter < mealPlan.meals.length; counter++) {
           if (this.meal.meal_id == mealPlan.meals[counter].meal_id) {
             return false;
@@ -114,9 +142,9 @@ export default {
       return mealPlans;
     },
     updateRemoveFromMealPlan() {
-      let mealPlans = this.$store.state.mealPlans
+      let mealPlans = this.$store.state.mealPlans;
       console.log("removing from meal plan...");
-      mealPlans = mealPlans.filter(mealPlan => {
+      mealPlans = mealPlans.filter((mealPlan) => {
         for (let counter = 0; counter < mealPlan.meals.length; counter++) {
           if (this.meal.meal_id == mealPlan.meals[counter].meal_id) {
             return true;
@@ -180,7 +208,7 @@ export default {
           this.$store.commit("REMOVE_MEAL", this.meal);
           location.reload();
         }
-      })
+      });
     },
     checkForEmptyName() {
       if (this.enteredMealName == "") {
@@ -205,28 +233,30 @@ export default {
       return formattedMeal;
     },
     addToMealPlan(mealPlanId) {
-      AccountService.addMealToMealPlan(this.meal, mealPlanId).then((response) => {
-        if (response.status == 201) {
-          AccountService.getAllMealPlans().then((mealPlanResponse) => {
-            this.$store.commit("SET_MEAL_PLANS", mealPlanResponse.data);
-          });
+      AccountService.addMealToMealPlan(this.meal, mealPlanId).then(
+        (response) => {
+          if (response.status == 201) {
+            AccountService.getAllMealPlans().then((mealPlanResponse) => {
+              this.$store.commit("SET_MEAL_PLANS", mealPlanResponse.data);
+            });
+          }
         }
-      });
+      );
     },
     removeFromMealPlan(mealPlanId) {
-      AccountService.removeMealFromMealPlan(mealPlanId, this.meal.meal_id).then((response) => {
-        if (response.status == 204) {
-          AccountService.getAllMealPlans().then((mealPlanResponse) => {
-            this.$store.commit("SET_MEAL_PLANS", mealPlanResponse.data);
-          });
+      AccountService.removeMealFromMealPlan(mealPlanId, this.meal.meal_id).then(
+        (response) => {
+          if (response.status == 204) {
+            AccountService.getAllMealPlans().then((mealPlanResponse) => {
+              this.$store.commit("SET_MEAL_PLANS", mealPlanResponse.data);
+            });
+          }
         }
-      });
-    }
+      );
+    },
     //This was added to give functionality to the dropdown list
   },
-  created() {
-
-  }
+  created() {},
 };
 </script>
 
@@ -238,7 +268,7 @@ export default {
   width: 200px;
   height: 15.5rem;
   margin: 20px;
-  background-color: #F8F9FA;
+  background-color: #f8f9fa;
   overflow: hidden;
 }
 
@@ -315,7 +345,8 @@ img {
   border-radius: 5px;
 }
 
-.edit-btn, .delete-btn {
+.edit-btn,
+.delete-btn {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -345,21 +376,20 @@ img {
   color: #0a3d5d;
 }
 
-.delete-btn:hover{
+.delete-btn:hover {
   width: 1.25rem;
   height: 1.25rem;
 }
 
-.edit-btn:hover{
+.edit-btn:hover {
   width: 1.5rem;
-  height:1.5rem;
+  height: 1.5rem;
 }
 
 .save-btn:hover {
   width: 1.7rem;
   height: 1.7rem;
 }
-
 
 .bottom-right {
   position: relative;
@@ -369,8 +399,8 @@ img {
 
 .top-left {
   position: relative;
-  top: .4rem;
-  right: -.5rem;  
+  top: 0.4rem;
+  right: -0.5rem;
 }
 
 .drop-down-container {
@@ -386,6 +416,8 @@ img {
   margin-left: 4.5rem;
   position: absolute;
 }
-
-
+a {
+  text-decoration: none;
+  color: black;
+}
 </style>
