@@ -43,7 +43,7 @@
         >
           Remove from Favorites
         </b-button>
-        <b-button size="sm">Add to Meal</b-button>
+       
       </div>
 
     
