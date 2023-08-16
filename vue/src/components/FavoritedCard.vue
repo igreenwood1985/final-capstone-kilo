@@ -204,8 +204,8 @@ export default {
 }
 
 .minus:hover {
-  width: 20px;
-  height: 20px;
+  width: 17.5px;
+  height: 17.5px;
 }
 
 .card-container {

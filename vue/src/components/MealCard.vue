@@ -346,18 +346,18 @@ img {
 }
 
 .delete-btn:hover{
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 .edit-btn:hover{
-  width: 1.5rem;
-  height:1.5rem;
+  width: 1.2rem;
+  height:1.2rem;
 }
 
 .save-btn:hover {
-  width: 1.7rem;
-  height: 1.7rem;
+  width: 1.4rem;
+  height: 1.4rem;
 }
 
 
