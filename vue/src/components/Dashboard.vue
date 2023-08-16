@@ -23,7 +23,7 @@
       </h1>
 
       <div class="recipes-heading">
-        <h2 class="recipes-title">My Latest Recipes</h2>
+        <h2 class="recipes-title">My Recipes</h2>
       </div>
 
       <div class="recipes-here">
