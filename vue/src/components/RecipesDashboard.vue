@@ -157,6 +157,7 @@ export default {
   border-right: 1px solid black;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
+  margin-bottom: 2.45rem;
 }
 
 .recipes-title,

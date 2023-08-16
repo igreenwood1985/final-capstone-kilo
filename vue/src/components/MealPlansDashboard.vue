@@ -68,7 +68,7 @@
       </div>
 
       <div class="mealplans-here">
-        <overview-meal-plans class="meal-plans-section" />
+        <my-meal-plans class="meal-plans-section" />
       </div>
 
       </div>
@@ -81,11 +81,11 @@
 
 <script>
 import AccountService from "../services/AccountService";
-import OverviewMealPlans from "./OverviewMealPlans.vue";
+import MyMealPlans from "./MyMealPlans.vue";
 
 export default {
   components: {
-      OverviewMealPlans
+      MyMealPlans
       },
   data() {
     return {
@@ -234,12 +234,10 @@ export default {
   background-color: #f5f0f4;
   width: 76rem;
   margin-left: 3.25rem;
-  border-bottom: 1px solid black;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-  border-bottom-right-radius: 10px;
+  border: 1px solid black;
+  border-top: none;
   border-bottom-left-radius: 10px;
-  margin-top: 0;
+  border-bottom-right-radius: 10px;
   margin-bottom: 2.45rem;
 }
 
