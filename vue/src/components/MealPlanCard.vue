@@ -136,15 +136,15 @@ export default {
       })
     },
     checkForEmptyName() {
-      if (this.enteredMealPlanName == "") {
-        return "Meal Plan #" + this.mealPlan.mealPlanId;
+      if (this.enteredMealPlanName == "" || this.enteredMealPlanName == " ") {
+        return this.mealPlan.name;
       } else {
         return this.enteredMealPlanName;
       }
     },
     checkForEmptyDesc() {
-      if (this.enteredDescription == "") {
-        return "Empty Meal Plan Description";
+      if (this.enteredDescription == "" || this.enteredDescription == " ") {
+        return this.mealPlan.description;
       } else {
         return this.enteredDescription;
       }
@@ -294,7 +294,7 @@ a {
 
 .meal-plan-desc-input {
   font-size: 1rem;
-  margin-bottom:3.4rem;
+  margin-bottom:4.7rem;
   
 }
 

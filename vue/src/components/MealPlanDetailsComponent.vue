@@ -117,14 +117,14 @@ export default {
     },
     checkForEmptyName() {
       if (this.enteredMealPlanName == "") {
-        return "Meal Plan #" + this.mealPlan.mealPlanId;
+        return this.mealPlan.name;
       } else {
         return this.enteredMealPlanName;
       }
     },
     checkForEmptyDesc() {
       if (this.enteredDescription == "") {
-        return "Empty Meal Plan Description";
+        return this.mealPlan.description;
       } else {
         return this.enteredDescription;
       }

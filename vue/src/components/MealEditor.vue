@@ -122,14 +122,14 @@ export default {
     },
     checkForEmptyName() {
       if (this.enteredMealName == "") {
-        return "Meal #" + this.meal.meal_id;
+        return this.meal.name;
       } else {
         return this.enteredMealName;
       }
     },
     checkForEmptyDesc() {
       if (this.enteredDescription == "") {
-        return "Empty Meal Description";
+        return this.meal.description;
       } else {
         return this.enteredDescription;
       }

@@ -38,7 +38,7 @@ INSERT INTO meals (meal_name, description, user_id) VALUES ('Soup and Salad', 'T
 INSERT INTO meals (meal_name, description, user_id) VALUES ('Desayuno', 'Breakfast: Mexican Style!', 3);
 INSERT INTO meals (meal_name, description, user_id) VALUES ('Lunch in Northern India', 'Paneer Makhani and Naan', 3);
 INSERT INTO meals (meal_name, description, user_id) VALUES ('Dinner in England', 'Bangers and Mash for supper', 3);
-INSERT INTO meals (meal_id, meal_name, description) VALUES (69, 'Add A New Meal!', 'Your meal plan currently has no meals. Try adding some.');
+INSERT INTO meals (meal_id, meal_name, description) VALUES (69, 'Add A New Meal!', 'Your meal plan currently has no meals.');
 
 
 --meal_recipe join

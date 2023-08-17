@@ -211,15 +211,15 @@ export default {
       });
     },
     checkForEmptyName() {
-      if (this.enteredMealName == "") {
-        return "Meal #" + this.meal.meal_id;
+      if (this.enteredMealName == "" || this.enteredMealName == "  ") {
+        return this.meal.name;
       } else {
         return this.enteredMealName;
       }
     },
     checkForEmptyDesc() {
-      if (this.enteredDescription == "") {
-        return "Empty Meal Description";
+      if (this.enteredDescription == "" || this.enteredDescription == " ") {
+        return this.meal.description;
       } else {
         return this.enteredDescription;
       }
