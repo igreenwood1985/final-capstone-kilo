@@ -163,7 +163,7 @@ public class JdbcMealPlanDAO implements MealPlanDAO{
                 "VALUES (?, ?);";
 
         String removeTemplateSql = "DELETE FROM meal_plan_meal WHERE meal_plan_id = ? AND meal_id = 69";
-        jdbcTemplate.update(removeTemplateSql, mealID);
+        jdbcTemplate.update(removeTemplateSql, mealPlanID);
 
         try {
             jdbcTemplate.update(sql, mealPlanID, mealID);
