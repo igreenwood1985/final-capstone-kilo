@@ -57,7 +57,7 @@ const router = new Router({
       name: 'recipe-details',
       component: RecipeDetailsView,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {
