@@ -28,7 +28,8 @@ export default {
   },
   computed: {
     updateMeals() {
-      const array = this.$store.state.meals;
+      let array = this.$store.state.meals;
+      array = array.slice(array.length - 3,);
       return array;
     }
   },
