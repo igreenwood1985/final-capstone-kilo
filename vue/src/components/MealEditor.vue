@@ -238,8 +238,8 @@ export default {
 }
 
 .save-btn:hover {
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 1.4rem;
+  height: 1.4rem;
 }
 
 .bottom-right {

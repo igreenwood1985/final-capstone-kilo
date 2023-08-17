@@ -21,7 +21,6 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     searchResults: [],
-    currentMeal: 0,
     favoritedRecipes: [],
     meals: [],
     mealPlans: []
@@ -62,9 +61,6 @@ export default new Vuex.Store({
       console.log("leaving the store");
       const recipeIndex = state.favoritedRecipes.indexOf(recipeToRemove);
       state.favoritedRecipes.splice(recipeIndex, 1);
-    },
-    SET_CURRENT_MEAL(state, mealId) {
-      state.currentMeal = mealId;
     },
     SET_MEAL_INFO(state, {meal, mealName, mealDesc}) {
       const mealIndex = state.meals.findIndex(item => {

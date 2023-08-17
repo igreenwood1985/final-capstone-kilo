@@ -19,7 +19,6 @@
         class="meal-name"
       >
         <h2
-          v-on:click="updateCurrentMealInStore()"
           v-show="mealEditToggle == false"
           v-bind:key="meal.name"
         >
@@ -184,9 +183,6 @@ export default {
       this.renderComponent = false;
       await this.$nextTick();
       this.renderComponent = true;
-    },
-    updateCurrentMealInStore() {
-      this.$store.commit("SET_CURRENT_MEAL", this.meal.meal_id);
     },
     updateMealName() {
       AccountService.updateMeal(this.formatMeal()).then((response) => {

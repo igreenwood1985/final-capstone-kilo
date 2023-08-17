@@ -22,7 +22,7 @@
             <b-button
               size="lg"
               variant="primary"
-              v-on:click="chooseSearch()"
+              v-on:click="chooseSearch(); advancedSearchVisible = false;"
               >⌕‍
             </b-button>
              </b-input-group-append>
