@@ -242,7 +242,6 @@ export default {
 }
 
 
-
 .bottom-right {
   position: relative;
  top: -1.75rem;
@@ -265,7 +264,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   margin-left: 1rem;
   margin-right: 1rem;
 }
