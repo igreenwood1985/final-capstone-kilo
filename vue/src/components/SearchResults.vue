@@ -76,7 +76,7 @@
             <div>
               <input
                 type="checkbox"
-                class="checkbox"
+      
                 name="dairy-free"
                 id="dairy-free"
                 v-bind:value="'&health=dairy-free'"
@@ -87,7 +87,7 @@
             <div>
               <input
                 type="checkbox"
-                class="checkbox"
+               
                 name="egg-free"
                 id="egg-free"
                 v-bind:value="'&health=egg-free'"
@@ -98,7 +98,7 @@
             <div>
               <input
                 type="checkbox"
-                class="checkbox"
+               
                 name="fish-free"
                 id="fish-free"
                 v-bind:value="'&health=fish-free'"
@@ -109,7 +109,7 @@
             <div>
               <input
                 type="checkbox"
-                class="checkbox"
+              
                 name="gluten-free"
                 id="gluten-free"
                 v-bind:value="'&health=gluten-free'"
@@ -120,7 +120,7 @@
             <div>
               <input
                 type="checkbox"
-                class="checkbox"
+               
                 name="peanut-free"
                 id="peanut-free"
                 v-bind:value="'&health=peanut-free'"
@@ -131,7 +131,7 @@
             <div>
               <input
                 type="checkbox"
-                class="checkbox"
+           
                 name="pescatarian"
                 id="pescatarian"
                 v-bind:value="'&health=pescatarian'"
@@ -142,7 +142,7 @@
             <div>
               <input
                 type="checkbox"
-                class="checkbox"
+           
                 name="soy-free"
                 id="soy-free"
                 v-bind:value="'&health=soy-free'"
@@ -153,7 +153,7 @@
             <div>
               <input
                 type="checkbox"
-                class="checkbox"
+          
                 name="tree-nut-free"
                 id="tree-nut-free"
                 v-bind:value="'&health=tree-nut-free'"
@@ -164,7 +164,7 @@
             <div>
               <input
                 type="checkbox"
-                class="checkbox"
+              
                 name="vegan"
                 id="vegan"
                 v-bind:value="'&health=vegan'"
@@ -175,7 +175,7 @@
             <div>
               <input
                 type="checkbox"
-                class="checkbox"
+          
                 name="vegetarian"
                 id="vegetarian"
                 v-bind:value="'&health=vegetarian'"
@@ -190,7 +190,7 @@
             <div>
               <input
                 type="checkbox"
-                class="checkbox"
+           
                 name="balanced"
                 id="balanced"
                 v-bind:value="'&diet=balanced'"
@@ -201,7 +201,7 @@
             <div>
               <input
                 type="checkbox"
-                class="checkbox"
+            
                 name="high-fiber"
                 id="high-fiber"
                 v-bind:value="'&diet=high-fiber'"
@@ -212,7 +212,7 @@
             <div>
               <input
                 type="checkbox"
-                class="checkbox"
+           
                 name="high-protein"
                 id="high-protein"
                 v-bind:value="'&diet=high-protein'"
@@ -223,7 +223,7 @@
             <div>
               <input
                 type="checkbox"
-                class="checkbox"
+         
                 name="immuno-supportive"
                 id="immuno-supportive"
                 v-bind:value="'&health=immuno-supportive'"
@@ -234,7 +234,7 @@
             <div>
               <input
                 type="checkbox"
-                class="checkbox"
+         
                 name="keto-friendly"
                 id="keto-friendly"
                 v-bind:value="'&health=keto-friendly'"
@@ -245,7 +245,7 @@
             <div>
               <input
                 type="checkbox"
-                class="checkbox"
+          
                 name="low-carb"
                 id="low-carb"
                 v-bind:value="'&diet=low-carb'"
@@ -256,7 +256,7 @@
             <div>
               <input
                 type="checkbox"
-                class="checkbox"
+             
                 name="low-fat"
                 id="low-fat"
                 v-bind:value="'&diet=low-fat'"
@@ -267,7 +267,7 @@
             <div>
               <input
                 type="checkbox"
-                class="checkbox"
+           
                 name="low-sodium"
                 id="low-sodium"
                 v-bind:value="'&diet=low-sodium'"
@@ -278,7 +278,7 @@
             <div>
               <input
                 type="checkbox"
-                class="checkbox"
+             
                 name="paleo"
                 id="paleo"
                 v-bind:value="'&health=paleo'"
@@ -289,7 +289,7 @@
             <div>
               <input
                 type="checkbox"
-                class="checkbox"
+             
                 name="sugar-conscious"
                 id="sugar-conscious"
                 v-bind:value="'&health=sugar-conscious'"
@@ -305,7 +305,7 @@
               <div>
                 <input
                   type="checkbox"
-                  class="checkbox"
+               
                   name="breakfast"
                   id="breakfast"
                   v-bind:value="'&mealType=breakfast'"
@@ -316,7 +316,7 @@
               <div>
                 <input
                   type="checkbox"
-                  class="checkbox"
+              
                   name="lunch"
                   id="lunch"
                   v-bind:value="'&mealType=lunch'"
@@ -327,7 +327,7 @@
               <div>
                 <input
                   type="checkbox"
-                  class="checkbox"
+            
                   name="dinner"
                   id="dinner"
                   v-bind:value="'&mealType=dinner'"
@@ -338,7 +338,7 @@
               <div>
                 <input
                   type="checkbox"
-                  class="checkbox"
+             
                   name="snack"
                   id="snack"
                   v-bind:value="'&mealType=snack'"
@@ -362,7 +362,7 @@
               <div>
                 <input
                   type="checkbox"
-                  class="checkbox"
+             
                   name="0-250-cals"
                   id="0-250-cals"
                   v-bind:value="'&calories=0-250'"
@@ -373,7 +373,7 @@
               <div>
                 <input
                   type="checkbox"
-                  class="checkbox"
+               
                   name="250-500-cals"
                   id="250-500-cals"
                   v-bind:value="'&calories=250-500'"
@@ -384,7 +384,7 @@
               <div>
                 <input
                   type="checkbox"
-                  class="checkbox"
+              
                   name="500-750-cals"
                   id="500-750-cals"
                   v-bind:value="'&calories=500-750'"
@@ -395,7 +395,7 @@
               <div>
                 <input
                   type="checkbox"
-                  class="checkbox"
+             
                   name="750-1000-cals"
                   id="750-1000-cals"
                   v-bind:value="'&calories=750-1000'"
@@ -407,7 +407,7 @@
                 <div>
                   <input
                     type="checkbox"
-                    class="checkbox"
+                
                     name="1000-plus-cals"
                     id="1000-plus-cals"
                     v-bind:value="'&calories=1000+'"
@@ -466,9 +466,7 @@
         class="display-card"
       />
     </div>
-    <div>
-      <h1 class="empty-search" v-if="chooseSearch()== true" v-show="searchResults.length == 0">There's none bucko! Try again. <br><br></h1>
-    </div>
+
     <div class="tagline">
       <h1 class="tag-title">Hungry?</h1>
       <h1>You came to the right place.</h1>
