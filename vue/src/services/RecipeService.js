@@ -35,7 +35,7 @@ export default {
       uri = uri.replaceAll('/', '%2F')
       uri = uri.replaceAll(':', '%3A')
       uri = uri.replaceAll('#', '%23')
-      return http.get('by-uri?type=public&beta=false&uri=http%3A%2F%2Fwww.edamam.com%2Fontologies%2Fedamam.owl%23' + uri + '&app_id=be14acd0&app_key=b9156f49c2db2a7389974ba9261c3628&field=uri&field=label&field=image&field=images&field=source&field=url&field=shareAs&field=yield&field=dietLabels&field=healthLabels&field=cautions&field=ingredientLines&field=ingredients&field=calories&field=glycemicIndex&field=totalCO2Emissions&field=co2EmissionsClass&field=totalWeight&field=totalTime&field=cuisineType&field=mealType&field=dishType&field=totalNutrients&field=totalDaily&field=digest&field=tags&field=externalId');
+      return http.get('by-uri?type=public&beta=false&uri=http%3A%2F%2Fwww.edamam.com%2Fontologies%2Fedamam.owl%23' + uri + '&app_id=' + apiID + '&app_key=' + apiKey + '&field=uri&field=label&field=image&field=images&field=source&field=url&field=shareAs&field=yield&field=dietLabels&field=healthLabels&field=cautions&field=ingredientLines&field=ingredients&field=calories&field=glycemicIndex&field=totalCO2Emissions&field=co2EmissionsClass&field=totalWeight&field=totalTime&field=cuisineType&field=mealType&field=dishType&field=totalNutrients&field=totalDaily&field=digest&field=tags&field=externalId');
     }
 
 }
