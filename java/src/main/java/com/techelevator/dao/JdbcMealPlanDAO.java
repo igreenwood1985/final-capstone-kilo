@@ -162,6 +162,9 @@ public class JdbcMealPlanDAO implements MealPlanDAO{
         String sql = "INSERT INTO meal_plan_meal (meal_plan_id, meal_id) " +
                 "VALUES (?, ?);";
 
+        String removeTemplateSql = "DELETE FROM meal_plan_meal WHERE meal_plan_id = ? AND meal_id = 69";
+        jdbcTemplate.update(removeTemplateSql, mealID);
+
         try {
             jdbcTemplate.update(sql, mealPlanID, mealID);
 

@@ -26,7 +26,7 @@
               >Find Recipes Online</router-link
             ></b-navbar-item
           >
-          <b-navbar-item><span class="divider">&nbsp;|&nbsp;</span><router-link v-if="$store.state.token != ''" v-bind:to="{name: 'dashboard'}" class="link-text">My Dashboard</router-link></b-navbar-item>
+          <b-navbar-item><span class="divider"  v-if="$store.state.token != ''">&nbsp;|&nbsp;</span><router-link v-if="$store.state.token != ''" v-bind:to="{name: 'dashboard'}" class="link-text">My Dashboard</router-link></b-navbar-item>
         </div>
 
         <div class="right-nav">
